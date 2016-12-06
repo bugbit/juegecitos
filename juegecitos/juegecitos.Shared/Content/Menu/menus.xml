@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+  <Asset Type="juegecitos.Shared.Menu.MenuItem[]">
+	<Item>
+		<Image>spaceinvaders</Image>
+		<TypeGameComponent>juegecitos.Shared.Games.SpaceInvanders.SpaceInvandersState</TypeGameComponent>
+	</Item>
+	<Item>
+		<Image>salir</Image>
+		<TypeGameComponent>juegecitos.Shared.Menu.SalirState</TypeGameComponent>
+	</Item>
+  </Asset>
+</XnaContent>

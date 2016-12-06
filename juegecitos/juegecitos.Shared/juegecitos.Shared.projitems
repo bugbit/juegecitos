@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{D8DAC6E9-3435-4F93-A43E-E325C3DBC56C}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>juegecitos.Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Modalities.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IStateManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\GameComponentState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\StateManagerComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DrawableGameComponentState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\JuegecitosGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IJuegecitosService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\GameExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu\MenuState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu\MenuItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\SpaceInvandersState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Menu\SalirState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Core\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Menu\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Games\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\" />
+  </ItemGroup>
+</Project>

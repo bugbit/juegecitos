@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "juegecitos.Desktop", "juegecitos.Desktop\juegecitos.Desktop.csproj", "{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "juegecitos.Shared", "juegecitos.Shared\juegecitos.Shared.shproj", "{D8DAC6E9-3435-4F93-A43E-E325C3DBC56C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Debug|x86.ActiveCfg = Debug|x86
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Debug|x86.Build.0 = Debug|x86
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Release|x86.ActiveCfg = Release|x86
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal
