@@ -86,7 +86,6 @@ namespace juegecitos.Shared.Menu
 		public override void Enter (GameTime gameTime)
 		{
 			mIdxSel = null;
-			LoadContent ();
 			Game.IsMouseVisible = true;
 			base.Enter (gameTime);
 		}
