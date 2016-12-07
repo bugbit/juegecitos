@@ -15,7 +15,8 @@ namespace juegecitos.Shared
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
 
-		public Core.IStateManager StateManager { get; set; }
+		public Color BackGround { get; set; }=Color.CornflowerBlue;
+		public Core.IStateManager StateManager { get; private set; }
 
 		public JuegecitosGame ()
 		{
@@ -74,7 +75,7 @@ namespace juegecitos.Shared
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
-			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
+			graphics.GraphicsDevice.Clear (BackGround);
             
 			//TODO: Add your drawing code here
             

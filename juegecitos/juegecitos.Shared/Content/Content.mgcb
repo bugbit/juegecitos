@@ -25,11 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Menu/spaceinvaders.jpg
 
-#begin Menu/menus.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:Menu/menus.xml
-
 #begin Menu/font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -46,4 +41,25 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Menu/salir.jpg
+
+#begin Menu/menus.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Menu/menus.xml
+
+#begin Menu/Strings.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:Menu/Strings.xml
+
+#begin SpaceInvanders/splash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:SpaceInvanders/splash.png
 

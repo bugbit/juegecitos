@@ -82,8 +82,8 @@ namespace juegecitos.Shared.Core
 			}
 			SetOrderState(argState, true);
 			Game.Components.Add(argState);
-			argState.Enter(gameTime);
 			mStates.Push(new Tuple<IState, Modalities>(argState, argModality));
+			argState.Enter(gameTime);
 		}
 
 		private void SetOrderState(IState argState, bool argNew)

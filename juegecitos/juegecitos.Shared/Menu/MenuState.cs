@@ -2,12 +2,13 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using juegecitos.Shared.Extensions;
 
 namespace juegecitos.Shared.Menu
 {
 	public class MenuState : Core.DrawableGameComponentState
 	{
-		private const string cTitle = "Juegecitos";
+		private MenuStrings mStrings;
 		private SpriteFont mFont;
 		private MenuItem[] mItems;
 		private Vector2 mPointTitle;
@@ -32,8 +33,9 @@ namespace juegecitos.Shared.Menu
 		protected override void LoadContent ()
 		{
 			mFont = Game.Content.Load<SpriteFont> ("Menu/font");
+			mStrings=Game.Content.LoadStrings<MenuStrings> ("Menu/Strings");
 
-			var pTitle = mFont.MeasureString (cTitle);
+			var pTitle = mFont.MeasureString (mStrings.Title);
 			var pItems=Game.Content.Load<MenuItem[]> ("Menu/menus");
 
 			mPointTitle = new Vector2 ((Game.GraphicsDevice.Viewport.Width - pTitle.X) / 2.0f, 0);
@@ -85,8 +87,7 @@ namespace juegecitos.Shared.Menu
 
 		public override void Enter (GameTime gameTime)
 		{
-			mIdxSel = null;
-			Game.IsMouseVisible = true;
+			Activate ();
 			base.Enter (gameTime);
 		}
 
@@ -97,7 +98,7 @@ namespace juegecitos.Shared.Menu
 				var pIdxP = new Point (0, 0);
 
 				pBatch.Begin ();
-				pBatch.DrawString (mFont, cTitle, mPointTitle, Color.White);
+				pBatch.DrawString (mFont, mStrings.Title, mPointTitle, Color.White);
 				for (int i = mIdx0; i < mItemsAct.Length; i++) {
 					var pItem = mItemsAct [i];
 
@@ -133,7 +134,7 @@ namespace juegecitos.Shared.Menu
 				var pValue = pType.GetConstructor (new Type[]{typeof(Game)}).Invoke (new object[]{Game});
 				var pState = pValue as Core.IState;
 
-				Game.Services.GetService<Core.IJuegecitosService> ().StateManager.PushState (gameTime, pState, Core.Modalities.Exclusive);
+				Game.GetService<Core.IJuegecitosService> ().StateManager.PushState (gameTime, pState, Core.Modalities.Exclusive);
 			}
 
 			base.Update (gameTime);
@@ -147,9 +148,15 @@ namespace juegecitos.Shared.Menu
 
 		public override void Reveal (GameTime gameTime)
 		{
+			Activate ();
+			base.Reveal (gameTime);
+		}
+
+		private void Activate ()
+		{
+			Game.GetService<Core.IJuegecitosService> ().BackGround = Color.Black;
 			Game.IsMouseVisible = true;
 			mIdxSel = null;
-			base.Reveal (gameTime);
 		}
 
 		private int? CalcIdxFromPoint(Point argPoint)
