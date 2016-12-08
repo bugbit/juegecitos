@@ -11,6 +11,14 @@ namespace juegecitos.Shared.Extensions
 
 			return pStrings;
 		}
+
+		public static Core.MapSprites<E> LoadSprites<E>(this ContentManager argContent,string argAssetName)
+		{
+			var pAsset = argContent.Load<Core.MapSprite[]> (argAssetName);
+			var pMap = new Core.MapSprites<E> (pAsset);
+
+			return pMap;
+		}
 	}
 }
 

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+  <Asset Type="juegecitos.Shared.Core.MapSprite[]">
+	<Item>
+		<Id>PLAYER_SPRITE</Id>
+		<X>1</X>
+		<Y>2</Y>
+		<Width>1</Width>
+		<Height>1</Height>
+	</Item>
+  </Asset>
+</XnaContent>

@@ -43,7 +43,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 		{
 			using (var pBatch = new SpriteBatch (Game.GraphicsDevice)) {
 				pBatch.Begin ();
-				pBatch.Draw (mSplashImg, mPosSplash);
+				pBatch.Draw (mSplashImg, mPosSplash,null,new Rectangle(0,0,640,270));
 				pBatch.End ();
 			}
 			base.Draw (gameTime);

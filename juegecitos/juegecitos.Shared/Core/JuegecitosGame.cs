@@ -13,7 +13,6 @@ namespace juegecitos.Shared
 	public class JuegecitosGame : Game,Core.IJuegecitosService
 	{		
 		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
 
 		public Color BackGround { get; set; }=Color.CornflowerBlue;
 		public Core.IStateManager StateManager { get; private set; }
@@ -34,6 +33,7 @@ namespace juegecitos.Shared
 		{
 			// TODO: Add your initialization logic here
 
+			Components.ComponentAdded += StateManager_Added;
 			this.Attach<Core.IJuegecitosService>(this);
 			StateManager = new Core.StateManagerComponent(this);
 			Components.Add(StateManager);
@@ -41,17 +41,20 @@ namespace juegecitos.Shared
 			base.Initialize ();
 		}
 
+		private void StateManager_Added(object sender,GameComponentCollectionEventArgs e)
+		{
+			Components.ComponentAdded -= StateManager_Added;
+			StateManager.PushState(null, new Menu.MenuState(this), Core.Modalities.Exclusive);
+		}
+
 		/// <summary>
 		/// LoadContent will be called once per game and is the place to load
 		/// all of your content.
 		/// </summary>
 		protected override void LoadContent ()
-		{
-			// Create a new SpriteBatch, which can be used to draw textures.
-			spriteBatch = new SpriteBatch (GraphicsDevice);
-
+		{						
 			//TODO: use this.Content to load your game content here 
-			StateManager.PushState(null, new Menu.MenuState(this), Core.Modalities.Exclusive);
+			//StateManager.PushState(null, new Menu.MenuState(this), Core.Modalities.Exclusive);
 		}
 
 		/// <summary>

@@ -11,12 +11,10 @@ namespace juegecitos.Shared.Core
 
 		virtual public void Enter(GameTime gameTime)
 		{
-			LoadContent ();
 		}
 
 		virtual public void Exit(GameTime gameTime)
 		{
-			UnloadContent ();
 		}
 
 		virtual public void Obscure(GameTime gameTime)
