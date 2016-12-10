@@ -29,6 +29,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Sprites.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MapSprites.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\MapSprite.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ISpriteGameComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SpriteGameComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SpriteGameComponentCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SpriteGameComponentCollectionEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Strings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\SpriteFontExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\EnemyDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Enemies.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />

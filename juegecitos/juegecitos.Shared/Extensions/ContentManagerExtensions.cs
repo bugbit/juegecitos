@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Content;
+using System.Collections.Generic;
 
 namespace juegecitos.Shared.Extensions
 {
@@ -18,6 +19,17 @@ namespace juegecitos.Shared.Extensions
 			var pMap = new Core.MapSprites<E> (pAsset);
 
 			return pMap;
+		}
+
+		public static IDictionary<K,T> LoadDict<K,T>(this ContentManager argContent,string argAssetName,Func<T,K> argKey)
+		{
+			var pAsset = argContent.Load<T[]> (argAssetName);
+			var pDict = new Dictionary<K,T> ();
+
+			foreach (var pItem in pAsset)
+				pDict.Add (argKey.Invoke (pItem), pItem);
+
+			return pDict;
 		}
 	}
 }

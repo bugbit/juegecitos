@@ -16,6 +16,7 @@ namespace juegecitos.Shared
 
 		public Color BackGround { get; set; }=Color.CornflowerBlue;
 		public Core.IStateManager StateManager { get; private set; }
+		public SpriteFont IntrsFont { get; private set; }
 
 		public JuegecitosGame ()
 		{
@@ -52,7 +53,9 @@ namespace juegecitos.Shared
 		/// all of your content.
 		/// </summary>
 		protected override void LoadContent ()
-		{						
+		{	
+			IntrsFont = Content.Load<SpriteFont> ("Comun/Fonts/Intrs");
+
 			//TODO: use this.Content to load your game content here 
 			//StateManager.PushState(null, new Menu.MenuState(this), Core.Modalities.Exclusive);
 		}

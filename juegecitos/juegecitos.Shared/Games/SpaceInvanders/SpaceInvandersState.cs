@@ -3,12 +3,16 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using juegecitos.Shared.Extensions;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 
 namespace juegecitos.Shared.Games.SpaceInvanders
 {
 	public class SpaceInvandersState: Core.DrawableGameComponentState,IService
 	{
+		public Strings Strs { get; private set; }
 		public Texture2D Sprites{ get; private set; }
+		public IDictionary<Enemies,EnemyDef> EnemiesDefs{ get; private set; }
+
 		public SpaceInvandersState(Game argGame):base(argGame)
 		{
 		}
@@ -23,15 +27,22 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 
 		protected override void LoadContent ()
 		{
-			Sprites = Game.Content.Load<Texture2D>("SpaceInvanders/sprites");
+			var pContent = Game.Content;
 
-			var p = Game.Content.LoadSprites<Sprites> ("SpaceInvanders/MapSprites");
+			Sprites = pContent.Load<Texture2D>("SpaceInvanders/sprites");
+			Strs = pContent.LoadStrings<Strings>("SpaceInvanders/Strings");
+			EnemiesDefs = pContent.LoadDict<Enemies,EnemyDef> ("SpaceInvanders/EnemyDef", e=>e.Enemy);
+
+			//var p = Game.Content.LoadSprites<Sprites> ("SpaceInvanders/MapSprites");
+
+
 
 			base.LoadContent ();
 		}
 
 		protected override void UnloadContent ()
 		{
+			Game.DeAttach<IService> ();
 			base.UnloadContent ();
 		}
 

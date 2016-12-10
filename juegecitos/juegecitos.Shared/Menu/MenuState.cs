@@ -121,6 +121,7 @@ namespace juegecitos.Shared.Menu
 		{
 			var pMouseState = Mouse.GetState ();
 			var pPosition = pMouseState.Position;
+			var pGamePad = GamePad.GetState (PlayerIndex.One);
 
 			// For Mobile devices, this logic will close the Game when the Back button is pressed
 			// Exit() is obsolete on iOS
@@ -130,11 +131,23 @@ namespace juegecitos.Shared.Menu
 //			#endif
 			mIdxSel = CalcIdxFromPoint(pPosition);
 			if (mIdxSel.HasValue && pMouseState.LeftButton == ButtonState.Pressed) {
-				var pType = Type.GetType (mItemsAct [mIdxSel.Value].TypeGameComponent);
-				var pValue = pType.GetConstructor (new Type[]{typeof(Game)}).Invoke (new object[]{Game});
-				var pState = pValue as Core.IState;
+				EjecutarItem (gameTime);
 
-				Game.GetService<Core.IJuegecitosService> ().StateManager.PushState (gameTime, pState, Core.Modalities.Exclusive);
+			}
+			if (pGamePad.DPad.Left == ButtonState.Pressed) {
+				if (!mIdxSel.HasValue)
+					mIdxSel = mIdx0;
+				else if (mIdxSel>0)
+					mIdxSel--;
+			}
+			if (pGamePad.DPad.Right == ButtonState.Pressed) {
+				if (!mIdxSel.HasValue)
+					mIdxSel = mIdx0;
+				else if (mIdxSel<mItemsAct.Length-1)
+					mIdxSel++;
+			}
+			if (pGamePad.IsButtonDown (Buttons.B) && mIdxSel.HasValue) {
+				EjecutarItem (gameTime);
 			}
 
 			base.Update (gameTime);
@@ -173,6 +186,18 @@ namespace juegecitos.Shared.Menu
 			}
 
 			return null;
+		}
+
+		private void EjecutarItem (GameTime gameTime)
+		{
+			var pType = Type.GetType (mItemsAct [mIdxSel.Value].TypeGameComponent);
+			var pValue = pType.GetConstructor (new Type[] {
+				typeof(Game)
+			}).Invoke (new object[] {
+				Game
+			});
+			var pState = pValue as Core.IState;
+			Game.GetService<Core.IJuegecitosService> ().StateManager.PushState (gameTime, pState, Core.Modalities.Exclusive);
 		}
 	}
 }

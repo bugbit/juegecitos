@@ -79,3 +79,19 @@
 /processor:PassThroughProcessor
 /build:SpaceInvanders/MapSprites.xml
 
+#begin SpaceInvanders/Strings.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpaceInvanders/Strings.xml
+
+#begin Comun/Fonts/Intrs.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Comun/Fonts/Intrs.spritefont
+
+#begin SpaceInvanders/EnemyDef.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:SpaceInvanders/EnemyDef.xml
+

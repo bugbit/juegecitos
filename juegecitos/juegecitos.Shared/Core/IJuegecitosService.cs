@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace juegecitos.Shared.Core
 {
@@ -7,6 +8,7 @@ namespace juegecitos.Shared.Core
 	{
 		Color BackGround { get; set; }
 		IStateManager StateManager { get; }
+		SpriteFont IntrsFont { get;}
 	}
 }
 

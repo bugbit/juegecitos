@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:ns="Microsoft.Xna.Framework">
+  <Asset Type="juegecitos.Shared.Games.SpaceInvanders.Strings">
+	<Intrs>
+		<Item>Use las teclas izq. y der para mover la nave y espacio para disparar</Item>
+		<Item>Si tienes un gamepad puede usar las teclas izq. y der y el boton B para disparar</Item>
+		<Item>En las pantallas tactil use los controles situados en la parte inferior de la pantalla</Item>
+		<Item>Pulse espacio, boton B o toque la pantalla tactil para jugar</Item>
+	</Intrs>
+  </Asset>
+</XnaContent>
