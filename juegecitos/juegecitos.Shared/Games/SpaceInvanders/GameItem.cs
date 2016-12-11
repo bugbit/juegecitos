@@ -7,10 +7,10 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 {
 	public class GameItem<T> : Core.SpriteGameComponent where T:ItemDef
 	{
-		private int? mIdx;
+		private int mIdx=0;
 		private Rectangle mRectSource;
 		protected Rectangle mBoundsSprite;
-		private int mEllapseCambioSprite;
+		private int mEllapseCambioSprite=0;
 
 		public T ItemDef { get; set; }
 		virtual public Rectangle BoundsSprite=>mBoundsSprite;
@@ -30,8 +30,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 		{
 			var pService = Game.GetService<IService> ();
 
-			if (mIdx.HasValue)
-				argSB.Draw (pService.Sprites, null, BoundsSprite,mRectSource);
+			argSB.Draw (pService.Sprites, null, BoundsSprite,mRectSource);
 			base.Draw (argSB, gameTime);
 		}
 
@@ -39,29 +38,39 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 		{
 			var pOldIdx = mIdx;
 
-			if (!mIdx.HasValue) {
-				mIdx = 0;
-				mEllapseCambioSprite = 0;
-			}
 			if (mEllapseCambioSprite > 500) {
 				mIdx = (mIdx + 1) % ItemDef.Sprites.Length;
 				mEllapseCambioSprite = mEllapseCambioSprite % 500;
 			} else
 				mEllapseCambioSprite += gameTime.ElapsedGameTime.Milliseconds;
 			if (pOldIdx != mIdx) {
-				var pService = Game.GetService<IService> ();
-
-				mRectSource = pService.MapSprites [ItemDef.Sprites [mIdx.Value]];
+				CalcSizeSourceSprite();
 			}	
 			base.Update (gameTime);
+		}
+
+		public void CalcSizeSourceSprite()
+		{
+			var pService = Game.GetService<IService> ();
+
+			mRectSource = pService.MapSprites [ItemDef.Sprites [mIdx]];
 		}
 
 		public void CalcSizeSprite ()
 		{
 			var pService = Game.GetService<IService> ();
+
+			mIdx=0;
+			CalcSizeSourceSprite();
+
 			var pSize= mRectSource.CalcSizeForScreen (pService.Scale);
 
 			mBoundsSprite.Size = pSize;
+		}
+
+		virtual public void SetLocation(Point argPos)
+		{
+			mBoundsSprite.Location=argPos;
 		}
 	}
 }

@@ -13,9 +13,21 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 		private Texture2D mSplashImg;
 		private Vector2 mPosSplash;
 		private Tuple<Vector2,string>[] mIntrs;
+		private Core.SpriteGameComponentCollection mSprites=new juegecitos.Shared.Core.SpriteGameComponentCollection();
 
 		public IntroState(Game argGame):base(argGame)
 		{
+		}
+
+		public override void Initialize ()
+		{
+			var pService = Game.GetService<IService> ();
+
+			mSprites.Add (new GameEnemyIntro(Game) { ItemDef = pService.EnemiesDefs [Items.BOTTOM_ALIEN] });
+			mSprites.Add (new GameEnemyIntro(Game) { ItemDef = pService.EnemiesDefs [Items.MIDDLE_ALIEN] });
+			mSprites.Add (new GameEnemyIntro(Game) { ItemDef = pService.EnemiesDefs [Items.TOP_ALIEN] });
+			mSprites.Add (new GameEnemyIntro(Game) { ItemDef = pService.EnemiesDefs [Items.UFO] });
+			base.Initialize ();
 		}
 
 		protected override void LoadContent ()
@@ -39,6 +51,29 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 				pY -= pDim.Y + mSpaceLinesIntrs;
 				mIntrs [i] = new Tuple<Vector2, string> (new Vector2 ((pView.Width - pDim.X) / 2, pY), pStr);
 			}
+
+			var pSize = new Point ();
+
+			foreach (var pSprite in mSprites) {
+				var pItem = (GameEnemyIntro)pSprite;
+				var pBounds = pItem.Bounds;
+
+				pSize.X += pBounds.Width+mSpaceLinesIntrs;
+				if (pSize.Y < pBounds.Height)
+					pSize.Y = pBounds.Height;
+			}
+
+			var pPos = new Point ((pView.Width - pSize.X)/2, (277+(int)pY-pSize.Y) / 2);
+
+			foreach (var pSprite in mSprites) {
+				var pItem = (GameEnemyIntro)pSprite;
+				var pBounds = pItem.Bounds;
+
+				pItem.SetLocation (new Point(pPos.X,pPos.Y+(pSize.Y-pBounds.Height)));
+				pPos.X += pBounds.Width + mSpaceLinesIntrs;
+			}
+
+			//mEnemy.SetLocation(new Point(0,300));
 			base.LoadContent ();
 		}
 
@@ -62,6 +97,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 			using (var pBatch = new SpriteBatch (pGame.GraphicsDevice)) {
 				pBatch.Begin ();
 				pBatch.Draw (mSplashImg, mPosSplash,null,new Rectangle(0,0,640,270));
+				mSprites.Draw (pBatch, gameTime);
 				foreach (var pIntr in mIntrs)
 					pBatch.DrawString (pIntrFont, pIntr.Item2, pIntr.Item1, Color.White);
 				pBatch.End ();
@@ -71,6 +107,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 
 		public override void Update (GameTime gameTime)
 		{
+			mSprites.Update (gameTime);
 			if (GamePad.GetState (PlayerIndex.One).Buttons.B == ButtonState.Pressed || Keyboard.GetState ().IsKeyDown (Keys.Space))
 				Game.GetService<Core.IJuegecitosService>().StateManager.PopState(gameTime);
 			base.Update (gameTime);
