@@ -12,6 +12,7 @@ namespace juegecitos.Shared.Core
 		event EventHandler<EventArgs> EnabledChanged;
 		event EventHandler<EventArgs> VisibleChanged;
 
+		void Initialize ();
 		void Update(GameTime gameTime);
 		void Draw(SpriteBatch argSB,GameTime gameTime);  
 	}

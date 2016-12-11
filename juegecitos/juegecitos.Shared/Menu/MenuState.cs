@@ -132,7 +132,6 @@ namespace juegecitos.Shared.Menu
 			mIdxSel = CalcIdxFromPoint(pPosition);
 			if (mIdxSel.HasValue && pMouseState.LeftButton == ButtonState.Pressed) {
 				EjecutarItem (gameTime);
-
 			}
 			if (pGamePad.DPad.Left == ButtonState.Pressed) {
 				if (!mIdxSel.HasValue)

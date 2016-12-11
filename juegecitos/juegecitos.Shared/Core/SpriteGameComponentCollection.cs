@@ -74,6 +74,7 @@ namespace juegecitos.Shared.Core
 		{
 			var pComponent = e.SpriteGameComponent;
 
+			pComponent.Initialize ();
 			pComponent.EnabledChanged += SpriteGameComponent_EnabledChanged;
 			pComponent.VisibleChanged += SpriteGameComponent_EnabledChanged;
 			if (pComponent.Enabled)
@@ -88,7 +89,6 @@ namespace juegecitos.Shared.Core
 
 		private void OnComponentRemoved(SpriteGameComponentCollectionEventArgs e)
 		{
-
 			var pComponent = e.SpriteGameComponent;
 
 			pComponent.EnabledChanged -= SpriteGameComponent_EnabledChanged;

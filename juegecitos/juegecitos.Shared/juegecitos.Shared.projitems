@@ -36,7 +36,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Strings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\SpriteFontExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\EnemyDef.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Enemies.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\Items.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\ItemDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\GameItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RectangleExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Games\SpaceInvanders\GameEnemyIntro.cs" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />

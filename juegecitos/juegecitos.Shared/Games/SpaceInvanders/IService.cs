@@ -6,9 +6,11 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 {
 	public interface IService
 	{
+		float Scale { get; set; }
 		Strings Strs { get; }
 		Texture2D Sprites{ get; }
-		IDictionary<Enemies,EnemyDef> EnemiesDefs{ get; }
+		Core.MapSprites<Sprites> MapSprites { get; }
+		IDictionary<Items,EnemyDef> EnemiesDefs{ get; }
 	}
 }
 

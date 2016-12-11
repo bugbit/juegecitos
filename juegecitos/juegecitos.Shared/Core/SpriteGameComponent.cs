@@ -81,7 +81,10 @@ namespace juegecitos.Shared.Core
 		/// <summary>
 		/// Shuts down the component.
 		/// </summary>
-		protected virtual void Dispose(bool disposing) { }
+		protected virtual void Dispose(bool disposing) 
+		{
+			UnloadContent ();
+		}
 
 		/// <summary>
 		/// Shuts down the component.

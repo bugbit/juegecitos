@@ -2,7 +2,7 @@
 <XnaContent xmlns:ns="Microsoft.Xna.Framework">
   <Asset Type="juegecitos.Shared.Games.SpaceInvanders.EnemyDef[]">
 	<Item>
-		<Enemy>BOTTOM_ALIEN</Enemy>
+		<ItemType>BOTTOM_ALIEN</ItemType>
 		<Sprites>
 			<Item>BOTTOM_ALIEN1</Item>
 			<Item>BOTTOM_ALIEN2</Item>
@@ -10,7 +10,7 @@
 		<Points>10</Points>
 	</Item>
 	<Item>
-		<Enemy>MIDDLE_ALIEN</Enemy>
+		<ItemType>MIDDLE_ALIEN</ItemType>
 		<Sprites>
 			<Item>MIDDLE_ALIEN1</Item>
 			<Item>MIDDLE_ALIEN2</Item>
@@ -18,7 +18,7 @@
 		<Points>20</Points>
 	</Item>
 	<Item>
-		<Enemy>TOP_ALIEN</Enemy>
+		<ItemType>TOP_ALIEN</ItemType>
 		<Sprites>
 			<Item>TOP_ALIEN1</Item>
 			<Item>TOP_ALIEN2</Item>
@@ -26,7 +26,7 @@
 		<Points>30</Points>
 	</Item>
 	<Item>
-		<Enemy>UFO</Enemy>
+		<ItemType>UFO</ItemType>
 		<Sprites>
 			<Item>UFO_SPRITE</Item>
 			<Item>UFO_SPRITE</Item>

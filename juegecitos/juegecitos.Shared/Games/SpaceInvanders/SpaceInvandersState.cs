@@ -9,9 +9,11 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 {
 	public class SpaceInvandersState: Core.DrawableGameComponentState,IService
 	{
+		public float Scale { get; set; }
 		public Strings Strs { get; private set; }
 		public Texture2D Sprites{ get; private set; }
-		public IDictionary<Enemies,EnemyDef> EnemiesDefs{ get; private set; }
+		public Core.MapSprites<Sprites> MapSprites { get; private set; }
+		public IDictionary<Items,EnemyDef> EnemiesDefs{ get; private set; }
 
 		public SpaceInvandersState(Game argGame):base(argGame)
 		{
@@ -22,6 +24,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 			var pGame = Game;
 
 			pGame.Attach<IService>(this);
+			Scale = new Rectangle (0, 0, 640, 400).CalcScaleFromScreen (GraphicsDevice.Viewport.Bounds);
 			base.Initialize ();
 		}
 
@@ -30,12 +33,9 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 			var pContent = Game.Content;
 
 			Sprites = pContent.Load<Texture2D>("SpaceInvanders/sprites");
+			MapSprites=pContent.LoadSprites<Sprites> ("SpaceInvanders/MapSprites");
 			Strs = pContent.LoadStrings<Strings>("SpaceInvanders/Strings");
-			EnemiesDefs = pContent.LoadDict<Enemies,EnemyDef> ("SpaceInvanders/EnemyDef", e=>e.Enemy);
-
-			//var p = Game.Content.LoadSprites<Sprites> ("SpaceInvanders/MapSprites");
-
-
+			EnemiesDefs = pContent.LoadDict<Items,EnemyDef> ("SpaceInvanders/EnemyDef", e=>e.ItemType);
 
 			base.LoadContent ();
 		}
@@ -58,10 +58,16 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 			base.Enter (gameTime);
 		}
 
-		public override void Obscure (GameTime gameTime)
+		public override void Exit (GameTime gameTime)
+		{
+			Game.DeAttach<IService> ();
+			base.Exit (gameTime);
+		}
+
+		public override void Reveal (GameTime gameTime)
 		{
 			Game.GetService<Core.IJuegecitosService>().StateManager.PopState(gameTime);
-			base.Obscure (gameTime);
+			base.Reveal (gameTime);
 		}
 
 		public override void Update (GameTime gameTime)
