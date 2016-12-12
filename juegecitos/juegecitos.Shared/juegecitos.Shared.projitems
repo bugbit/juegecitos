@@ -44,7 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\PointExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Juegecitos.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Core\" />
