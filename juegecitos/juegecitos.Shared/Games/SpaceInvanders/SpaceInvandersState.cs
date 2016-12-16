@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using juegecitos.Shared.Extensions;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using FP=FarseerPhysics;
 
 namespace juegecitos.Shared.Games.SpaceInvanders
 {
@@ -14,6 +15,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 		public Texture2D Sprites{ get; private set; }
 		public Core.MapSprites<Sprites> MapSprites { get; private set; }
 		public IDictionary<Items,EnemyDef> EnemiesDefs{ get; private set; }
+		public FP.Dynamics.World FPWorld { get; private set; }
 
 		public SpaceInvandersState(Game argGame):base(argGame)
 		{
@@ -25,6 +27,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 
 			pGame.Attach<IService>(this);
 			Scale = new Rectangle (0, 0, 640, 400).CalcScaleFromScreen (GraphicsDevice.Viewport.Bounds);
+			FPWorld = new FP.Dynamics.World (new Vector2 (0, 9.8f));
 			base.Initialize ();
 		}
 
@@ -72,6 +75,7 @@ namespace juegecitos.Shared.Games.SpaceInvanders
 
 		public override void Update (GameTime gameTime)
 		{
+			FPWorld.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalMilliseconds * 0.001f, (1f / 30f)));
 //			if (GamePad.GetState (PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState ().IsKeyDown (Keys.Escape))
 //				Game.GetService<Core.IJuegecitosService>().StateManager.PopState(gameTime);
 			base.Update (gameTime);
