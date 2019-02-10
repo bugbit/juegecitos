@@ -1,19 +1,48 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "juegecitos.Desktop", "juegecitos.Desktop\juegecitos.Desktop.csproj", "{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "juegecitos.Shared", "juegecitos.Shared\juegecitos.Shared.shproj", "{D8DAC6E9-3435-4F93-A43E-E325C3DBC56C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jetpac.Desktop", "Jetpac.Desktop\Jetpac.Desktop.csproj", "{0A39CF7E-121B-427B-A3DF-9F832D5EF772}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Jetpac.Shared", "Jetpac.Shared\Jetpac.Shared.shproj", "{A0CDBD0E-3A41-42B7-9425-A838BC2C7383}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Jetpac.Shared\Jetpac.Shared.projitems*{0a39cf7e-121b-427b-a3df-9f832d5ef772}*SharedItemsImports = 4
+		juegecitos.Shared\juegecitos.Shared.projitems*{9e74d6aa-84be-4cf1-a00f-4a07792cfc19}*SharedItemsImports = 4
+		Jetpac.Shared\Jetpac.Shared.projitems*{a0cdbd0e-3a41-42b7-9425-a838bc2c7383}*SharedItemsImports = 13
+		juegecitos.Shared\juegecitos.Shared.projitems*{d8dac6e9-3435-4f93-a43e-e325c3dbc56c}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Debug|x86.ActiveCfg = Debug|x86
-		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Debug|x86.Build.0 = Debug|x86
+		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Release|Any CPU.ActiveCfg = Release|x86
 		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Release|x86.ActiveCfg = Release|x86
 		{9E74D6AA-84BE-4CF1-A00F-4A07792CFC19}.Release|x86.Build.0 = Release|x86
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Debug|x86.Build.0 = Debug|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Release|x86.ActiveCfg = Release|Any CPU
+		{0A39CF7E-121B-427B-A3DF-9F832D5EF772}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB062C2C-21A6-4D49-87A7-B3E5F2B5AA20}
 	EndGlobalSection
 EndGlobal
