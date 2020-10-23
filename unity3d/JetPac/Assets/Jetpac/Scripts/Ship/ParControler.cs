@@ -11,14 +11,11 @@ namespace JetPac.Ship
         public ParControler PartNext;
 
         private Game.Controler mGameControler;
-        private ParControler mPartToAdd;
 
         public void ApplyGravity(bool argApply)
         {
             InGravity = argApply;
         }
-
-        public void PartToAdd(ParControler argPartToAdd) => mPartToAdd = argPartToAdd;
 
         // Start is called before the first frame update
         void Start()

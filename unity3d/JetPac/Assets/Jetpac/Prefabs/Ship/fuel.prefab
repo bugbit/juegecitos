@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 278801415348296101}
   m_Layer: 0
   m_Name: fuel
-  m_TagString: Untagged
+  m_TagString: Fuel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,3 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e695831ef9622b4d91ac40ee7243263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InGravity: 1
+  Gravity: 2

@@ -11,7 +11,6 @@ namespace JetPac.Player
         private Game.Controler mGameControler;
         private Animator mAnim;
         private Rigidbody2D mRB;
-        private FixedJoint2D mFJ;
         private AudioSource mAS;
         private GameObject mLeft;
         private GameObject mRight;
@@ -80,7 +79,6 @@ namespace JetPac.Player
             mGameControler = FindObjectOfType<Game.Controler>();
             mAnim = GetComponent<Animator>();
             mRB = GetComponent<Rigidbody2D>();
-            mFJ = GetComponent<FixedJoint2D>();
             mAS = GetComponent<AudioSource>();
             mLeft = GameObject.Find("left");
             mRight = GameObject.Find("right");

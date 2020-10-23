@@ -367,6 +367,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 401634906}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &401634908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8963258955679800837, guid: c7e6ecaef1e9b7b449aa1f78dc37d165,
+    type: 3}
+  m_PrefabInstance: {fileID: 401634906}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31dc901c2dab34644bd3bcfc8b56952d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,6 +5602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e81439e7364d6447bf5a55fd4cf5165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ParShip3: {fileID: 401634908}
 --- !u!1 &927638536
 GameObject:
   m_ObjectHideFlags: 0
@@ -5810,7 +5823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1162557806
 Transform:
   m_ObjectHideFlags: 0
@@ -6802,7 +6815,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62155659532b25f4699b2417118e5376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  State: 1
+  State: 4
+  FuelPrefab: {fileID: 1585320891942176087, guid: 7c57e8db343735c41bb74675c9cc152f,
+    type: 3}
 --- !u!1 &2062878352
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,10 @@ namespace JetPac.Ship
 {
     public class Controler : MonoBehaviour
     {
+        public ParControler ParShip3;
+
         private RocketControler mRocketObj;
+
         public bool IsInShip(GameObject argObj)
         {
             return Mathf.Abs(argObj.transform.position.x - transform.position.x) <= 1e-2;
@@ -20,9 +23,17 @@ namespace JetPac.Ship
             argObj.transform.position = new Vector3(transform.position.x, pPos.y, pPos.z);
         }
 
+        public void PrepareAssembleShip()
+        {
+            foreach (var pPar in FindObjectsOfType<ParControler>())
+                pPar.gameObject.SetActive(true);
+
+            mRocketObj.gameObject.SetActive(false);
+        }
+
         public void PrepareForFill()
         {
-            foreach (var pPar in GetComponentsInChildren<Ship.ParControler>())
+            foreach (var pPar in FindObjectsOfType<ParControler>())
                 pPar.gameObject.SetActive(false);
 
             mRocketObj.gameObject.SetActive(true);
