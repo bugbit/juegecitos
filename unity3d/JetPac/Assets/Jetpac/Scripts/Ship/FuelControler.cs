@@ -8,16 +8,19 @@ namespace JetPac.Ship
     {
         public bool InGravity = true;
         public float Gravity = 2;
+
+        private Game.Controler mGameControler;
+
         public void ApplyGravity(bool argApply)
         {
             InGravity = argApply;
         }
 
         // Start is called before the first frame update
-        //void Start()
-        //{
-
-        //}
+        void Start()
+        {
+            mGameControler = FindObjectOfType<Game.Controler>();
+        }
 
         // Update is called once per frame
         //void Update()
@@ -37,7 +40,15 @@ namespace JetPac.Ship
             var pResults = new List<RaycastHit2D>();
 
             pContactFilter.useTriggers = true;
-            pContactFilter.SetLayerMask(LayerMask.GetMask("Floor"));
+            switch (mGameControler.State)
+            {
+                case Game.Controler.EState.WaitFuel:
+                    pContactFilter.SetLayerMask(LayerMask.GetMask("Ship"));
+                    break;
+                default:
+                    pContactFilter.SetLayerMask(LayerMask.GetMask("Floor"));
+                    break;
+            }
             pCollider.Raycast(pDir, pContactFilter, pResults, Mathf.Max(pDist, pCollider.size.magnitude));
             if (pResults.Count > 0)
             {
@@ -49,6 +60,8 @@ namespace JetPac.Ship
                     {
                         pDist = d.distance;
                         InGravity = false;
+                        if (mGameControler.State == Game.Controler.EState.WaitFuel)
+                            mGameControler.NextFuel(this);
 
                         break;
                     }

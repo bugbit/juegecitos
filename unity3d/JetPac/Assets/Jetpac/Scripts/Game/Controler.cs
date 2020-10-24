@@ -9,13 +9,13 @@ namespace JetPac.Game
     {
         public enum EState
         {
-            Menu, AssembleShip, LoadPartShip, WaitPartShip, FillShip
+            Menu, AssembleShip, LoadPartShip, WaitPartShip, FillShip, FillFuel, LoadFuel, WaitFuel
         }
 
         public EState State = EState.AssembleShip;
         public GameObject FuelPrefab;
 
-        private Ship.ParControler mShipPartAssemble;
+        private ParControler mShipPartAssemble;
         private Ship.Controler mShipControler;
         private BoxCollider2D mZoneGameBoxC2D;
 
@@ -25,15 +25,15 @@ namespace JetPac.Game
             ChangeState();
         }
 
-        public void PartToAssemble(Ship.ParControler argPart)
+        public void PartToAssemble(ParControler argPart)
         {
             mShipPartAssemble = argPart;
         }
 
-        public void NextAssemble(Ship.ParControler argPart)
+        public void NextAssemble(ParControler argPart)
         {
             if (argPart == null)
-                FillShip();
+                ChangeState(EState.FillShip);
             else
             {
                 ChangeState(EState.AssembleShip);
@@ -41,14 +41,21 @@ namespace JetPac.Game
             }
         }
 
-        public void FillShip()
+        public void NextFuel(FuelControler argFuel)
         {
-            ChangeState(EState.FillShip);
+            ThrowObjFromTop(argFuel.gameObject);
+            argFuel.InGravity = true;
+            ChangeState(EState.FillFuel);
         }
 
         public void ThrowPrefabObjFromTop(GameObject argObj)
         {
             var pObj = Instantiate(argObj);
+            ThrowObjFromTop(pObj);
+        }
+
+        private void ThrowObjFromTop(GameObject pObj)
+        {
             var pBoundsZone = mZoneGameBoxC2D.bounds;
             var pBoundsObj = pObj.GetComponent<BoxCollider2D>().bounds;
 
@@ -74,13 +81,14 @@ namespace JetPac.Game
                         ChangeState(EState.LoadPartShip);
                     }
                     break;
-                case EState.FillShip:
+                case EState.FillFuel:
                     var pFuelCntl = collision.GetComponent<FuelControler>();
 
                     if (pFuelCntl != null)
                     {
                         gameobj.GetComponent<Player.Controler>().LoadObj(collision.gameObject);
                         pFuelCntl.InGravity = false;
+                        ChangeState(EState.LoadFuel);
                     }
                     break;
             }
@@ -89,14 +97,13 @@ namespace JetPac.Game
         public void PlayerTriggerStay2D(GameObject gameobj, Collider2D collision)
         {
             var pPlayerCntl = gameobj.GetComponent<Player.Controler>();
+            var pShipCntl = collision.gameObject.GetComponent<Ship.Controler>();
 
-            switch (State)
+            if (pShipCntl != null)
             {
-                case EState.LoadPartShip:
-                    var pShipCntl = collision.gameObject.GetComponent<Ship.Controler>();
-
-                    if (pShipCntl != null)
-                    {
+                switch (State)
+                {
+                    case EState.LoadPartShip:
                         if (pPlayerCntl.IsLoadObj && pShipCntl.IsInShip(gameobj))
                         {
                             mShipPartAssemble.InGravity = true;
@@ -108,8 +115,22 @@ namespace JetPac.Game
                             pShipCntl.PutObjInZoneShip(pObj);
                             ChangeState(EState.WaitPartShip);
                         }
-                    }
-                    break;
+                        break;
+                    case EState.LoadFuel:
+                        if (pPlayerCntl.IsLoadObj && pShipCntl.IsInShip(gameobj))
+                        {
+                            var pFuelCntl = pPlayerCntl.GetLoadObj().GetComponent<FuelControler>();
+
+                            if (pFuelCntl != null)
+                            {
+                                pFuelCntl.InGravity = true;
+                                pPlayerCntl.UnLoadObj();
+                                pShipCntl.PutObjInZoneShip(pFuelCntl.gameObject);
+                                ChangeState(EState.WaitFuel);
+                            }
+                        }
+                        break;
+                }
             }
         }
 
@@ -139,6 +160,7 @@ namespace JetPac.Game
                     mShipPartAssemble = null;
                     mShipControler.PrepareForFill();
                     ThrowPrefabObjFromTop(FuelPrefab);
+                    ChangeState(EState.FillFuel);
                     break;
             }
         }
