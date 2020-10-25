@@ -25,6 +25,7 @@ namespace JetPac.Ship
 
         public void PrepareAssembleShip()
         {
+            GetComponent<BoxCollider2D>().enabled = true;
             foreach (var pPar in FindObjectsOfType<ParControler>())
                 pPar.gameObject.SetActive(true);
 
@@ -33,11 +34,25 @@ namespace JetPac.Ship
 
         public void PrepareForFill()
         {
+            GetComponent<BoxCollider2D>().enabled = true;
             foreach (var pPar in FindObjectsOfType<ParControler>())
                 pPar.gameObject.SetActive(false);
 
+            mRocketObj.ResetLevel();
             mRocketObj.gameObject.SetActive(true);
         }
+
+        public bool NextFuel()
+        {
+            var pRet = mRocketObj.NextLevel();
+
+            if (!pRet)
+                GetComponent<BoxCollider2D>().enabled = false;
+
+            return pRet;
+        }
+
+        public void TakeOff() => mRocketObj.TakeOff();
 
         // Start is called before the first frame update
         void Start()

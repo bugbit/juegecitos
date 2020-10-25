@@ -43,7 +43,7 @@ namespace JetPac.Ship
             switch (mGameControler.State)
             {
                 case Game.Controler.EState.WaitFuel:
-                    pContactFilter.SetLayerMask(LayerMask.GetMask("Ship"));
+                    pContactFilter.SetLayerMask(LayerMask.GetMask("Ship", "Floor"));
                     break;
                 default:
                     pContactFilter.SetLayerMask(LayerMask.GetMask("Floor"));

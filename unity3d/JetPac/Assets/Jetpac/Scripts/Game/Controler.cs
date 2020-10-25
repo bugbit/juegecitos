@@ -3,13 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ 
+https://github.com/mrcook/jetpac-disassembly/blob/master/jetpac.skool
+http://frgcb.blogspot.com/2013/10/jetpac-ultimate-play-game-1983.html
+https://www.icemark.com/
+ 
+ */
+
 namespace JetPac.Game
 {
     public class Controler : MonoBehaviour
     {
         public enum EState
         {
-            Menu, AssembleShip, LoadPartShip, WaitPartShip, FillShip, FillFuel, LoadFuel, WaitFuel
+            Menu, AssembleShip, LoadPartShip, WaitPartShip, FillShip, FillFuel, LoadFuel, WaitFuel, WaitPlayerForTakeOf, ShipTakeOf, ShipToLand
         }
 
         public EState State = EState.AssembleShip;
@@ -18,6 +26,7 @@ namespace JetPac.Game
         private ParControler mShipPartAssemble;
         private Ship.Controler mShipControler;
         private BoxCollider2D mZoneGameBoxC2D;
+        private Player.Controler mPlayerControler;
 
         public void ChangeState(EState argState)
         {
@@ -43,9 +52,17 @@ namespace JetPac.Game
 
         public void NextFuel(FuelControler argFuel)
         {
-            ThrowObjFromTop(argFuel.gameObject);
-            argFuel.InGravity = true;
-            ChangeState(EState.FillFuel);
+            if (mShipControler.NextFuel())
+            {
+                ThrowObjFromTop(argFuel.gameObject);
+                argFuel.InGravity = true;
+                ChangeState(EState.FillFuel);
+            }
+            else
+            {
+                Destroy(argFuel.gameObject);
+                ChangeState(EState.WaitPlayerForTakeOf);
+            }
         }
 
         public void ThrowPrefabObjFromTop(GameObject argObj)
@@ -91,6 +108,10 @@ namespace JetPac.Game
                         ChangeState(EState.LoadFuel);
                     }
                     break;
+                case EState.WaitPlayerForTakeOf:
+                    if (collision.gameObject.CompareTag("Ship"))
+                        ChangeState(EState.ShipTakeOf);
+                    break;
             }
         }
 
@@ -104,7 +125,7 @@ namespace JetPac.Game
                 switch (State)
                 {
                     case EState.LoadPartShip:
-                        if (pPlayerCntl.IsLoadObj && pShipCntl.IsInShip(gameobj))
+                        if (pPlayerCntl.IsLoadObj /*&& pShipCntl.IsInShip(gameobj)*/)
                         {
                             mShipPartAssemble.InGravity = true;
                             mShipPartAssemble = null;
@@ -117,7 +138,7 @@ namespace JetPac.Game
                         }
                         break;
                     case EState.LoadFuel:
-                        if (pPlayerCntl.IsLoadObj && pShipCntl.IsInShip(gameobj))
+                        if (pPlayerCntl.IsLoadObj /*&& pShipCntl.IsInShip(gameobj)*/)
                         {
                             var pFuelCntl = pPlayerCntl.GetLoadObj().GetComponent<FuelControler>();
 
@@ -138,6 +159,7 @@ namespace JetPac.Game
         void Start()
         {
             mShipControler = FindObjectOfType<Ship.Controler>();
+            mPlayerControler = FindObjectOfType<Player.Controler>();
             mZoneGameBoxC2D = GameObject.Find("ZoneGame").GetComponent<BoxCollider2D>();
             ChangeState();
         }
@@ -161,6 +183,10 @@ namespace JetPac.Game
                     mShipControler.PrepareForFill();
                     ThrowPrefabObjFromTop(FuelPrefab);
                     ChangeState(EState.FillFuel);
+                    break;
+                case EState.ShipTakeOf:
+                    mPlayerControler.gameObject.SetActive(false);
+                    mShipControler.TakeOff();
                     break;
             }
         }
