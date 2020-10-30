@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c9de0a5a2bef2448ad383b71dc861c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipTakeOff: {fileID: 8300000, guid: cafab2194cb5eb546b7769e43d808e0c, type: 3}
-  clipToLand: {fileID: 8300000, guid: c039f6dbc4853684eb56e31e7adb225e, type: 3}
+  clipTakeOff: {fileID: 8300000, guid: c039f6dbc4853684eb56e31e7adb225e, type: 3}
+  clipToLand: {fileID: 8300000, guid: cafab2194cb5eb546b7769e43d808e0c, type: 3}
 --- !u!61 &37014793
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5687,7 +5687,7 @@ GameObject:
   - component: {fileID: 740371197}
   - component: {fileID: 740371198}
   - component: {fileID: 740371199}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ship
   m_TagString: Ship
   m_Icon: {fileID: 0}

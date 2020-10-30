@@ -27,6 +27,13 @@ namespace JetPac.Game
         private Ship.Controler mShipControler;
         private BoxCollider2D mZoneGameBoxC2D;
         private Player.Controler mPlayerControler;
+        private ContactFilter2D mZonaShipFilter2D = new ContactFilter2D
+        {
+            useTriggers = true,
+            useLayerMask = true
+        };
+        //Allocate an array with just one element capacity to store the floor when hit
+        private RaycastHit2D[] hits = new RaycastHit2D[1];
 
         public void ChangeState(EState argState)
         {
@@ -74,10 +81,15 @@ namespace JetPac.Game
         private void ThrowObjFromTop(GameObject pObj)
         {
             var pBoundsZone = mZoneGameBoxC2D.bounds;
-            var pBoundsObj = pObj.GetComponent<BoxCollider2D>().bounds;
+            var pObjBox = pObj.GetComponent<BoxCollider2D>();
+            var pBoundsObj = pObjBox.bounds;
+            int pCountRay;
 
-            //pObj.transform.position = pBoundsZone.max - pBoundsObj.size - Vector3.right * pBoundsZone.size.x;
-            pObj.transform.position = new Vector3(pBoundsZone.center.x - pBoundsZone.size.x / 2 + pBoundsObj.size.x + Random.value * (pBoundsZone.size.x - pBoundsObj.size.x), pBoundsZone.center.y + pBoundsZone.size.y / 2 - pBoundsObj.size.y, pObj.transform.position.z);
+            do
+            {
+                pObj.transform.position = new Vector3(pBoundsZone.center.x - pBoundsZone.size.x / 2 + pBoundsObj.size.x + Random.value * (pBoundsZone.size.x - pBoundsObj.size.x), pBoundsZone.center.y + pBoundsZone.size.y / 2 - pBoundsObj.size.y, pObj.transform.position.z);
+                pCountRay = Physics2D.Raycast(pObj.transform.position, Vector2.down, mZonaShipFilter2D, hits, 1);
+            } while (pCountRay > 0);
         }
 
         public void PlayerCollisionEnter(GameObject gameobj, Collision2D collision)
@@ -161,6 +173,7 @@ namespace JetPac.Game
             mShipControler = FindObjectOfType<Ship.Controler>();
             mPlayerControler = FindObjectOfType<Player.Controler>();
             mZoneGameBoxC2D = GameObject.Find("ZoneGame").GetComponent<BoxCollider2D>();
+            mZonaShipFilter2D.SetLayerMask(LayerMask.GetMask("ZoneShip"));
             ChangeState();
         }
 

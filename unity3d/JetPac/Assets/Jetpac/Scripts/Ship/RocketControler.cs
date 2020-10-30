@@ -47,21 +47,23 @@ namespace JetPac.Ship
 
         // Update is called once per frame
         //void Update()
-        //{
-
+        //{           
         //}
 
         private IEnumerator TakeOffCoroutine()
         {
-            var h = transform.parent.GetComponent<BoxCollider2D>().bounds.size.y;
-            var h2 = h / 8 / 16;
+            var a = gameObject.transform.position;
+            var b = a + Vector3.up * (transform.parent.GetComponent<BoxCollider2D>().size.y - 2 * GetComponent<BoxCollider2D>().size.y);
+            var t = 0.0f;
+
             mAS.PlayOneShot(clipTakeOff);
 
             while (mAS.isPlaying)
             {
-                gameObject.transform.Translate(Vector3.up * h2);
+                t += Time.deltaTime;
+                gameObject.transform.position = Vector3.Lerp(a, b, t / 8.0f);
 
-                yield return new WaitForSeconds(1.0f / 16);
+                yield return null;
             }
 
             yield break;

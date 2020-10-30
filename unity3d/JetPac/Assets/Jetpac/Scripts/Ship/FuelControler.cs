@@ -36,10 +36,13 @@ namespace JetPac.Ship
             var pCollider = GetComponent<BoxCollider2D>();
             var pDir = Vector2.down;
             var pDist = Gravity * Time.deltaTime;
-            var pContactFilter = new ContactFilter2D();
+            var pContactFilter = new ContactFilter2D
+            {
+                useTriggers = true,
+                useLayerMask = true
+            };
             var pResults = new List<RaycastHit2D>();
 
-            pContactFilter.useTriggers = true;
             switch (mGameControler.State)
             {
                 case Game.Controler.EState.WaitFuel:

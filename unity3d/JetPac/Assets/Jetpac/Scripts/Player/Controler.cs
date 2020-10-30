@@ -10,6 +10,7 @@ namespace JetPac.Player
     {
         private Game.Controler mGameControler;
         private Animator mAnim;
+        private BoxCollider2D mBC;
         private Rigidbody2D mRB;
         private AudioSource mAS;
         private GameObject mLeft;
@@ -21,7 +22,16 @@ namespace JetPac.Player
         public float fireForce = 9f;
         public AudioClip clipCLink;
 
-        private bool mInAir = true;
+        private bool mIsFired = true;
+        private bool mInGround = false;
+
+        private ContactFilter2D mGroundFilter2D = new ContactFilter2D
+        {
+            useTriggers = true,
+            useLayerMask = true
+        };
+        //Allocate an array with just one element capacity to store the floor when hit
+        private RaycastHit2D[] hits = new RaycastHit2D[1];
 
         public bool IsLoadObj => mLoadObj != null;
 
@@ -35,7 +45,7 @@ namespace JetPac.Player
             var pInMov = x != 0;
             var pLR = x < 0;
 
-            mInAir = argFire;
+            mIsFired = argFire;
             mAnim.SetBool("inmov", pInMov);
             if (pInMov)
             {
@@ -78,11 +88,13 @@ namespace JetPac.Player
         {
             mGameControler = FindObjectOfType<Game.Controler>();
             mAnim = GetComponent<Animator>();
+            mBC = GetComponent<BoxCollider2D>();
             mRB = GetComponent<Rigidbody2D>();
             mAS = GetComponent<AudioSource>();
             mLeft = GameObject.Find("left");
             mRight = GameObject.Find("right");
             mLoadParentObj = transform.Find("load").gameObject;
+            mGroundFilter2D.SetLayerMask(LayerMask.GetMask("Floor"));
         }
 
         //private void OnCollisionStay2D(Collision2D collision)
@@ -91,27 +103,82 @@ namespace JetPac.Player
         //        mAnim.SetBool("inair", false);
         //}
 
+        private void FixedUpdate()
+        {
+            FixedUpdateGrounded();
+        }
+
+        private void FixedUpdateGrounded()
+        {
+            if (mIsFired)
+            {
+                if (mInGround)
+                    mAnim.SetBool("inair", false);
+
+                return;
+            }
+            //Laser length
+            float laserLength = 0.025f;
+            //Left ray start X
+            float left = transform.position.x - (mBC.size.x * transform.localScale.x / 2.0f) + (mBC.offset.x * transform.localScale.x) + 0.1f;
+            //Right ray start X
+            float right = transform.position.x + (mBC.size.x * transform.localScale.x / 2.0f) + (mBC.offset.x * transform.localScale.x) - 0.1f;
+
+            Vector2 startPositionLeft = new Vector2(left, transform.position.y - (mBC.bounds.extents.y + 0.05f));
+            //Right ray start point
+            Vector2 startPositionRight = new Vector2(right, transform.position.y - (mBC.bounds.extents.y + 0.05f));
+            //The color of the ray for debug purpose
+            Color rayColor = Color.red;
+            //Check if the left laser hits something
+            int leftCount = Physics2D.Raycast(startPositionLeft, Vector2.down, mGroundFilter2D, hits, laserLength);
+            //Check if the right laser hits something
+            int rightCount = Physics2D.Raycast(startPositionRight, Vector2.down, mGroundFilter2D, hits, laserLength);
+
+            Collider2D col2DHit = null;
+            //If one of the lasers hits the floor
+            //if ((leftCount > 0 && hitsLeft[0].collider != null) || (rightCount > 0 && hitsRight[0].collider != null))
+            if ((leftCount > 0 || rightCount > 0) && hits[0].collider != null)
+            {
+
+                //Get the object hits collider
+                col2DHit = hits[0].collider;
+                //Change the color of the ray for debug purpose
+                rayColor = Color.green;
+            }
+            //Draw the ray for debug purpose
+            Debug.DrawRay(startPositionLeft, Vector2.down * laserLength, rayColor);
+            Debug.DrawRay(startPositionRight, Vector2.down * laserLength, rayColor);
+            //If the ray hits the floor returns true, false otherwise
+
+            var pInGround = col2DHit != null;
+
+            if (pInGround != mInGround)
+                mAnim.SetBool("inair", !pInGround);
+
+            mInGround = pInGround;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag.Equals("Platform"))
-            {
-                if (!mInAir)
-                {
-                    mAnim.SetBool("inair", false);
-                    mInAir = false;
-                }
-            }
-            else
-                mGameControler.PlayerCollisionEnter(gameObject, collision);
+            //if (collision.gameObject.tag.Equals("Platform"))
+            //{
+            //    if (!mIsFired)
+            //    {
+            //        mAnim.SetBool("inair", false);
+            //        mIsFired = false;
+            //    }
+            //}
+            //else
+            mGameControler.PlayerCollisionEnter(gameObject, collision);
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (!mInAir)
+            if (!mIsFired)
                 if (collision.gameObject.tag.Equals("Platform"))
                 {
                     mAnim.SetBool("inair", true);
-                    mInAir = true;
+                    mIsFired = true;
                 }
         }
 
