@@ -6,6 +6,9 @@ namespace JetPac.Aliens
 {
     public class AlienControler : MonoBehaviour
     {
+        public GameObject Body;
+        public GameObject Explosion;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -16,6 +19,15 @@ namespace JetPac.Aliens
         void Update()
         {
 
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<AudioSource>().enabled = true;
+            Body.SetActive(false);
+            Explosion.SetActive(true);
+            Destroy(gameObject, 3);
         }
     }
 }
