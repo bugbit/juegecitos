@@ -24,18 +24,20 @@ namespace JetPac.Game
         public EState State = EState.AssembleShip;
         public GameObject ZoneGame;
         public GameObject FuelPrefab;
+        public bool HaltRespawning;
 
         private ParControler mShipPartAssemble;
         private Ship.Controler mShipControler;
         private BoxCollider2D mZoneGameBoxC2D;
         private Player.Controler mPlayerControler;
+        private Aliens.AliensManager mAliensManager;
         private ContactFilter2D mZonaShipFilter2D = new ContactFilter2D
         {
             useTriggers = true,
             useLayerMask = true
         };
         //Allocate an array with just one element capacity to store the floor when hit
-        private RaycastHit2D[] hits = new RaycastHit2D[1];
+        private RaycastHit2D[] hits = new RaycastHit2D[1];        
 
         public void ChangeState(EState argState)
         {
@@ -174,6 +176,7 @@ namespace JetPac.Game
         {
             mShipControler = FindObjectOfType<Ship.Controler>();
             mPlayerControler = FindObjectOfType<Player.Controler>();
+            mAliensManager = FindObjectOfType<Aliens.AliensManager>();
             mZoneGameBoxC2D = ZoneGame.GetComponent<BoxCollider2D>();
             mZonaShipFilter2D.SetLayerMask(LayerMask.GetMask("ZoneShip"));
             ChangeState();
