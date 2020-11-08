@@ -9,18 +9,18 @@ namespace JetPac.Player
     public class Controler : MonoBehaviour
     {
         private Game.Controler mGameControler;
+        private Game.ZoneGame mZoneGame;
         private Animator mAnim;
         private BoxCollider2D mBC;
         private Rigidbody2D mRB;
         private AudioSource mAS;
-        private GameObject mLeft;
-        private GameObject mRight;
         private GameObject mLoadParentObj;
         private GameObject mLoadObj;
 
         public float moveForce = 1;
         public float fireForce = 9f;
         public AudioClip clipCLink;
+        public GameObject fire;
 
         private bool mIsFired = true;
         private bool mInGround = false;
@@ -87,12 +87,11 @@ namespace JetPac.Player
         void Start()
         {
             mGameControler = FindObjectOfType<Game.Controler>();
+            mZoneGame = FindObjectOfType<Game.ZoneGame>();
             mAnim = GetComponent<Animator>();
             mBC = GetComponent<BoxCollider2D>();
             mRB = GetComponent<Rigidbody2D>();
             mAS = GetComponent<AudioSource>();
-            mLeft = GameObject.Find("left");
-            mRight = GameObject.Find("right");
             mLoadParentObj = transform.Find("load").gameObject;
             mGroundFilter2D.SetLayerMask(LayerMask.GetMask("Floor"));
         }
@@ -185,9 +184,9 @@ namespace JetPac.Player
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.name == "left")
-                gameObject.transform.position = new Vector2(mRight.transform.position.x - (transform.position.x - collision.gameObject.transform.position.x), gameObject.transform.position.y);
+                gameObject.transform.position = new Vector2(mZoneGame.right.transform.position.x - 2 * gameObject.GetComponent<BoxCollider2D>().size.x /*(transform.position.x - collision.gameObject.transform.position.x)*/, gameObject.transform.position.y);
             else if (collision.gameObject.name == "right")
-                gameObject.transform.position = new Vector2(mLeft.transform.position.x - (transform.position.x - collision.gameObject.transform.position.x), gameObject.transform.position.y);
+                gameObject.transform.position = new Vector2(mZoneGame.left.transform.position.x + 2 * gameObject.GetComponent<BoxCollider2D>().size.x /*(transform.position.x - collision.gameObject.transform.position.x)*/, gameObject.transform.position.y);
             else
                 mGameControler.PlayerTriggerEnter2D(gameObject, collision);
         }

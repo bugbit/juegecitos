@@ -22,6 +22,7 @@ namespace JetPac.Game
         }
 
         public EState State = EState.AssembleShip;
+        public GameObject ZoneGame;
         public GameObject FuelPrefab;
 
         private ParControler mShipPartAssemble;
@@ -173,7 +174,7 @@ namespace JetPac.Game
         {
             mShipControler = FindObjectOfType<Ship.Controler>();
             mPlayerControler = FindObjectOfType<Player.Controler>();
-            mZoneGameBoxC2D = GameObject.Find("ZoneGame").GetComponent<BoxCollider2D>();
+            mZoneGameBoxC2D = ZoneGame.GetComponent<BoxCollider2D>();
             mZonaShipFilter2D.SetLayerMask(LayerMask.GetMask("ZoneShip"));
             ChangeState();
         }
