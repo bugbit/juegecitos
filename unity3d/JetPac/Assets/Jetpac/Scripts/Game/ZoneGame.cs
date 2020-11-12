@@ -6,8 +6,10 @@ namespace JetPac.Game
 {
     public class ZoneGame : MonoBehaviour
     {
+        public GameObject top;
         public GameObject left;
         public GameObject right;
+        public GameObject bottom;
 
         // Start is called before the first frame update
         //void Start()

@@ -18,7 +18,7 @@ namespace JetPac.Game
     {
         public enum EState
         {
-            Menu, AssembleShip, LoadPartShip, WaitPartShip, FillShip, FillFuel, LoadFuel, WaitFuel, WaitPlayerForTakeOf, ShipTakeOf, ShipToLand
+            AssembleShip, LoadPartShip, WaitPartShip, FillShip, FillFuel, LoadFuel, WaitFuel, WaitPlayerForTakeOf, ShipTakeOf, ShipToLand
         }
 
         public EState State = EState.AssembleShip;
@@ -37,7 +37,7 @@ namespace JetPac.Game
             useLayerMask = true
         };
         //Allocate an array with just one element capacity to store the floor when hit
-        private RaycastHit2D[] hits = new RaycastHit2D[1];        
+        private RaycastHit2D[] hits = new RaycastHit2D[1];
 
         public void ChangeState(EState argState)
         {
