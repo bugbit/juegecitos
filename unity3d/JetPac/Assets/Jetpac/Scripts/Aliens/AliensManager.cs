@@ -53,7 +53,7 @@ namespace JetPac.Aliens
             {
                 if (pUpDown < 1)
                     pAngle = 360 - pAngle;
-                pXOrd = mZoneGame.right.transform.position.x - pSpriter.bounds.size.x;
+                pXOrd = mZoneGame.right.transform.position.x - 2 * pSpriter.bounds.size.x;
             }
             else
             {
@@ -61,11 +61,17 @@ namespace JetPac.Aliens
                     pAngle = 170 + pAngle;
                 else
                     pAngle = 170 + pAngle;
-                pXOrd = mZoneGame.left.transform.position.x + pSpriter.bounds.size.x;
+                pXOrd = mZoneGame.left.transform.position.x + 2 * pSpriter.bounds.size.x;
             }
-            pYOrd = mZoneGame.left.transform.position.y + pSpriter.bounds.size.y + Random.Range(0, mZoneGame.bottom.transform.position.y - mZoneGame.top.transform.position.y);
+            pYOrd = mZoneGame.top.transform.position.y + 2 * pSpriter.bounds.size.y + Random.Range(0, mZoneGame.bottom.transform.position.y - mZoneGame.top.transform.position.y - 2 * pSpriter.bounds.size.y);
 
             var pAlien = Instantiate<AlienControler>(alienPrefab, new Vector3(pXOrd, pYOrd), Quaternion.identity, aliens.transform);
+
+            pAlien.ColissionMode = ColissionMode;
+            pAlien.Sprite = pSpriter;
+            pAlien.Speed = pSpeed;
+            pAlien.Angle = pAngle;
+            pAlien.Dir = pDir;
         }
 
         // Start is called before the first frame update

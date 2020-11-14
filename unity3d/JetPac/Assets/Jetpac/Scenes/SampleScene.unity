@@ -11606,11 +11606,11 @@ MonoBehaviour:
   startNumAliens: 4
   angleMin: 0
   angleMax: 20
-  angleRestriction: 0
+  angleRestriction: 2
   speedMin: 100
   speedMax: 200
   ColissionMode: 1
-  alienTrails: 0
+  alienTrails: 1
   alienRespawmLikeHood: 0.95
 --- !u!114 &1970901186
 MonoBehaviour:
