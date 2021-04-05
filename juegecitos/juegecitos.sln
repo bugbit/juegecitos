@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Juegecitos.Core", "Juegecit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Juegecitos.JetPac", "Juegecitos.JetPac\Juegecitos.JetPac.csproj", "{882351D2-9557-47A8-958A-210FFE9C4273}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juegecitos.Blazor", "Juegecitos.Blazor\Juegecitos.Blazor.csproj", "{DD6A7E9B-74AF-47C9-AF30-FB66B58FA5FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Juegecitos.Blazor", "Juegecitos.Blazor\Juegecitos.Blazor.csproj", "{DD6A7E9B-74AF-47C9-AF30-FB66B58FA5FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
