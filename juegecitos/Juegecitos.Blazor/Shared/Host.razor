@@ -1,0 +1,40 @@
+﻿@inject IJSRuntime JsRuntime;
+
+<div @ref="canvas" class="main" style="background-color: @BackColor;width:100%; height: 100% ">
+    <canvas class="center" width=@Width height=@Height>Your browser does not support the canvas element.</canvas>
+</div>
+@code {
+    ElementReference canvas;
+
+    [Parameter]
+    public string BackColor { get; set; } = "black";
+
+    [Parameter]
+    public int Width { get; set; } = 800;
+
+    [Parameter]
+    public int Height { get; set; } = 600;
+
+    public App App { get; private set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        App = new App();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        await JsRuntime.InvokeVoidAsync("juegecitos.init", DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    public void Loop(float timeStamp)
+    {
+        //Update();
+        //Render();
+    }
+}
