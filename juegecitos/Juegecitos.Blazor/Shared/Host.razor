@@ -1,26 +1,29 @@
-﻿@inject IJSRuntime JsRuntime;
+﻿@inject IJSRuntime JSAsync;
 
-<div @ref="canvas" class="main" style="background-color: @BackColor;width:100%; height: 100% ">
-    <canvas class="center" width=@Width height=@Height>Your browser does not support the canvas element.</canvas>
+<div @ref="canvas" class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
+    <canvas class="center" width=@mWidth height=@mHeight>Your browser does not support the canvas element.</canvas>
 </div>
 @code {
     ElementReference canvas;
 
-    [Parameter]
-    public string BackColor { get; set; } = "black";
+    private IJSInProcessRuntime JS;
+    private IJSUnmarshalledRuntime Js;
+    private string mBackColor = "black";
+    private int mWidth = 800;
+    private int mHeight = 600;
+    private string mContext;
+    private Core.ILoop mLoop = Core.VoidLoop.Instance;
+    private Core.Game mGameAct;
+    private Core.GameTime mTime;
 
     [Parameter]
-    public int Width { get; set; } = 800;
-
-    [Parameter]
-    public int Height { get; set; } = 600;
-
-    public App App { get; private set; }
+    public Core.App App { get; set; }
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        App = new App();
+        JS = (IJSInProcessRuntime)JSAsync;
+        Js = (IJSUnmarshalledRuntime)JSAsync;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -28,13 +31,58 @@
         if (!firstRender)
             return;
 
-        await JsRuntime.InvokeVoidAsync("juegecitos.init", DotNetObjectReference.Create(this));
+        var pGame = App.Main() ?? await App.MainAsync();
+
+        if (pGame == null)
+            return;
+
+        await JSAsync.InvokeVoidAsync("juegecitos.init", DotNetObjectReference.Create(this), canvas);
+
+        ChangeGame(pGame);
     }
 
     [JSInvokable]
     public void Loop(float timeStamp)
     {
+        if (mTime.TimeStamp > 0)
+        {
+            mTime.ElapsedGameTime = timeStamp - mTime.TimeStamp;
+            mTime.TotalGameTime += mTime.ElapsedGameTime;
+        }
+        mTime.TimeStamp = timeStamp;
+
+        mLoop.Loop(mTime);
         //Update();
         //Render();
     }
+
+    public void ChangeGame(Core.Game argGame)
+    {
+        if (mGameAct != null)
+        {
+            mLoop = Core.VoidLoop.Instance;
+            mGameAct.Dispose();
+            mGameAct = null;
+        }
+
+        mGameAct = argGame;
+        mGameAct.AsignHost(this);
+        mGameAct.Initialize();
+        mBackColor = mGameAct.PresentationParameters.BackColor;
+        if (mWidth != mGameAct.PresentationParameters.Width)
+            mWidth = mGameAct.PresentationParameters.Width;
+        if (mHeight != mGameAct.PresentationParameters.Height)
+            mHeight = mGameAct.PresentationParameters.Height;
+        if (string.Equals(mContext, mGameAct.PresentationParameters.CanvasContext))
+            SetContext(mGameAct.PresentationParameters.CanvasContext);
+        mLoop = mGameAct;
+    }
+
+    public void SetContext(string argType)
+    {
+        JS.InvokeVoid("juegecitos.setContext", argType);
+        mContext = argType;
+    }
+
+    public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
 }

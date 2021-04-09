@@ -1,8 +1,3 @@
 ﻿@page "/"
 
-<Host @ref="host"></Host>
-
-@code
-{
-    Host host;
-}
+<Host App=@Core.App.CreateMainApp()></Host>
