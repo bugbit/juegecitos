@@ -38,6 +38,11 @@
 
         this.context2d.strokeText(text, x, y);
     }
+    this.fillText = function (_text, x, y) {
+        var text = BINDING.conv_string(_text);
+
+        this.context2d.fillText(text, x, y);
+    }
 }
 
 window.juegecitos = new Juegecitos();

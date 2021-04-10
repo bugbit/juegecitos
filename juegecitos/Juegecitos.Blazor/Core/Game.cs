@@ -9,11 +9,11 @@ namespace Juegecitos.Blazor.Core
     {
         private bool disposedValue;
 
-        protected IHost mHost;
+        public IHost Host { get; private set; }
 
         public PresentationParameters PresentationParameters { get; } = new PresentationParameters();
 
-        public void AsignHost(IHost argHost) => mHost = argHost;
+        public void AsignHost(IHost argHost) => Host = argHost;
 
         public virtual void Initialize() { }
 

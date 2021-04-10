@@ -21,11 +21,11 @@ namespace Juegecitos.Blazor.Tests
         public override void Render(GameTime argTime)
         {
             base.Render(argTime);
-            mHost.clearRect(0, 0, 300, 400);
-            mHost.setfillStyle("green");
-            mHost.fillRect(10, 50, 300, 100);
-            mHost.setfont("16px verdana");
-            mHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 10, 80);
+            Host.clearRect(0, 0, 300, 400);
+            Host.setfillStyle("green");
+            Host.fillRect(10, 50, 300, 100);
+            Host.setfont("16px verdana");
+            Host.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 10, 80);
         }
     }
 }

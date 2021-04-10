@@ -25,15 +25,22 @@ namespace Juegecitos.Blazor.Core.Components
             return default(T);
         }
 
-        public void Add(IComponent argComponent)
+        public bool Add(IComponent argComponent)
         {
+            if (Contains(argComponent))
+                return false;
+
             argComponent.Initialize();
             mComponents.Add(argComponent.GetType(), argComponent);
             if (argComponent is IComponentUpdate pUpdate)
                 mComponentsUpdates.Add(pUpdate);
             if (argComponent is IComponentRender pRender)
                 mComponentsRenders.Add(pRender);
+
+            return true;
         }
+
+        void ICollection<IComponent>.Add(IComponent argComponent) => Add(argComponent);
 
         public void Clear()
         {
@@ -42,17 +49,14 @@ namespace Juegecitos.Blazor.Core.Components
             mComponentsRenders.Clear();
         }
 
-        public bool Contains(IComponent item)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Contains(IComponent item) => mComponents.ContainsKey(item.GetType());
 
         public void CopyTo(IComponent[] array, int arrayIndex)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerator<IComponent> GetEnumerator() => mComponents.Values;
+        public IEnumerator<IComponent> GetEnumerator() => mComponents.Values.GetEnumerator();
 
         public bool Remove(IComponent item)
         {

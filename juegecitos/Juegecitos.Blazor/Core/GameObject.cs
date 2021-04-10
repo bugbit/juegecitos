@@ -8,10 +8,30 @@ namespace Juegecitos.Blazor.Core
 {
     public class GameObject : IUpdate, IRender
     {
-        public ComponentsCollection Components { get; } = new ComponentsCollection();
+        private ComponentsCollection mComponents = new ComponentsCollection();
 
-        public virtual void Render(GameTime argTime) => Components.Render(argTime);
+        public Game Game { get; }
 
-        public virtual void Update(GameTime argTime) => Components.Update(argTime);
+        public GameObject(Game argGame) => Game = argGame;
+
+        public T AddComponent<T>(T argComponent) where T : Component
+        {
+            argComponent.Owner = this;
+            mComponents.Add(argComponent);
+
+            return argComponent;
+        }
+
+        public void AddComponents(params Component[] argComponens)
+        {
+            foreach (var pComponent in argComponens)
+                AddComponent(pComponent);
+        }
+
+        public T GetComponent<T>() where T : IComponent => mComponents.GetComponent<T>();
+
+        public virtual void Render(GameTime argTime) => mComponents.Render(argTime);
+
+        public virtual void Update(GameTime argTime) => mComponents.Update(argTime);
     }
 }

@@ -71,7 +71,8 @@
         mGameAct = argGame;
         mGameAct.AsignHost(this);
         mGameAct.Initialize();
-        mBackColor = mGameAct.PresentationParameters.BackColor;
+        if (!string.Equals(mBackColor, mGameAct.PresentationParameters.BackColor))
+            mBackColor = mGameAct.PresentationParameters.BackColor;
         if (mWidth != mGameAct.PresentationParameters.Width)
             mWidth = mGameAct.PresentationParameters.Width;
         if (mHeight != mGameAct.PresentationParameters.Height)
@@ -92,4 +93,5 @@
     public void fillRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.fillRect", x, y, width, height);
     public void setfont(string font) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfont", font);
     public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
+    public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText", text, x, y);
 }

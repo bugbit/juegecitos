@@ -14,5 +14,6 @@ namespace Juegecitos.Blazor.Core
         void fillRect(int x, int y, int width, int height);
         void setfont(string font);
         void strokeText(string text, int x, int y);
+        void fillText(string text, int x, int y);
     }
 }

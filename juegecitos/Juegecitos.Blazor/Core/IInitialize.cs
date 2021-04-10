@@ -7,6 +7,6 @@ namespace Juegecitos.Blazor.Core
 {
     public interface IInitialize
     {
-        void Initialize() { }
+        void Initialize();
     }
 }
