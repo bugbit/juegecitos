@@ -1,7 +1,8 @@
 ﻿@inject IJSRuntime JSAsync;
+@implements Core.IHost;
 
-<div @ref="canvas" class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
-    <canvas class="center" width=@mWidth height=@mHeight>Your browser does not support the canvas element.</canvas>
+<div class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
+    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight>Your browser does not support the canvas element.</canvas>
 </div>
 @code {
     ElementReference canvas;
@@ -24,6 +25,7 @@
         base.OnInitialized();
         JS = (IJSInProcessRuntime)JSAsync;
         Js = (IJSUnmarshalledRuntime)JSAsync;
+        mTime = new Core.GameTime();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -56,14 +58,15 @@
         //Render();
     }
 
-    public void ChangeGame(Core.Game argGame)
+    public void ChangeGame(Core.Game argGame, bool argDisposedGameAct = true)
     {
-        if (mGameAct != null)
-        {
-            mLoop = Core.VoidLoop.Instance;
-            mGameAct.Dispose();
-            mGameAct = null;
-        }
+        if (argDisposedGameAct)
+            if (mGameAct != null)
+            {
+                mLoop = Core.VoidLoop.Instance;
+                mGameAct.Dispose();
+                mGameAct = null;
+            }
 
         mGameAct = argGame;
         mGameAct.AsignHost(this);
@@ -73,16 +76,20 @@
             mWidth = mGameAct.PresentationParameters.Width;
         if (mHeight != mGameAct.PresentationParameters.Height)
             mHeight = mGameAct.PresentationParameters.Height;
-        if (string.Equals(mContext, mGameAct.PresentationParameters.CanvasContext))
+        if (!string.Equals(mContext, mGameAct.PresentationParameters.CanvasContext))
             SetContext(mGameAct.PresentationParameters.CanvasContext);
         mLoop = mGameAct;
     }
 
-    public void SetContext(string argType)
+    public void SetContext(string type)
     {
-        JS.InvokeVoid("juegecitos.setContext", argType);
-        mContext = argType;
+        JS.InvokeVoid("juegecitos.setContext", type);
+        mContext = type;
     }
 
     public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
+    public void setfillStyle(string style) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfillStyle", style);
+    public void fillRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.fillRect", x, y, width, height);
+    public void setfont(string font) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfont", font);
+    public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
 }

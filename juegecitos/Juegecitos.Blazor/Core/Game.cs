@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public class Game : IDisposable, ILoop, IUpdate, IRender
+    public class Game : IDisposable, IInitialize, ILoop, IUpdate, IRender
     {
         private bool disposedValue;
 
-        protected Shared.Host mHost;
+        protected IHost mHost;
 
         public PresentationParameters PresentationParameters { get; } = new PresentationParameters();
 
-        public void AsignHost(Shared.Host argHost) => mHost = argHost;
+        public void AsignHost(IHost argHost) => mHost = argHost;
 
         public virtual void Initialize() { }
 
