@@ -11,5 +11,6 @@ namespace Juegecitos.Blazor.Core
         public int Width { get; set; } = 800;
         public int Height { get; set; } = 600;
         public string CanvasContext { get; set; } = "2d";
+        public Scene MainScene { get; set; }
     }
 }

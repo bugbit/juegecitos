@@ -6,13 +6,19 @@ using Juegecitos.Blazor.Core.Components;
 
 namespace Juegecitos.Blazor.Core
 {
-    public class GameObject : IUpdate, IRender
+    public class GameObject : IInitialize, IUpdate, IRender
     {
         private ComponentsCollection mComponents = new ComponentsCollection();
 
-        public Game Game { get; }
+        public Scene Scene { get; }
 
-        public GameObject(Game argGame) => Game = argGame;
+        public GameObject(Scene argScene, params Component[] argComponens)
+        {
+            Scene = argScene;
+            AddComponents(argComponens);
+        }
+
+        public virtual void Initialize() { }
 
         public T AddComponent<T>(T argComponent) where T : Component
         {
@@ -21,6 +27,8 @@ namespace Juegecitos.Blazor.Core
 
             return argComponent;
         }
+
+        public T AddComponent<T>() where T : Component, new() => AddComponent(new T());
 
         public void AddComponents(params Component[] argComponens)
         {
@@ -33,5 +41,7 @@ namespace Juegecitos.Blazor.Core
         public virtual void Render(GameTime argTime) => mComponents.Render(argTime);
 
         public virtual void Update(GameTime argTime) => mComponents.Update(argTime);
+        public bool IsUpdater => mComponents.IsUpdater;
+        public bool IsRender => mComponents.IsRender;
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core.Components
 {
-    public class Transform2d : Component
+    public class Transform2d : Component2d
     {
         public Vector2 Position { get; set; } = Vector2.Zero;
         public Vector2 Direction { get; set; } = Vector2.One;

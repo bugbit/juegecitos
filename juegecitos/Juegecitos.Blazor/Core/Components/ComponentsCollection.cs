@@ -74,6 +74,9 @@ namespace Juegecitos.Blazor.Core.Components
 
         public void Update(GameTime argTime) => mComponentsUpdates.ForEach(o => o.Update(argTime));
 
+        public bool IsUpdater => mComponentsUpdates.Count > 0;
+        public bool IsRender => mComponentsRenders.Count > 0;
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }

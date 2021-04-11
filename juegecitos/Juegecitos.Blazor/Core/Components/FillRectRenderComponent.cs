@@ -5,24 +5,17 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core.Components
 {
-    public class FillRectRenderComponent : Component, IComponentRender
+    public class FillRectRenderComponent : Component2d, IComponentRender
     {
-        private Transform2d mTransform;
-
         public string FillStyle { get; set; }
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            mTransform = Owner.GetComponent<Transform2d>();
-        }
 
         public void Render(GameTime argTime)
         {
-            var pHost = Owner.Game.Host;
+            var pHost = Owner.Scene.Game.Host;
+            var pTransform = GameObject.Transform;
 
             pHost.setfillStyle(FillStyle);
-            pHost.fillRect((int)mTransform.Position.X, (int)mTransform.Position.Y, (int)mTransform.Scale.X, (int)mTransform.Scale.Y);
+            pHost.fillRect((int)pTransform.Position.X, (int)pTransform.Position.Y, (int)pTransform.Scale.X, (int)pTransform.Scale.Y);
         }
     }
 }

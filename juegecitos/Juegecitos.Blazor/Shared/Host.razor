@@ -2,7 +2,7 @@
 @implements Core.IHost;
 
 <div class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
-    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight>Your browser does not support the canvas element.</canvas>
+    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight @onkeydown="canvas_keydown"  @onkeydown:preventDefault >Your browser does not support the canvas element.</canvas>
 </div>
 @code {
     ElementReference canvas;
@@ -58,13 +58,20 @@
         //Render();
     }
 
-    public void ChangeGame(Core.Game argGame, bool argDisposedGameAct = true)
+    private void canvas_keydown(KeyboardEventArgs e)
     {
-        if (argDisposedGameAct)
+
+    }
+
+    public void SetLoop(Core.ILoop argLoop) => mLoop = argLoop;
+
+    public void ChangeGame(Core.Game argGame, bool argUnLoadGameAct = true)
+    {
+        if (argUnLoadGameAct)
             if (mGameAct != null)
             {
                 mLoop = Core.VoidLoop.Instance;
-                mGameAct.Dispose();
+                mGameAct.UnLoad();
                 mGameAct = null;
             }
 
@@ -79,7 +86,10 @@
             mHeight = mGameAct.PresentationParameters.Height;
         if (!string.Equals(mContext, mGameAct.PresentationParameters.CanvasContext))
             SetContext(mGameAct.PresentationParameters.CanvasContext);
-        mLoop = mGameAct;
+        if (mGameAct.PresentationParameters.MainScene != null)
+        {
+            mGameAct.ActiveScene = mGameAct.PresentationParameters.MainScene;
+        }
     }
 
     public void SetContext(string type)

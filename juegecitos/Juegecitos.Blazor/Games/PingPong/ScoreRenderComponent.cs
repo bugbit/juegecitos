@@ -7,25 +7,19 @@ using Juegecitos.Blazor.Core.Components;
 
 namespace Juegecitos.Blazor.Games.PingPong
 {
-    public class ScoreRenderComponent : Component, IComponentRender
+    public class ScoreRenderComponent : Component2d, IComponentRender
     {
-        private Transform2d mTransform;
-        private ScoreComponent mScore;
+        public ScoreComponent Score { get; set; }
 
-        public override void Initialize()
-        {
-            base.Initialize();
-            mTransform = Owner.GetComponent<Transform2d>();
-            mScore = Owner.GetComponent<ScoreComponent>();
-        }
         public void Render(GameTime argTime)
         {
-            var pHost = Owner.Game.Host;
+            var pHost = Owner.Scene.Game.Host;
+            var pTransform = GameObject.Transform;
 
             pHost.setfillStyle("#fff");
             pHost.setfont("35px sans-serif");
 
-            pHost.fillText(mScore.Score.ToString(), (int)mTransform.Position.X, (int)mTransform.Position.Y);
+            pHost.fillText(Score.Score.ToString(), (int)pTransform.Position.X, (int)pTransform.Position.Y);
         }
     }
 }

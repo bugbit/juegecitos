@@ -9,6 +9,8 @@
     this.init = function (instance, canvas) {
         this.instance = instance;
         this.canvas = canvas;
+        canvas.tabIndex = 0;
+        canvas.focus();
         window.requestAnimationFrame(loop);
     }
     this.setContext = function (type) {
