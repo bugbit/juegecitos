@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public class GameObject2d : GameObject
+    public sealed class GameObject2d : GameObject
     {
         private Transform2d mTransform;
 

@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core.Components
 {
+    public delegate void ComponentsCollectionChange(ComponentsCollection argComps);
     public class ComponentsCollection : IUpdate, IRender, ICollection<IComponent>
     {
         private Dictionary<Type, IComponent> mComponents = new Dictionary<Type, IComponent>();
         private List<IComponentUpdate> mComponentsUpdates = new List<IComponentUpdate>();
         private List<IComponentRender> mComponentsRenders = new List<IComponentRender>();
 
-        public int Count => mComponents.Count;
+        public event ComponentsCollectionChange CollectionChange;
 
+        public int Count => mComponents.Count;
         public bool IsReadOnly => false;
 
         public T GetComponent<T>() where T : IComponent
@@ -32,10 +34,17 @@ namespace Juegecitos.Blazor.Core.Components
 
             argComponent.Initialize();
             mComponents.Add(argComponent.GetType(), argComponent);
-            if (argComponent is IComponentUpdate pUpdate)
-                mComponentsUpdates.Add(pUpdate);
-            if (argComponent is IComponentRender pRender)
-                mComponentsRenders.Add(pRender);
+            if (argComponent.Enabled)
+            {
+                if (argComponent is IComponentUpdate pUpdate)
+                    mComponentsUpdates.Add(pUpdate);
+                if (argComponent.Enabled && argComponent is IComponentRender pRender)
+                    mComponentsRenders.Add(pRender);
+            }
+            CollectionChange?.Invoke(this);
+
+            argComponent.EnabledChange -= Component_EnabledChange;
+            argComponent.EnabledChange += Component_EnabledChange;
 
             return true;
         }
@@ -44,9 +53,12 @@ namespace Juegecitos.Blazor.Core.Components
 
         public void Clear()
         {
+            foreach (var pComponent in this)
+                pComponent.EnabledChange -= Component_EnabledChange;
             mComponents.Clear();
             mComponentsUpdates.Clear();
             mComponentsRenders.Clear();
+            CollectionChange?.Invoke(this);
         }
 
         public bool Contains(IComponent item) => mComponents.ContainsKey(item.GetType());
@@ -62,10 +74,15 @@ namespace Juegecitos.Blazor.Core.Components
         {
             if (!mComponents.Remove(item.GetType()))
                 return false;
-            if (item is IComponentUpdate pUpdate)
-                mComponentsUpdates.Remove(pUpdate);
-            if (item is IComponentRender pRender)
-                mComponentsRenders.Remove(pRender);
+            if (item.Enabled)
+            {
+                if (item is IComponentUpdate pUpdate)
+                    mComponentsUpdates.Remove(pUpdate);
+                if (item is IComponentRender pRender)
+                    mComponentsRenders.Remove(pRender);
+            }
+            CollectionChange?.Invoke(this);
+            item.EnabledChange -= Component_EnabledChange;
 
             return true;
         }
@@ -78,5 +95,23 @@ namespace Juegecitos.Blazor.Core.Components
         public bool IsRender => mComponentsRenders.Count > 0;
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+        private void Component_EnabledChange(IComponent argComponent, bool argEnabledAnt, bool argEnabledAct)
+        {
+            if (argEnabledAnt && !argEnabledAct)
+            {
+                if (argComponent is IComponentUpdate pUpdate)
+                    mComponentsUpdates.Remove(pUpdate);
+                if (argComponent is IComponentRender pRender)
+                    mComponentsRenders.Remove(pRender);
+            }
+            else if (!argEnabledAnt && argEnabledAct)
+            {
+                if (argComponent is IComponentUpdate pUpdate)
+                    mComponentsUpdates.Add(pUpdate);
+                if (argComponent is IComponentRender pRender)
+                    mComponentsRenders.Add(pRender);
+            }
+        }
     }
 }

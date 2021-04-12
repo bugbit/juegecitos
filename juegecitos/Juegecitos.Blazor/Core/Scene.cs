@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public class Scene : ILoop, IUpdateRender
+    public sealed class Scene : ILoop, IUpdateRender
     {
         public Game Game { get; }
         public GameObjectsCollection Objs { get; }
