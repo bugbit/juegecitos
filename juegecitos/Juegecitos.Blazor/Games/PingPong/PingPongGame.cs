@@ -30,6 +30,7 @@ namespace Juegecitos.Blazor.Games.PingPong
             PresentationParameters.Width = 600;
             PresentationParameters.Height = 400;
 
+            /*
             var pScene = new Scene(this);
             var pPlayer1 = new GameObject2d(pScene, new ScoreComponent(), new FillRectRenderComponent { FillStyle = "#FFF" })
             {
@@ -59,6 +60,7 @@ namespace Juegecitos.Blazor.Games.PingPong
             );
 
             PresentationParameters.MainScene = pScene;
+            */
         }
     }
 }

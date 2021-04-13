@@ -11,8 +11,8 @@ namespace Juegecitos.Blazor.Tests
     public class TestApp : Core.App
     {
         public override Game Main()
-            //=> new Test1Game();
-            => new Games.PingPong.PingPongGame();
+            => new Test1Game();
+            //=> new Games.PingPong.PingPongGame();
     }
 }
 

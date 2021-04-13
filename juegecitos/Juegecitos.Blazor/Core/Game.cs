@@ -7,22 +7,13 @@ namespace Juegecitos.Blazor.Core
 {
     public class Game : IInitialize
     {
-        private Scene mActiveScene;
-
         public IHost Host { get; private set; }
-        public Scene ActiveScene
-        {
-            get => mActiveScene;
-            set
-            {
-                mActiveScene = value;
-                Host.SetLoop(mActiveScene);
-            }
-        }
+        public Scene ActiveScene { get; private set; }
 
         public PresentationParameters PresentationParameters { get; } = new PresentationParameters();
 
-        public void AsignHost(IHost argHost) => Host = argHost;
+        internal void AsignHost(IHost argHost) => Host = argHost;
+        internal void AsignActiveScene(Scene argScene) => ActiveScene = argScene;
 
         public virtual void Initialize() { }
         public virtual void UnLoad() { }

@@ -45,6 +45,13 @@
 
         this.context2d.fillText(text, x, y);
     }
+    this.setTransform = function (a, b, c, d, e, f) {
+        this.context2d.setTransform(a, b, c, d, e, f);
+    }
 }
 
 window.juegecitos = new Juegecitos();
+
+window.runGame = function (game) {
+    window.location = "/" + game;
+}

@@ -9,6 +9,7 @@ namespace Juegecitos.Blazor.Core
     {
         void SetLoop(ILoop argLoop);
         void ChangeGame(Game argGame, bool argUnLoadGameAct = true);
+        void SetActiveScene(Core.Scene argScene);
         void SetContext(string type);
         void clearRect(int x, int y, int width, int height);
         void setfillStyle(string style);
@@ -16,5 +17,6 @@ namespace Juegecitos.Blazor.Core
         void setfont(string font);
         void strokeText(string text, int x, int y);
         void fillText(string text, int x, int y);
+        void setTransform(float a, float b, float c, float d, float e, float f);
     }
 }

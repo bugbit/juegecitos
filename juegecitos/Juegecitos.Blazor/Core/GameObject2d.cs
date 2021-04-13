@@ -10,7 +10,7 @@ namespace Juegecitos.Blazor.Core
     {
         private Transform2d mTransform;
 
-        public GameObject2d(Scene argScene, params Component[] argComponens) : base(argScene, argComponens) { }
+        public GameObject2d(Scene argScene) : base(argScene) { }
 
         public Transform2d Transform
         {
@@ -18,15 +18,15 @@ namespace Juegecitos.Blazor.Core
             set
             {
                 mTransform = value;
-                Transform.Owner = this;
+                //Transform.Owner = this;
             }
         }
 
         public override void Initialize()
         {
             base.Initialize();
-            if (Transform == null)
-                Transform = new Transform2d();
+            //if (Transform == null)
+            //    Transform = new Transform2d();
         }
     }
 }

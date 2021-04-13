@@ -5,30 +5,20 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public sealed class Scene : ILoop, IUpdateRender
+    public class Scene : IInitialize, ILoop, IUpdateRender
     {
         public Game Game { get; }
-        public GameObjectsCollection Objs { get; }
 
-        public Scene(Game argGame, GameObjectsCollection argObjs)
+        public Scene(Game argGame)
         {
             Game = argGame;
-            Objs = argObjs;
         }
 
-        public Scene(Game argGame) : this(argGame, new GameObjectsCollection()) { }
+        public virtual void Initialize() { }
 
-        public void Render(GameTime argTime)
-        {
-            foreach (var pObj in Objs.GetObjsVisible())
-                pObj.Render(argTime);
-        }
+        public virtual void Render(GameTime argTime) { }
+        public virtual void Update(GameTime argTime) { }
 
-        public void Update(GameTime argTime)
-        {
-            foreach (var pObj in Objs.GetObjsEnableds())
-                pObj.Update(argTime);
-        }
         void ILoop.Loop(GameTime argTime)
         {
             Update(argTime);

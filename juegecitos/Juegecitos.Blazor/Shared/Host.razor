@@ -2,10 +2,31 @@
 @implements Core.IHost;
 
 <div class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
-    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight @onkeydown="canvas_keydown"  @onkeydown:preventDefault >Your browser does not support the canvas element.</canvas>
+    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight @onkeydown="canvas_keydown" @onkeydown:preventDefault>Your browser does not support the canvas element.</canvas>
 </div>
 @code {
     ElementReference canvas;
+
+    class ChangeGameLoop : Core.ILoop
+    {
+        private Host mHost;
+        private Core.Game mGame;
+        private bool mUnLoadGameAct;
+        private Task mChangeGameTask;
+
+        public ChangeGameLoop(Host argHost, Core.Game argGame, bool argUnLoadGameAct)
+        {
+            mHost = argHost;
+            mGame = argGame;
+            mUnLoadGameAct = argUnLoadGameAct;
+        }
+
+        public void Loop(Core.GameTime argTime)
+        {
+            if (mChangeGameTask == null)
+                mChangeGameTask = mHost.StartChangeGame(mGame, mUnLoadGameAct);
+        }
+    }
 
     private IJSInProcessRuntime JS;
     private IJSUnmarshalledRuntime Js;
@@ -66,6 +87,12 @@
     public void SetLoop(Core.ILoop argLoop) => mLoop = argLoop;
 
     public void ChangeGame(Core.Game argGame, bool argUnLoadGameAct = true)
+        => SetLoop(new ChangeGameLoop(this, argGame, argUnLoadGameAct));
+
+    private Task StartChangeGame(Core.Game argGame, bool argUnLoadGameAct)
+        => Task.Run(() => ChangeGameInternal(argGame, argUnLoadGameAct));
+
+    private void ChangeGameInternal(Core.Game argGame, bool argUnLoadGameAct = true)
     {
         if (argUnLoadGameAct)
             if (mGameAct != null)
@@ -88,8 +115,15 @@
             SetContext(mGameAct.PresentationParameters.CanvasContext);
         if (mGameAct.PresentationParameters.MainScene != null)
         {
-            mGameAct.ActiveScene = mGameAct.PresentationParameters.MainScene;
+            SetActiveScene(mGameAct.PresentationParameters.MainScene);
         }
+    }
+
+    public void SetActiveScene(Core.Scene argScene)
+    {
+        argScene.Game.AsignActiveScene(argScene);
+        argScene.Initialize();
+        SetLoop(argScene);
     }
 
     public void SetContext(string type)
@@ -104,4 +138,5 @@
     public void setfont(string font) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfont", font);
     public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
     public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText", text, x, y);
+    public void setTransform(float a, float b, float c, float d, float e, float f) => JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
 }

@@ -1,3 +1,13 @@
 ﻿@page "/"
+@inject IJSRuntime JS;
 
-<Host App=@Core.App.CreateMainApp()></Host>
+<a href="/Test1Game">Test1Game</a>
+
+@code
+{
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        ((IJSInProcessRuntime)JS).InvokeVoid("runGame", "Test1Game");
+    }
+}
