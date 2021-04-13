@@ -15,9 +15,10 @@ namespace Juegecitos.Blazor.Tests
         private class Scene1 : Scene
         {
             private System.Numerics.Matrix3x2 mTransform;
-            public Scene1(Game argGame) : base(argGame)
-            {
-            }
+
+            //public Scene1(Game argGame) : base(argGame)
+            //{
+            //}
 
             public override void Initialize()
             {
@@ -60,7 +61,7 @@ namespace Juegecitos.Blazor.Tests
             PresentationParameters.Width = 300;
             PresentationParameters.Height = 400;
 
-            PresentationParameters.MainScene = new Scene1(this);
+            //PresentationParameters.MainScene = new Scene1(this);
 
             /*
             var pScene = new Scene(this);
