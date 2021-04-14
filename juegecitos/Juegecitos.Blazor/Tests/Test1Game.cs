@@ -16,9 +16,9 @@ namespace Juegecitos.Blazor.Tests
         {
             private System.Numerics.Matrix3x2 mTransform;
 
-            //public Scene1(Game argGame) : base(argGame)
-            //{
-            //}
+            public Scene1(Game argGame) : base(argGame)
+            {
+            }
 
             public override void Initialize()
             {
@@ -38,8 +38,8 @@ namespace Juegecitos.Blazor.Tests
                 pHost.fillRect(10, 50, 300, 100);
                 pHost.setfont("16px verdana");
                 //pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 10, 80);
-                pHost.setTransform(mTransform.M11, mTransform.M12, mTransform.M21, mTransform.M22, mTransform.M31, mTransform.M32);                
-                pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 1, 1);                
+                pHost.setTransform(mTransform.M11, mTransform.M12, mTransform.M21, mTransform.M22, mTransform.M31, mTransform.M32);
+                pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 1, 1);
             }
         }
         //private class Test1Render : Component2d, IComponentRender
@@ -60,6 +60,8 @@ namespace Juegecitos.Blazor.Tests
             base.Initialize();
             PresentationParameters.Width = 300;
             PresentationParameters.Height = 400;
+
+            PresentationParameters.MainScene = new Scene1(this);
 
             //PresentationParameters.MainScene = new Scene1(this);
 

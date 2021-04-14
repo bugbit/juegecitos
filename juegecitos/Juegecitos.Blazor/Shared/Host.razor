@@ -7,27 +7,6 @@
 @code {
     ElementReference canvas;
 
-    class ChangeGameLoop : Core.ILoop
-    {
-        private Host mHost;
-        private Core.Game mGame;
-        private bool mUnLoadGameAct;
-        private Task mChangeGameTask;
-
-        public ChangeGameLoop(Host argHost, Core.Game argGame, bool argUnLoadGameAct)
-        {
-            mHost = argHost;
-            mGame = argGame;
-            mUnLoadGameAct = argUnLoadGameAct;
-        }
-
-        public void Loop(Core.GameTime argTime)
-        {
-            if (mChangeGameTask == null)
-                mChangeGameTask = mHost.StartChangeGame(mGame, mUnLoadGameAct);
-        }
-    }
-
     private IJSInProcessRuntime JS;
     private IJSUnmarshalledRuntime Js;
     private string mBackColor = "black";
@@ -40,6 +19,9 @@
 
     [Parameter]
     public Core.App App { get; set; }
+
+    public int Width { get => mWidth; }
+    public int Height { get => mHeight; }
 
     protected override void OnInitialized()
     {
@@ -87,41 +69,57 @@
     public void SetLoop(Core.ILoop argLoop) => mLoop = argLoop;
 
     public void ChangeGame(Core.Game argGame, bool argUnLoadGameAct = true)
-        => SetLoop(new ChangeGameLoop(this, argGame, argUnLoadGameAct));
-
-    private Task StartChangeGame(Core.Game argGame, bool argUnLoadGameAct)
-        => Task.Run(() => ChangeGameInternal(argGame, argUnLoadGameAct));
-
-    private void ChangeGameInternal(Core.Game argGame, bool argUnLoadGameAct = true)
     {
         if (argUnLoadGameAct)
             if (mGameAct != null)
             {
                 mLoop = Core.VoidLoop.Instance;
-                mGameAct.UnLoad();
+                if (mGameAct.ActiveScene != null)
+                {
+                    if (mGameAct.ActiveScene.IsLoaded)
+                        mGameAct.ActiveScene.UnLoad();
+                }
+                if (mGameAct.IsLoaded)
+                    mGameAct.UnLoad();
                 mGameAct = null;
             }
 
         mGameAct = argGame;
-        mGameAct.AsignHost(this);
-        mGameAct.Initialize();
-        if (!string.Equals(mBackColor, mGameAct.PresentationParameters.BackColor))
-            mBackColor = mGameAct.PresentationParameters.BackColor;
-        if (mWidth != mGameAct.PresentationParameters.Width)
-            mWidth = mGameAct.PresentationParameters.Width;
-        if (mHeight != mGameAct.PresentationParameters.Height)
-            mHeight = mGameAct.PresentationParameters.Height;
-        if (!string.Equals(mContext, mGameAct.PresentationParameters.CanvasContext))
-            SetContext(mGameAct.PresentationParameters.CanvasContext);
-        if (mGameAct.PresentationParameters.MainScene != null)
+        if (!mGameAct.IsLoaded)
         {
-            SetActiveScene(mGameAct.PresentationParameters.MainScene);
+            mLoop = Core.VoidLoop.Instance;
+            mGameAct.Host = this;
+            mGameAct.Load();
+            mGameAct.BackColor = mGameAct.PresentationParameters.BackColor;
+            mGameAct.Width = mGameAct.PresentationParameters.Width;
+            mGameAct.Height = mGameAct.PresentationParameters.Height;
+            mGameAct.CanvasContext = mGameAct.PresentationParameters.CanvasContext;
+            mGameAct.ActiveScene = mGameAct.PresentationParameters.MainScene;
         }
+        if (string.Equals(mContext, "2d"))
+        {
+            if (mWidth != mGameAct.Width || mHeight != mGameAct.Height)
+                clearRect(0, 0, Width, mHeight);
+        }
+        if (!string.Equals(mBackColor, mGameAct.BackColor))
+            mBackColor = mGameAct.PresentationParameters.BackColor;
+        if (mWidth != mGameAct.Width)
+            mWidth = mGameAct.Width;
+        if (mHeight != mGameAct.Height)
+            mHeight = mGameAct.PresentationParameters.Height;
+        if (!string.Equals(mContext, mGameAct.CanvasContext))
+            SetContext(mGameAct.CanvasContext);
+        SetActiveScene(mGameAct.ActiveScene);
+        changedGame();
     }
 
     public void SetActiveScene(Core.Scene argScene)
     {
-        argScene.Game.AsignActiveScene(argScene);
+        if (!argScene.IsLoaded)
+        {
+            argScene.Load();
+        }
+        changedGame();
         SetLoop(argScene);
     }
 
@@ -131,6 +129,8 @@
         mContext = type;
     }
 
+    public void changedGame() => Js.InvokeUnmarshalled<int>("juegecitos.changedGame");
+
     public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
     public void setfillStyle(string style) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfillStyle", style);
     public void fillRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.fillRect", x, y, width, height);
@@ -138,29 +138,4 @@
     public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
     public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText", text, x, y);
     public void setTransform(float a, float b, float c, float d, float e, float f) => JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
-
-    private void CreateGameInternal<T>(Core.Game argGame)
-    {
-        mGameAct = argGame;
-        argGame.AsignHost(this);
-        argGame.Initialize();
-        if (!string.Equals(mBackColor, argGame.PresentationParameters.BackColor))
-            mBackColor = argGame.PresentationParameters.BackColor;
-        if (mWidth != argGame.PresentationParameters.Width)
-            mWidth = argGame.PresentationParameters.Width;
-        if (mHeight != argGame.PresentationParameters.Height)
-            mHeight = argGame.PresentationParameters.Height;
-        if (!string.Equals(mContext, argGame.PresentationParameters.CanvasContext))
-            SetContext(argGame.PresentationParameters.CanvasContext);
-
-        var pScene=argGame.PresentationParameters.MainScene;
-
-        if (pScene!= null)
-            CreateSceneInternal(pScene);
-    }
-
-    private void CreateSceneInternal(Core.Scene argScene)
-    {
-        argScene.Initialize();
-    }
 }

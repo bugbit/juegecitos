@@ -29,6 +29,7 @@ namespace Juegecitos.Blazor.Games.PingPong
             PresentationParameters.BackColor = "white";
             PresentationParameters.Width = 600;
             PresentationParameters.Height = 400;
+            PresentationParameters.MainScene = new PingPongScene(this);
 
             /*
             var pScene = new Scene(this);

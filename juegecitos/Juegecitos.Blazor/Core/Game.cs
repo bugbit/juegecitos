@@ -5,17 +5,25 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public class Game : IInitialize
+    public class Game : IInitialize, ILoad
     {
-        public IHost Host { get; private set; }
-        public Scene ActiveScene { get; private set; }
+        public IHost Host { get; internal set; }
+        public Scene ActiveScene { get; internal set; }
+        public bool IsLoaded { get; private set; }
+        public string BackColor { get; internal set; }
+        public int Width { get; internal set; }
+        public int Height { get; internal set; }
+        public string CanvasContext { get; internal set; }
 
         public PresentationParameters PresentationParameters { get; } = new PresentationParameters();
 
-        internal void AsignHost(IHost argHost) => Host = argHost;
-        internal void AsignActiveScene(Scene argScene) => ActiveScene = argScene;
-
+        
         public virtual void Initialize() { }
-        public virtual void UnLoad() { }
+        public void Load()
+        {
+            Initialize();
+            IsLoaded = true;
+        }
+        public void UnLoad() { }
     }
 }

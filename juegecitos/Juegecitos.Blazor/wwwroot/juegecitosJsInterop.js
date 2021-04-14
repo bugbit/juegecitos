@@ -13,6 +13,10 @@
         canvas.focus();
         window.requestAnimationFrame(loop);
     }
+    this.changedGame = function () {
+        this.canvas.tabIndex = 0;
+        this.canvas.focus();
+    }
     this.setContext = function (type) {
         var context = this.canvas.getContext(type);
 
@@ -52,6 +56,3 @@
 
 window.juegecitos = new Juegecitos();
 
-window.runGame = function (game) {
-    window.location = "/" + game;
-}
