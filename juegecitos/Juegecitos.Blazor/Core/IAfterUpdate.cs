@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Juegecitos.Blazor.Core
 {
-    public struct GameTime
+    public interface IAfterUpdate
     {
-        public float TimeStamp;
-        public float ElapsedGameTime;        
+        void AfterUpdate();
     }
 }

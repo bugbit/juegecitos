@@ -7,6 +7,8 @@ namespace Juegecitos.Blazor.Core
 {
     public interface IHost
     {
+        Input.InputSystem Input { get; }
+
         void SetLoop(ILoop argLoop);
         void ChangeGame(Game argGame, bool argUnLoadGameAct = true);
         void SetActiveScene(Core.Scene argScene);

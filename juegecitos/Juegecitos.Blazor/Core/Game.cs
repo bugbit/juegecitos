@@ -7,6 +7,7 @@ namespace Juegecitos.Blazor.Core
 {
     public class Game : IInitialize, ILoad
     {
+        public float TotalTime { get; internal set; } = 0;
         public IHost Host { get; internal set; }
         public Scene ActiveScene { get; internal set; }
         public bool IsLoaded { get; private set; }

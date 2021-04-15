@@ -38,7 +38,7 @@ namespace Juegecitos.Blazor.Tests
                 pHost.setfont("16px verdana");
                 //pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 10, 80);
                 pHost.setTransform(mTransform.M11, mTransform.M12, mTransform.M21, mTransform.M22, mTransform.M31, mTransform.M32);
-                pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 1, 1);
+                pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {Game.TotalTime:n2}", 1, 1);
             }
         }
         public override void Initialize()
