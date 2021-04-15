@@ -1,27 +1,39 @@
 ﻿@inject IJSRuntime JSAsync;
+@using System.Runtime.InteropServices
 @implements Core.IHost;
 
-<div class="main" style="background-color: @mBackColor;width:100%; height: 100% ">
-    <canvas @ref="canvas" class="center" width=@mWidth height=@mHeight @onkeydown="canvas_keydown" @onkeydown:preventDefault>Your browser does not support the canvas element.</canvas>
+<div @ref="main" class="main" style="opacity: 1; width: 100%; height: 100% ">
+    <canvas @ref="canvas" class="center" @onkeydown="canvas_keydown" @onkeydown:preventDefault>Your browser does not support the canvas element.</canvas>
 </div>
 @code {
+    [StructLayout(LayoutKind.Explicit)]
+    public struct Info
+    {
+        [FieldOffset(0)]
+        public string BackColor;
+
+        [FieldOffset(0 + 8)]
+        public int Width;
+
+        [FieldOffset(0 + 8 + 4)]
+        public int Height;
+
+        [FieldOffset(0 + 8 + 4 + 4)]
+        public string Context;
+    }
+
+    ElementReference main;
     ElementReference canvas;
 
     private IJSInProcessRuntime JS;
     private IJSUnmarshalledRuntime Js;
-    private string mBackColor = "black";
-    private int mWidth = 800;
-    private int mHeight = 600;
-    private string mContext;
     private Core.ILoop mLoop = Core.VoidLoop.Instance;
     private Core.Game mGameAct;
+    private Info mInfo = new Info();
     private Core.GameTime mTime;
 
     [Parameter]
     public Core.App App { get; set; }
-
-    public int Width { get => mWidth; }
-    public int Height { get => mHeight; }
 
     protected override void OnInitialized()
     {
@@ -36,7 +48,7 @@
         if (!firstRender)
             return;
 
-        await JSAsync.InvokeVoidAsync("juegecitos.init", DotNetObjectReference.Create(this), canvas);
+        await JSAsync.InvokeVoidAsync("juegecitos.init", DotNetObjectReference.Create(this), main, canvas);
 
         if (App != null)
         {
@@ -96,21 +108,17 @@
             mGameAct.CanvasContext = mGameAct.PresentationParameters.CanvasContext;
             mGameAct.ActiveScene = mGameAct.PresentationParameters.MainScene;
         }
-        if (string.Equals(mContext, "2d"))
+        if (string.Equals(mInfo.Context, "2d"))
         {
-            if (mWidth != mGameAct.Width || mHeight != mGameAct.Height)
-                clearRect(0, 0, Width, mHeight);
+            if (mInfo.Width != mGameAct.Width || mInfo.Height != mGameAct.Height)
+                clearRect(0, 0, mInfo.Width, mInfo.Height);
         }
-        if (!string.Equals(mBackColor, mGameAct.BackColor))
-            mBackColor = mGameAct.PresentationParameters.BackColor;
-        if (mWidth != mGameAct.Width)
-            mWidth = mGameAct.Width;
-        if (mHeight != mGameAct.Height)
-            mHeight = mGameAct.PresentationParameters.Height;
-        if (!string.Equals(mContext, mGameAct.CanvasContext))
-            SetContext(mGameAct.CanvasContext);
+        mInfo.BackColor = mGameAct.BackColor;
+        mInfo.Width = mGameAct.Width;
+        mInfo.Height = mGameAct.Height;
+        mInfo.Context = mGameAct.CanvasContext;
+        ChangedGame();
         SetActiveScene(mGameAct.ActiveScene);
-        changedGame();
     }
 
     public void SetActiveScene(Core.Scene argScene)
@@ -119,17 +127,11 @@
         {
             argScene.Load();
         }
-        changedGame();
+        ChangedGame();
         SetLoop(argScene);
     }
 
-    public void SetContext(string type)
-    {
-        JS.InvokeVoid("juegecitos.setContext", type);
-        mContext = type;
-    }
-
-    public void changedGame() => Js.InvokeUnmarshalled<int>("juegecitos.changedGame");
+    public void ChangedGame() => Js.InvokeUnmarshalled<Info, int>("juegecitos.changeGame", mInfo);
 
     public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
     public void setfillStyle(string style) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfillStyle", style);

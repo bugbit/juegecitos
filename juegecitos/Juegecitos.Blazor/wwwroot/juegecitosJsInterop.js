@@ -4,16 +4,27 @@
         window.juegecitos.instance.invokeMethod('Loop', timeStamp);
     }
     this.instance = undefined;
+    this.main = undefined;
     this.canvas = undefined;
     this.context2d = undefined;
-    this.init = function (instance, canvas) {
+    this.init = function (instance, main, canvas) {
         this.instance = instance;
+        this.main = main;
         this.canvas = canvas;
         canvas.tabIndex = 0;
         canvas.focus();
         window.requestAnimationFrame(loop);
     }
-    this.changedGame = function () {
+    this.changeGame = function (g) {
+        const backcolor = Blazor.platform.readStringField(g, 0);
+        const width = Blazor.platform.readInt32Field(g, 0 + 8);
+        const height = Blazor.platform.readInt32Field(g, 0 + 8 + 4);
+        const context = Blazor.platform.readStringField(g, 0 + 8 + 4 + 4);
+
+        this.main.style.backgroundColor = this.canvas.backgroundColor = backcolor;
+        this.canvas.width = width;
+        this.canvas.height = height;
+        this.setContext(context);
         this.canvas.tabIndex = 0;
         this.canvas.focus();
     }

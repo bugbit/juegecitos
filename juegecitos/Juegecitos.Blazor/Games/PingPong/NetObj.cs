@@ -2,19 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Juegecitos.Blazor.Core;
 
-namespace Juegecitos.Blazor.Core.Components
+namespace Juegecitos.Blazor.Games.PingPong
 {
-    public class FillRectRenderComponent : Component2d, IComponentRender
+    public class NetObj : GameObject2d, IRender
     {
-        public string FillStyle { get; set; }
+        public NetObj(Scene argScene) : base(argScene)
+        {
+        }
 
         public void Render(GameTime argTime)
         {
-            var pHost = Owner.Scene.Game.Host;
-            var pTransform = GameObject.Transform;
+            var pHost = Scene.Game.Host;
+            var pTransform = Transform;
 
-            pHost.setfillStyle(FillStyle);
+            pHost.setfillStyle("#FFF");
             pHost.fillRect((int)pTransform.Position.X, (int)pTransform.Position.Y, (int)pTransform.Scale.X, (int)pTransform.Scale.Y);
         }
     }

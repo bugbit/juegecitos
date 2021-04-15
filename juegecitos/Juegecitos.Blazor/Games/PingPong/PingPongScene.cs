@@ -13,7 +13,11 @@ namespace Juegecitos.Blazor.Games.PingPong
         const int paddleWidth = 10;
         const int paddleHeight = 100;
 
-        private Paddle mPlayer;
+        private PaddleObj mPlayer1;
+        private ScoreObj mScore1;
+        private PaddleObj mPlayer2;
+        private ScoreObj mScore2;
+        private NetObj mNetObj;
 
         public PingPongScene(Game argGame) : base(argGame)
         {
@@ -25,10 +29,29 @@ namespace Juegecitos.Blazor.Games.PingPong
 
             //var pHost = Game.Host;
 
-            mPlayer = new Paddle(this)
+            mPlayer1 = new PaddleObj(this)
             {
                 Transform = new Transform2d { Position = new System.Numerics.Vector2(10, Game.Height / 2 - paddleHeight / 2), Scale = new System.Numerics.Vector2(paddleWidth, paddleHeight) },
                 Color = "#FFF"
+            };
+            mScore1 = new ScoreObj(this)
+            {
+                Transform = new Transform2d { Position = new System.Numerics.Vector2(Game.Width / 4, Game.Height / 6) },
+                Paddle = mPlayer1
+            };
+            mPlayer2 = new PaddleObj(this)
+            {
+                Transform = new Transform2d { Position = new System.Numerics.Vector2(Game.Width - (paddleWidth + 10), Game.Height / 2 - paddleHeight / 2), Scale = new System.Numerics.Vector2(paddleWidth, paddleHeight) },
+                Color = "#FFF"
+            };
+            mScore2 = new ScoreObj(this)
+            {
+                Transform = new Transform2d { Position = new System.Numerics.Vector2(3 * Game.Width / 4, Game.Height / 6) },
+                Paddle = mPlayer2
+            };
+            mNetObj = new NetObj(this)
+            {
+                Transform = new Transform2d { Position = new System.Numerics.Vector2(Game.Width / 2 - netWidth / 2, 0), Scale = new System.Numerics.Vector2(netWidth, netHeight) }
             };
         }
 
@@ -40,7 +63,11 @@ namespace Juegecitos.Blazor.Games.PingPong
             pHost.setfillStyle("#000"); /* whatever comes below this acquires black color (#000). */
             // draws the black board
             pHost.fillRect(0, 0, Game.Width, Game.Height);
-            mPlayer.Render(argTime);
+            mPlayer1.Render(argTime);
+            mScore1.Render(argTime);
+            mPlayer2.Render(argTime);
+            mScore2.Render(argTime);
+            mNetObj.Render(argTime);
         }
     }
 }

@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Juegecitos.Blazor.Core.Components;
 
 namespace Juegecitos.Blazor.Tests
 {
@@ -42,19 +41,6 @@ namespace Juegecitos.Blazor.Tests
                 pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 1, 1);
             }
         }
-        //private class Test1Render : Component2d, IComponentRender
-        //{
-        //    public void Render(GameTime argTime)
-        //    {
-        //        var pHost = Owner.Scene.Game.Host;
-
-        //        pHost.clearRect(0, 0, 300, 400);
-        //        pHost.setfillStyle("green");
-        //        pHost.fillRect(10, 50, 300, 100);
-        //        pHost.setfont("16px verdana");
-        //        pHost.strokeText($"elapsed: {argTime.ElapsedGameTime:n2} total: {argTime.TotalGameTime:n2}", 10, 80);
-        //    }
-        //}
         public override void Initialize()
         {
             base.Initialize();

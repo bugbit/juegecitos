@@ -6,12 +6,12 @@ using Juegecitos.Blazor.Core;
 
 namespace Juegecitos.Blazor.Games.PingPong
 {
-    public sealed class Paddle : GameObject2d, IRender
+    public sealed class PaddleObj : GameObject2d, IRender
     {
         public string Color { get; set; }
         public int Score { get; private set; }
 
-        public Paddle(Scene argScene) : base(argScene)
+        public PaddleObj(Scene argScene) : base(argScene)
         {
         }
 
