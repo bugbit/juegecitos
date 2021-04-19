@@ -156,5 +156,9 @@
     public void setfont(string font) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfont", font);
     public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
     public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText", text, x, y);
-    public void setTransform(float a, float b, float c, float d, float e, float f) => JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
+    public void setTransform(double a, double b, double c, double d, double e, double f) => JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
+    public void beginPath() => Js.InvokeUnmarshalled<int>("juegecitos.beginPath");
+    public void closePath() => Js.InvokeUnmarshalled<int>("juegecitos.closePath");
+    public void arc(int x, int y, double radius, double startAngle, double endAngle, bool counterclockwise) => JS.InvokeVoid("juegecitos.arc", x, y, radius, startAngle, endAngle, counterclockwise);
+    public void fill() => Js.InvokeUnmarshalled<int>("juegecitos.fill");
 }

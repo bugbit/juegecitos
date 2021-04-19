@@ -18,6 +18,7 @@ namespace Juegecitos.Blazor.Games.PingPong
         private PaddleObj mPlayer2;
         private ScoreObj mScore2;
         private NetObj mNetObj;
+        private BallObj mBallObj;
 
         public PingPongScene(Game argGame) : base(argGame)
         {
@@ -55,6 +56,14 @@ namespace Juegecitos.Blazor.Games.PingPong
             {
                 Transform = new Transform2d { Position = new System.Numerics.Vector2(Game.Width / 2 - netWidth / 2, 0), Scale = new System.Numerics.Vector2(netWidth, netHeight) }
             };
+            mBallObj = new BallObj(this)
+            {
+                Transform = new Transform2d { Position = new System.Numerics.Vector2(Game.Width / 2, Game.Height / 2) },
+                Color = "#05EDFF",
+                Radius = 7,
+                Speed = 7 / 10.0f,
+                Velocity = new System.Numerics.Vector2(5 / 10.0f, 5 / 10.0f)
+            };
         }
 
         public override void Render(GameTime argTime)
@@ -70,6 +79,7 @@ namespace Juegecitos.Blazor.Games.PingPong
             mPlayer2.Render(argTime);
             mScore2.Render(argTime);
             mNetObj.Render(argTime);
+            mBallObj.Render(argTime);
         }
 
         public override void Update(GameTime argTime)
@@ -78,6 +88,7 @@ namespace Juegecitos.Blazor.Games.PingPong
 
             mPlayer1.Update(argTime);
             mPlayer2.Update(argTime);
+            mBallObj.Update(argTime);
         }
     }
 }

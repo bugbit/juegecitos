@@ -18,6 +18,10 @@ namespace Juegecitos.Blazor.Core
         void setfont(string font);
         void strokeText(string text, int x, int y);
         void fillText(string text, int x, int y);
-        void setTransform(float a, float b, float c, float d, float e, float f);
+        void setTransform(double a, double b, double c, double d, double e, double f);
+        void beginPath();
+        void closePath();
+        void arc(int x, int y, double radius, double startAngle, double endAngle, bool counterclockwise);
+        void fill();
     }
 }

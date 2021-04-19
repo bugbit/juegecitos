@@ -63,6 +63,18 @@
     this.setTransform = function (a, b, c, d, e, f) {
         this.context2d.setTransform(a, b, c, d, e, f);
     }
+    this.beginPath = function () {
+        this.context2d.beginPath();
+    }
+    this.closePath = function () {
+        this.context2d.closePath();
+    }
+    this.arc = function (x, y, radius, startAngle, endAngle, counterclockwise) {
+        this.context2d.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+    }
+    this.fill = function () {
+        this.context2d.fill();
+    }
 }
 
 window.juegecitos = new Juegecitos();
