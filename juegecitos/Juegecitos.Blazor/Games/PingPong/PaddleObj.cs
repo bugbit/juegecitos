@@ -6,7 +6,7 @@ using Juegecitos.Blazor.Core;
 
 namespace Juegecitos.Blazor.Games.PingPong
 {
-    public sealed class PaddleObj : GameObject2d, IRender
+    public class PaddleObj : GameObject2d, IUpdate, IRender
     {
         public string Color { get; set; }
         public int Score { get; private set; }
@@ -21,6 +21,11 @@ namespace Juegecitos.Blazor.Games.PingPong
             Score = 0;
         }
 
+        public void Update(GameTime argTime)
+        {
+            UpdateActions(argTime);
+        }
+
         public void Render(GameTime argTime)
         {
             var pHost = Scene.Game.Host;
@@ -28,6 +33,10 @@ namespace Juegecitos.Blazor.Games.PingPong
 
             pHost.setfillStyle(Color);
             pHost.fillRect((int)pTransform.Position.X, (int)pTransform.Position.Y, (int)pTransform.Scale.X, (int)pTransform.Scale.Y);
+        }
+
+        protected virtual void UpdateActions(GameTime argTime)
+        {
         }
     }
 }

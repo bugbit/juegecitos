@@ -9,6 +9,11 @@ namespace Juegecitos.Blazor.Core.Input
     {
         public Keyboard Keyboard { get; } = new Keyboard();
 
+        public void Update()
+        {
+            Keyboard.Update();
+        }
+
         public void AfterUpdate()
         {
             Keyboard.AfterUpdate();

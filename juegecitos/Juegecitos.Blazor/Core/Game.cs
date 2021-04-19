@@ -17,7 +17,7 @@ namespace Juegecitos.Blazor.Core
         public string CanvasContext { get; internal set; }
 
         public PresentationParameters PresentationParameters { get; } = new PresentationParameters();
-
+        public Input.ActionCollection Actions { get; } = new Input.ActionCollection();
         
         public virtual void Initialize() { }
         public void Load()
