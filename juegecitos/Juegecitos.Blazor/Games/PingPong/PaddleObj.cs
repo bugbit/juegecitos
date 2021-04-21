@@ -9,7 +9,7 @@ namespace Juegecitos.Blazor.Games.PingPong
     public class PaddleObj : GameObject2d, IUpdate, IRender
     {
         public string Color { get; set; }
-        public int Score { get; private set; }
+        public int Score { get; set; }
 
         public PaddleObj(Scene argScene) : base(argScene)
         {

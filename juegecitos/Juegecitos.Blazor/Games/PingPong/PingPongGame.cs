@@ -18,8 +18,8 @@ namespace Juegecitos.Blazor.Games.PingPong
             PresentationParameters.MainScene = new PingPongScene(this);
 
             Actions.Add("Vertical1", new Core.Input.Action(
-                    new ActionUpdateKeyAxis { Key = Keys.Up, Axis = new System.Numerics.Vector2(0, -1) },
-                    new ActionUpdateKeyAxis { Key = Keys.Down, Axis = new System.Numerics.Vector2(0, 1) }
+                    new ActionUpdateKeyAxis { KeyCode = KeyCodes.Up, Axis = new System.Numerics.Vector2(0, -1) },
+                    new ActionUpdateKeyAxis { KeyCode = KeyCodes.Down, Axis = new System.Numerics.Vector2(0, 1) }
                 ));
             Actions.Add("Vertical2", new Core.Input.Action(
                    new ActionUpdateKeyAxis { KeyCode = KeyCodes.UpNumPad, Axis = new System.Numerics.Vector2(0, -1) },
