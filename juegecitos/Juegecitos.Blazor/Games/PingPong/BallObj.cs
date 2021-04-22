@@ -14,7 +14,7 @@ namespace Juegecitos.Blazor.Games.PingPong
         }
 
         public string Color { get; set; }
-        public double Radius { get; set; }
+        public float Radius { get; set; }
         public Vector2 Velocity { get; set; }
         public float Speed { get; set; }
 

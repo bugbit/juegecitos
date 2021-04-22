@@ -96,16 +96,20 @@ namespace Juegecitos.Blazor.Games.PingPong
 
             if (mBallObj.Transform.Position.Y + mBallObj.Radius >= Game.Height || mBallObj.Transform.Position.Y - mBallObj.Radius <= 0)
                 mBallObj.Velocity *= mVectDirBallY;
-
-            if (mBallObj.Transform.Position.X + mBallObj.Radius >= mPlayerRight.Transform.Position.X)
+            else if (mBallObj.Transform.Position.X + mBallObj.Radius >= Game.Width)
             {
                 mPlayerLeft.Score++;
                 Reset();
             }
-            if (mBallObj.Transform.Position.X - mBallObj.Radius <= mPlayerLeft.Transform.Position.X)
+            else if (mBallObj.Transform.Position.X - mBallObj.Radius <= 0)
             {
                 mPlayerRight.Score++;
                 Reset();
+            }
+            else
+            {
+                CollisionPlayerBall(mPlayerRight, mBallObj, true);
+                CollisionPlayerBall(mPlayerLeft, mBallObj, false);
             }
         }
 
@@ -114,6 +118,35 @@ namespace Juegecitos.Blazor.Games.PingPong
             mBallObj.Transform.Position = new Vector2(Game.Width / 2, Game.Height / 2);
             mBallObj.Speed = 7 * factor;
             mBallObj.Velocity *= mVectDirBallReset;
+        }
+
+        private bool CollisionPlayerBall(PaddleObj argPlayerObj, BallObj argBallObj, bool argPlayerRight)
+        {
+            var pBallY = argBallObj.Transform.Position.Y;
+            var pPlayerY = argPlayerObj.Transform.Position.Y;
+
+            if
+            (
+                argPlayerObj.Transform.Position.X <= argBallObj.Transform.Position.X && argPlayerObj.Transform.Position.X + argPlayerObj.Transform.Scale.X >= argBallObj.Transform.Position.X
+                && pPlayerY <= pBallY && pPlayerY + argPlayerObj.Transform.Scale.Y >= pBallY
+            )
+            {
+                var pAng = 0.0f;
+                var pDir = (argPlayerRight) ? -1.0f : 1.0f;
+                var pRad_2 = argBallObj.Radius / 2.0f;
+                var pY_2 = pPlayerY / 2.0f;
+
+                if (pBallY < pY_2 - pRad_2)
+                    pAng = MathF.PI / -4.0f;
+                else if (pBallY > pY_2 + pRad_2)
+                    pAng = MathF.PI / 4.0f;
+
+                argBallObj.Velocity = pDir * argBallObj.Speed * new Vector2(MathF.Cos(pAng), MathF.Sin(pAng));
+
+                return true;
+            }
+
+            return false;
         }
     }
 }
