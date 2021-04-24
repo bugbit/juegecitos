@@ -9,12 +9,18 @@ namespace Juegecitos.Blazor.Core
     {
         public Game Game { get; private set; }
         public bool IsLoaded { get; private set; }
+
         public void Load()
         {
             Initialize();
+            Game.LoadedScene(this);
             IsLoaded = true;
         }
-        public void UnLoad() { }
+        public void UnLoad()
+        {
+            Game.UnLoadedScene(this);
+            IsLoaded = false;
+        }
 
         public Scene(Game argGame)
         {

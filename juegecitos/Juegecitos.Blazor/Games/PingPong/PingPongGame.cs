@@ -9,6 +9,8 @@ namespace Juegecitos.Blazor.Games.PingPong
 {
     public class PingPongGame : Game
     {
+        public int hitSound = Constants.NullAsset;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -25,6 +27,24 @@ namespace Juegecitos.Blazor.Games.PingPong
                    new ActionUpdateKeyAxis { KeyCode = KeyCodes.UpNumPad, Axis = new System.Numerics.Vector2(0, -1) },
                    new ActionUpdateKeyAxis { KeyCode = KeyCodes.DownNumPad, Axis = new System.Numerics.Vector2(0, 1) }
                ));
+        }
+
+        public override void LoadAssets()
+        {
+            var pHost = Host;
+
+            base.LoadAssets();
+
+            hitSound = pHost.loadSound("pingpong/hitSound.wav");
+        }
+
+        public override void UnLoadAssets()
+        {
+            var pHost = Host;
+
+            base.UnLoadAssets();
+
+            UnLoadSound(ref hitSound);
         }
     }
 }

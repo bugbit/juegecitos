@@ -3,10 +3,45 @@
         window.requestAnimationFrame(loop);
         window.juegecitos.instance.invokeMethod('Loop', timeStamp);
     }
+    function insertAsset(as, arr) {
+        var i;
+
+        if (arr.unload.length > 0) {
+            i = arr.unload.pop();
+            arr.load[i] = as;
+        }
+        else
+            i = arr.load.push(as) - 1;
+
+        return i;
+    }
+    function getAsset(i, arr) {
+        if (i < 0 || i > arr.load.length)
+            return undefined;
+
+        return arr.load[i];
+    }
+    function destroyAsset(i, arr) {
+        if (i < 0 || i > arr.load.length)
+            return false;
+
+        arr.load[i] = undefined;
+        arr.unload.push(i);
+
+        return true;
+    }
     this.instance = undefined;
     this.main = undefined;
     this.canvas = undefined;
     this.context2d = undefined;
+    this.assets =
+    {
+        sounds:
+        {
+            load: [],
+            unload: []
+        }
+    }
     this.init = function (instance, main, canvas) {
         this.instance = instance;
         this.main = main;
@@ -74,6 +109,30 @@
     }
     this.fill = function () {
         this.context2d.fill();
+    }
+    this.loadSound = function (_url) {
+        var url = BINDING.conv_string(_url);
+        var as = new Audio("assets/" + url);
+
+        insertAsset(as, this.assets.sounds)
+    }
+    this.unloadSound = function (i) {
+        var as = getAsset(i, this.assets.sounds);
+
+        if (as)
+            as.pause();
+
+        return destroyAsset(i, this.assets.sounds);
+    }
+    this.playSound = function (i) {
+        var as = getAsset(i, this.assets.sounds);
+
+        if (!as)
+            return false;
+
+        as.play();
+
+        return true;
     }
 }
 

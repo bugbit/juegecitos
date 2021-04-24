@@ -12,6 +12,11 @@ namespace Juegecitos.Blazor.Core
         void SetLoop(ILoop argLoop);
         void ChangeGame(Game argGame, bool argUnLoadGameAct = true);
         void SetActiveScene(Core.Scene argScene);
+        // assets
+        int loadSound(string url);
+        bool unloadSound(int i);
+        bool playSound(int i);
+        // 2d
         void clearRect(int x, int y, int width, int height);
         void setfillStyle(string style);
         void fillRect(int x, int y, int width, int height);

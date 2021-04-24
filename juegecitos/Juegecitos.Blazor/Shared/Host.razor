@@ -150,6 +150,14 @@
 
     public void ChangedGame() => Js.InvokeUnmarshalled<Info, int>("juegecitos.changeGame", mInfo);
 
+    // assets
+
+    public int loadSound(string url) => Js.InvokeUnmarshalled<string, int>("juegecitos.loadSound", url);
+    public bool unloadSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.unloadSound", i);
+    public bool playSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.playSound", i);
+
+    // 2d
+
     public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
     public void setfillStyle(string style) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfillStyle", style);
     public void fillRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.fillRect", x, y, width, height);
