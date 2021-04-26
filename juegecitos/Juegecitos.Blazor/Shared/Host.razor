@@ -152,9 +152,23 @@
 
     // assets
 
+    // low
     public int loadSound(string url) => Js.InvokeUnmarshalled<string, int>("juegecitos.loadSound", url);
     public bool unloadSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.unloadSound", i);
     public bool playSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.playSound", i);
+
+    // high
+
+    public void LoadSound(Core.Assets.AsHandler h, string url) => h.Handle = loadSound(url);
+    public bool UnLoadSound(Core.Assets.AsHandler h)
+    {
+        var pRet = unloadSound(h.Handle);
+
+        if (pRet)
+            h.Handle = Core.Constants.NullAsset;
+
+        return pRet;
+    }
 
     // 2d
 

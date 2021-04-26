@@ -24,8 +24,6 @@ namespace Juegecitos.Blazor.Games.PingPong
         private Vector2 mVectDirBallY = new Vector2(1, -1);
         private Vector2 mVectDirBallReset = new Vector2(-1, -1);
 
-        public int hitSound = Constants.NullAsset;
-
         public PingPongScene(Game argGame) : base(argGame)
         {
         }
@@ -33,11 +31,6 @@ namespace Juegecitos.Blazor.Games.PingPong
         public override void Initialize()
         {
             base.Initialize();
-
-            if (Game is PingPongGame pGame)
-            {
-                hitSound = pGame.hitSound;
-            }
 
             //var pHost = Game.Host;
 
@@ -131,6 +124,7 @@ namespace Juegecitos.Blazor.Games.PingPong
         {
             var pBallY = argBallObj.Transform.Position.Y;
             var pPlayerY = argPlayerObj.Transform.Position.Y;
+            var pAssets = Game.GetAssets<PingPongAssets>();
 
             if
             (
@@ -150,7 +144,8 @@ namespace Juegecitos.Blazor.Games.PingPong
 
                 argBallObj.Velocity = pDir * argBallObj.Speed * new Vector2(MathF.Cos(pAng), MathF.Sin(pAng));
 
-                Game.Host.playSound(hitSound);
+                if (pAssets != null)
+                    Game.Host.playSound(pAssets.hitSound);
 
                 return true;
             }

@@ -9,6 +9,8 @@ namespace Juegecitos.Blazor.Core
     {
         private List<Scene> mScenesLoades = new List<Scene>();
 
+        protected object mAssets;
+
         public float TotalTime { get; internal set; } = 0;
         public IHost Host { get; internal set; }
         public Scene ActiveScene { get; internal set; }
@@ -38,17 +40,9 @@ namespace Juegecitos.Blazor.Core
             IsLoaded = false;
         }
 
+        public T GetAssets<T>() where T : class => mAssets as T;
+
         internal void LoadedScene(Scene argScene) => mScenesLoades.Add(argScene);
         internal bool UnLoadedScene(Scene argScene) => mScenesLoades.Remove(argScene);
-
-        protected bool UnLoadSound(ref int argHandler)
-        {
-            var pRet = Host.unloadSound(argHandler);
-
-            if (pRet)
-                argHandler = Constants.NullAsset;
-
-            return pRet;
-        }
     }
 }
