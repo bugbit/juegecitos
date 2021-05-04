@@ -29,7 +29,9 @@ char Pulsaciones[PULSA_MAX];
 int Apunte=0;
 unsigned Num_pul,Pausa=PPAUSA,Pausa2=PPAUSA2,Nivel;
 
-void bold_font();
+//void bold_font();
+
+//void initraton(void)
 
 void esperatecla(void){
 
