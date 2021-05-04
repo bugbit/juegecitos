@@ -7,6 +7,10 @@
 #include <conio.h>
 #include <string.h>
 
+#define MOUSE_MSKBTNLEFT	1
+#define MOUSE_MSKBTNRIGHT	2
+#define MOUSE_MSKBTNCENTER	4
+
 #define LADO		100
 #define CX			320
 #define CY			240-80/2
@@ -24,6 +28,7 @@ struct TRIANGULO {
 	{ YELLOW,{ CX,CY,CX,CY+LADO,CX+LADO,CY }}
   };
 
+int hasMouse;
 char Teclas[]="QAWS\x1B";
 char Pulsaciones[PULSA_MAX];
 int Apunte=0;
@@ -31,14 +36,66 @@ unsigned Num_pul,Pausa=PPAUSA,Pausa2=PPAUSA2,Nivel;
 
 //void bold_font();
 
-//void initraton(void)
+int initmouse(void){
+	asm {
+		xor ax,ax
+		int 33h
+	}
+}
+
+int ismouseclick(int msk)
+{
+	asm {
+		mov ax,3
+		int 33h
+		and bx,[msk]
+		mov ax,bx
+	}
+}
+
+void showmouseptr()
+{
+	asm {
+		mov ax,1
+		int 33h
+	}
+}
+
+void hidemouseptr()
+{
+	asm {
+		mov ax,2
+		int 33h
+	}
+}
 
 void esperatecla(void){
 
-  outtextxy(0,379,"Pulse una tecla para continuar");
-  getch();
+	if (!hasMouse)
+  {
+		outtextxy(0,379,"Pulse una tecla para continuar");
+		getch();
+	}
+	else
+	{
+		outtextxy(0,379,"Pulse una tecla o boton raton para continuar");
+		for(;;)
+		{
+			if (kbhit())
+			{
+				getch();
 
-  }
+				break;
+			}
+			else if (ismouseclick(MOUSE_MSKBTNLEFT|MOUSE_MSKBTNRIGHT))
+			{
+				while(!ismouseclick(MOUSE_MSKBTNLEFT|MOUSE_MSKBTNRIGHT));
+				break;
+			}
+		}
+	}
+
+}
 
 void imprimetexto(char *cadena) {
   int x,y,letras,alto=textheight("W"),ancho=textwidth("n");
@@ -63,32 +120,43 @@ void imprimetexto(char *cadena) {
 		  }
 		if (!*n) letras--;
 		for (;letras+1>1;letras--) {
-		  buffer[0]=*cadena++;
-		  outtext(buffer);
-		  }
+			buffer[0]=*cadena++;
+			outtext(buffer);
+			}
 		letras=0;
 		x=getx();
 		y=gety();
 		}
 	 letras++;
 	 } while (*n++);
-  esperatecla();
+	esperatecla();
+}
 
-  }
+void MostrarBotonesNivel(int y)
+{
+	int w=textwidth("1")+4;
+	int x=CX-w*9,n;
+	char numstr[2]="1";
+
+	for(;numstr[0]<='9';++numstr[0],x += w)
+	{
+		outtextxy(x,y,numstr);
+	}
+}
 
 void Instrucciones()  {
 
-  int tecla;
+	int tecla;
 
-  setcolor(LIGHTBLUE);
-  settextstyle(BOLD_FONT,HORIZ_DIR,3);
-  settextjustify(CENTER_TEXT,TOP_TEXT);
-  outtextxy(CX,0,"Juego del Sim¢n");
-  setcolor(WHITE);
-  settextstyle(BOLD_FONT,HORIZ_DIR,1);
-  setviewport(0,60,639,479,1);
-  settextjustify(LEFT_TEXT,TOP_TEXT);
-  imprimetexto(
+	setcolor(LIGHTBLUE);
+	settextstyle(BOLD_FONT,HORIZ_DIR,3);
+	settextjustify(CENTER_TEXT,TOP_TEXT);
+	outtextxy(CX,0,"Juego del Sim¢n");
+	setcolor(WHITE);
+	settextstyle(BOLD_FONT,HORIZ_DIR,1);
+	setviewport(0,60,639,479,1);
+	settextjustify(LEFT_TEXT,TOP_TEXT);
+	imprimetexto(
 	 "Este juego estimula la memoria y la capacidad de asociaci¢n de colores"
 	 " y sonidos. La computadora nos muestra una sentencia al azar"
 	 " entre 4 colores (rojo, azul, verde y amarillo) y nosotros tenemos que"
@@ -99,19 +167,26 @@ void Instrucciones()  {
 	 " muestra toda la serie completa para que la volvamos a repetir. Este"
 	 " juego posee infinitos niveles. El primer nivel consiste en una serie de"
 	 " cinco colores, el segundo diez, el tercero quince, etc.");
-  clearviewport();
-  //imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢ del grupo C1M2.");
-  imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢.");
-  settextstyle(BOLD_FONT,HORIZ_DIR,2);
-  settextjustify(CENTER_TEXT,CENTER_TEXT);
-  clearviewport();
-  outtextxy(CX,CY,"Introduzca nivel inicial (1-9)");
-  do
+	clearviewport();
+	//imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢ del grupo C1M2.");
+	imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢.");
+	settextstyle(BOLD_FONT,HORIZ_DIR,2);
+	settextjustify(CENTER_TEXT,CENTER_TEXT);
+	clearviewport();
+	outtextxy(CX,CY,"Introduzca nivel inicial (1-9)");
+	if (hasMouse)
+	{
+		MostrarBotonesNivel(CY+textheight("I"));
+		showmouseptr();
+	}
+	do
 	 tecla=getch();
 	 while (!isdigit(tecla));
-  Nivel=tecla-'0';
+	Nivel=tecla-'0';
+	if (hasMouse)
+		hidemouseptr();
 
-  }
+	}
 
 void Triangulo(int num,int brillante) {
 
@@ -280,6 +355,7 @@ int main() {
 	 printf("Error de gr ficos  %s\n", grapherrormsg(errorcode));
 	 return 1;
 	 }
+	hasMouse=initmouse();
   randomize();
   Instrucciones();
   Dibuja();
