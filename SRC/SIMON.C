@@ -18,15 +18,20 @@
 #define PPAUSA    500
 #define PPAUSA2	100
 
+typedef struct _MOUSEPOS
+{
+	int x,y;
+} MOUSEPOS;
+
 struct TRIANGULO {
-  int color;
-  int puntos[3*2];
-  } Triangulos[]={
+	int color;
+	int puntos[3*2];
+	} Triangulos[]={
 	{ RED,{ CX,CY,CX,CY-LADO,CX-LADO,CY }},
 	{ BLUE,{ CX,CY,CX,CY+LADO,CX-LADO,CY }},
 	{ GREEN,{ CX,CY,CX,CY-LADO,CX+LADO,CY }},
 	{ YELLOW,{ CX,CY,CX,CY+LADO,CX+LADO,CY }}
-  };
+	};
 
 int hasMouse;
 char Teclas[]="QAWS\x1B";
@@ -69,16 +74,28 @@ void hidemouseptr()
 	}
 }
 
+MOUSEPOS getmousepos()
+{
+	// cx = x
+	// dx = y
+	asm {
+		mov ax,3
+		int 33h
+		mov ax,cx
+	}
+}
+
 void esperatecla(void){
+	int msk;
 
 	if (!hasMouse)
-  {
+	{
 		outtextxy(0,379,"Pulse una tecla para continuar");
 		getch();
 	}
 	else
 	{
-		outtextxy(0,379,"Pulse una tecla o boton raton para continuar");
+		outtextxy(0,379,"Pulse tecla,cliquee,toque tactil para seguir");
 		for(;;)
 		{
 			if (kbhit())
@@ -87,9 +104,9 @@ void esperatecla(void){
 
 				break;
 			}
-			else if (ismouseclick(MOUSE_MSKBTNLEFT|MOUSE_MSKBTNRIGHT))
+			else if ((msk=ismouseclick(MOUSE_MSKBTNLEFT|MOUSE_MSKBTNRIGHT)))
 			{
-				while(!ismouseclick(MOUSE_MSKBTNLEFT|MOUSE_MSKBTNRIGHT));
+				while(ismouseclick(msk));
 				break;
 			}
 		}
@@ -108,7 +125,7 @@ void imprimetexto(char *cadena) {
   do {
 	 if (!*n || *n==32) {
 		if (x+letras*ancho>639) {
-		  x=0;
+			x=0;
 		  if (y+alto>340) {
 			 esperatecla();
 			 clearviewport();
@@ -132,21 +149,52 @@ void imprimetexto(char *cadena) {
 	esperatecla();
 }
 
-void MostrarBotonesNivel(int y)
+void MostrarBotonesNivel(int y,int *rx0,int *rw,int *rh,int *resp)
 {
 	int w=textwidth("1")+4;
-	int x=CX-w*9,n;
+	int esp=10;
+	int h=textheight("1");
+	int cy=y+h/2-2-1;
+	int x=CX-(w*9+8*esp)/2,n;
 	char numstr[2]="1";
 
-	for(;numstr[0]<='9';++numstr[0],x += w)
+	*rx0=x;
+	*rw=w;
+	*rh=h;
+	*resp=esp;
+	settextjustify(CENTER_TEXT,CENTER_TEXT);
+	setfillstyle(SOLID_FILL,DARKGRAY);
+	for(;numstr[0]<='9';++numstr[0],x += w+esp)
 	{
-		outtextxy(x,y,numstr);
+		//line(x,y-3,x+w,y-3);
+		bar3d(x,y,x+w,y+h,2,1);
+		outtextxy(x+w/2,cy,numstr);
 	}
+}
+
+int LeerNumberNivel(int y,int rx0,int rw,int rh,int resp)
+{
+	int tecla;
+	MOUSEPOS mpos;
+
+	if (kbhit())
+		return getch();
+
+	if (!hasMouse)
+		return 0;
+
+	mpos=getmousepos();
+
+	if (mpos.x>=rx0 && mpos.y>=y && mpos.y-y<=rh)
+	{
+	}
+
+	return 0;
 }
 
 void Instrucciones()  {
 
-	int tecla;
+	int tecla,rx0,ry0,rw,rh,resp;
 
 	setcolor(LIGHTBLUE);
 	settextstyle(BOLD_FONT,HORIZ_DIR,3);
@@ -176,17 +224,18 @@ void Instrucciones()  {
 	outtextxy(CX,CY,"Introduzca nivel inicial (1-9)");
 	if (hasMouse)
 	{
-		MostrarBotonesNivel(CY+textheight("I"));
+		ry0=CY+textheight("I");
+		MostrarBotonesNivel(ry0,&rx0,&rw,&rh,&resp);
 		showmouseptr();
 	}
 	do
-	 tecla=getch();
+	 //tecla=getch();
+	 tecla=LeerNumberNivel(ry0,rx0,rw,rh,resp);
 	 while (!isdigit(tecla));
 	Nivel=tecla-'0';
 	if (hasMouse)
 		hidemouseptr();
-
-	}
+}
 
 void Triangulo(int num,int brillante) {
 
@@ -344,14 +393,14 @@ void Jugar() {
 
 int main() {
 
-  int gdriver=VGA,gmode=VGAHI;
-  int errorcode;
+	int gdriver=VGA,gmode=VGAHI;
+	int errorcode;
 
-  //registerbgidriver(EGAVGA_driver);
-  //registerbgifont(bold_font);
-  initgraph(&gdriver,&gmode,"");
-  errorcode = graphresult();
-  if (errorcode != grOk)  {
+	//registerbgidriver(EGAVGA_driver);
+	//registerbgifont(bold_font);
+	initgraph(&gdriver,&gmode,"");
+	errorcode = graphresult();
+	if (errorcode != grOk)  {
 	 printf("Error de gr ficos  %s\n", grapherrormsg(errorcode));
 	 return 1;
 	 }
@@ -364,4 +413,4 @@ int main() {
 
   return 0;
 
-  }
+	}
