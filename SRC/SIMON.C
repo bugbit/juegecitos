@@ -145,7 +145,7 @@ void imprimetexto(char *cadena) {
   char *n=cadena;
   char buffer[2]="a";
 
-  x=getx();
+	x=getx();
   y=gety();
   letras=1;
   do {
@@ -325,7 +325,7 @@ void Parpadeo(int num) {
 
 void Serie() {
 
-  int i;
+	int i;
 	char *s;
 
   for (s=&Pulsaciones,i=0;i<Num_pul;i++) {
@@ -366,7 +366,7 @@ void Pensar() {
 	 }
 }
 
-int isPointIntoTriangle(TRIANGLE *t,int x,int y)
+int isPointIntoTriangle(struct TRIANGULO *t,int x,int y)
 {
 }
 
