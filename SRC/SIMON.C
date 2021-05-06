@@ -20,7 +20,9 @@
 
 typedef struct _MOUSEPOS
 {
-	int x,y;
+	unsigned x:16;
+	unsigned y:13;
+	unsigned btn:3;
 } MOUSEPOS;
 
 struct TRIANGULO {
@@ -36,7 +38,7 @@ struct TRIANGULO {
 int hasMouse;
 char Teclas[]="QAWS\x1B";
 char Pulsaciones[PULSA_MAX];
-int Apunte=0;
+int Apunte=0,ytopview=0;
 unsigned Num_pul,Pausa=PPAUSA,Pausa2=PPAUSA2,Nivel;
 
 //void bold_font();
@@ -76,26 +78,41 @@ void hidemouseptr()
 
 MOUSEPOS getmousepos()
 {
+	// bx = botones
 	// cx = x
 	// dx = y
 	asm {
 		mov ax,3
 		int 33h
+		sal bl,1+4
+		or dh,bl
 		mov ax,cx
+		sub dx,ytopview
 	}
 }
 
-void esperatecla(void){
+void restrictmouseptr(int x1, int y1, int x2, int y2)
+{
+	asm {
+		mov ax,7
+		mov cx,x1
+		mov dx,x2
+		int 33h
+		mov ax,8
+		mov cx,y1
+		mov dx,y2
+		int 33h
+	}
+}
+
+void waitanykeyorbtn()
+{
 	int msk;
 
 	if (!hasMouse)
-	{
-		outtextxy(0,379,"Pulse una tecla para continuar");
 		getch();
-	}
 	else
 	{
-		outtextxy(0,379,"Pulse tecla,cliquee,toque tactil para seguir");
 		for(;;)
 		{
 			if (kbhit())
@@ -111,7 +128,16 @@ void esperatecla(void){
 			}
 		}
 	}
+}
 
+void esperatecla(void){
+	int msk;
+
+	if (!hasMouse)
+		outtextxy(0,379,"Pulse una tecla para continuar");
+	else
+		outtextxy(0,379,"Pulse tecla,cliquee,toque tactil para seguir");
+	waitanykeyorbtn();
 }
 
 void imprimetexto(char *cadena) {
@@ -166,15 +192,15 @@ void MostrarBotonesNivel(int y,int *rx0,int *rw,int *rh,int *resp)
 	setfillstyle(SOLID_FILL,DARKGRAY);
 	for(;numstr[0]<='9';++numstr[0],x += w+esp)
 	{
-		//line(x,y-3,x+w,y-3);
-		bar3d(x,y,x+w,y+h,2,1);
+		//bar3d(x,y,x+w,y+h,2,1);
 		outtextxy(x+w/2,cy,numstr);
 	}
 }
 
 int LeerNumberNivel(int y,int rx0,int rw,int rh,int resp)
 {
-	int tecla;
+	int tecla,yf;
+	div_t n;
 	MOUSEPOS mpos;
 
 	if (kbhit())
@@ -184,9 +210,13 @@ int LeerNumberNivel(int y,int rx0,int rw,int rh,int resp)
 		return 0;
 
 	mpos=getmousepos();
+	yf=y+rh;
 
-	if (mpos.x>=rx0 && mpos.y>=y && mpos.y-y<=rh)
+	if (mpos.btn && mpos.x>=rx0 && mpos.y>=y && mpos.y<=yf)
 	{
+		n=div (mpos.x-rx0,rw+resp);
+		if (n.quot<=8 && n.rem<rw)
+			return '1'+n.quot;
 	}
 
 	return 0;
@@ -202,7 +232,10 @@ void Instrucciones()  {
 	outtextxy(CX,0,"Juego del Sim¢n");
 	setcolor(WHITE);
 	settextstyle(BOLD_FONT,HORIZ_DIR,1);
-	setviewport(0,60,639,479,1);
+	ytopview=60;
+	setviewport(0,ytopview,639,479,1);
+	if (hasMouse)
+		restrictmouseptr(0,ytopview,getmaxx()-1,getmaxy()-1);
 	settextjustify(LEFT_TEXT,TOP_TEXT);
 	imprimetexto(
 	 "Este juego estimula la memoria y la capacidad de asociaci¢n de colores"
@@ -218,16 +251,24 @@ void Instrucciones()  {
 	clearviewport();
 	//imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢ del grupo C1M2.");
 	imprimetexto( "Programa hecho por Oscar Hern ndez Ba¤¢.");
+	setvisualpage(1);
 	settextstyle(BOLD_FONT,HORIZ_DIR,2);
 	settextjustify(CENTER_TEXT,CENTER_TEXT);
 	clearviewport();
 	outtextxy(CX,CY,"Introduzca nivel inicial (1-9)");
+
 	if (hasMouse)
 	{
 		ry0=CY+textheight("I");
 		MostrarBotonesNivel(ry0,&rx0,&rw,&rh,&resp);
-		showmouseptr();
 	}
+		else
+		ry0=rx0=rw=rh=resp=0;
+	setvisualpage(0);
+
+	if (hasMouse)
+		showmouseptr();
+
 	do
 	 //tecla=getch();
 	 tecla=LeerNumberNivel(ry0,rx0,rw,rh,resp);
@@ -239,31 +280,32 @@ void Instrucciones()  {
 
 void Triangulo(int num,int brillante) {
 
-  struct TRIANGULO *t=&Triangulos[num];
+	struct TRIANGULO *t=&Triangulos[num];
 
   setfillstyle((brillante) ? SOLID_FILL : HATCH_FILL,t->color);
   fillpoly(3,&t->puntos);
 
-  }
+	}
 
 void Dibuja() {
 
-  int i;
+	int i;
 
-  clearviewport();
-  for (i=0;i<4;i++) Triangulo(i,0);
-  settextjustify(CENTER_TEXT,BOTTOM_TEXT);
-  outtextxy(CX-LADO/2,CY-LADO,"Q");
-  outtextxy(CX+LADO/2,CY-LADO,"W");
-  settextjustify(CENTER_TEXT,TOP_TEXT);
-  outtextxy(CX-LADO/2,CY+LADO,"A");
-  outtextxy(CX+LADO/2,CY+LADO,"S");
-  settextstyle(BOLD_FONT,HORIZ_DIR,1);
-  outtextxy(CX,430-55,"[ESPACIO] Apunte   [ESC] Salir");
-  settextstyle(BOLD_FONT,HORIZ_DIR,2);
-  settextjustify(CENTER_TEXT,TOP_TEXT);
-
-  }
+	setvisualpage(1);
+	clearviewport();
+	for (i=0;i<4;i++) Triangulo(i,0);
+	settextjustify(CENTER_TEXT,BOTTOM_TEXT);
+	outtextxy(CX-LADO/2,CY-LADO,"Q");
+	outtextxy(CX+LADO/2,CY-LADO,"W");
+	settextjustify(CENTER_TEXT,TOP_TEXT);
+	outtextxy(CX-LADO/2,CY+LADO,"A");
+	outtextxy(CX+LADO/2,CY+LADO,"S");
+	settextstyle(BOLD_FONT,HORIZ_DIR,1);
+	outtextxy(CX,430-55,"[ESPACIO] Apunte   [ESC] Salir");
+	settextstyle(BOLD_FONT,HORIZ_DIR,2);
+	settextjustify(CENTER_TEXT,TOP_TEXT);
+	setvisualpage(0);
+}
 
 void Sonido(int num) {
 
@@ -275,7 +317,7 @@ void Sonido(int num) {
 
 void Parpadeo(int num) {
 
-  Triangulo(num,1);
+	Triangulo(num,1);
   Sonido(num);
   Triangulo(num,0);
 
@@ -284,7 +326,7 @@ void Parpadeo(int num) {
 void Serie() {
 
   int i;
-  char *s;
+	char *s;
 
   for (s=&Pulsaciones,i=0;i<Num_pul;i++) {
 	 Parpadeo(*s++);
@@ -296,20 +338,20 @@ void Serie() {
 
 void outtextxyf(int x,int y,char *fmt,...) {
 
-  char buffer[90];
-  vsprintf(buffer,fmt,...);
-  outtextxy(x,y,buffer);
+	char buffer[90];
+	vsprintf(buffer,fmt,...);
+	outtextxy(x,y,buffer);
 
-  }
+	}
 
 void Pensar() {
 
-  if (Num_pul==5*Nivel) {
+	if (Num_pul==5*Nivel) {
 	 clearviewport();
 	 settextjustify(CENTER_TEXT,TOP_TEXT);
 	 outtextxyf(CX,CY-30,"Has completado con ‚xito el nivel %d",Nivel++);
 	 outtextxyf(CX,CY+10,"Vamos al nivel %d",Nivel);
-	 getch();
+	 waitanykeyorbtn();
 	 Dibuja();
 	 Num_pul=0;
 	 Pausa=PPAUSA;
@@ -322,8 +364,11 @@ void Pensar() {
 	 if (Pausa2>20) Pausa2 -= 10;
 	 Serie();
 	 }
+}
 
-  }
+int isPointIntoTriangle(TRIANGLE *t,int x,int y)
+{
+}
 
 int LeeTecla(int num) {
 
@@ -384,7 +429,7 @@ void Jugar() {
 
   int opc;
 
-  do {
+	do {
 	 Pensar();
 	 while ((opc=Sucesion())==1);
 	 } while (!opc);
@@ -405,12 +450,12 @@ int main() {
 	 return 1;
 	 }
 	hasMouse=initmouse();
-  randomize();
-  Instrucciones();
-  Dibuja();
-  Jugar();
-  closegraph();
+	randomize();
+	Instrucciones();
+	Dibuja();
+	Jugar();
+	closegraph();
 
-  return 0;
+	return 0;
 
 	}

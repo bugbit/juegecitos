@@ -4,6 +4,7 @@
 # borland
 *.exe
 *.bak
+*.swp
 
 # User-specific files
 *.suo
