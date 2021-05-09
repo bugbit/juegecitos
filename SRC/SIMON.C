@@ -148,7 +148,7 @@ void imprimetexto(char *cadena) {
 	x=getx();
   y=gety();
   letras=1;
-  do {
+	do {
 	 if (!*n || *n==32) {
 		if (x+letras*ancho>639) {
 			x=0;
@@ -283,7 +283,7 @@ void Triangulo(int num,int brillante) {
 	struct TRIANGULO *t=&Triangulos[num];
 
   setfillstyle((brillante) ? SOLID_FILL : HATCH_FILL,t->color);
-  fillpoly(3,&t->puntos);
+	fillpoly(3,&t->puntos);
 
 	}
 
@@ -318,7 +318,7 @@ void Sonido(int num) {
 void Parpadeo(int num) {
 
 	Triangulo(num,1);
-  Sonido(num);
+	Sonido(num);
   Triangulo(num,0);
 
   }
@@ -328,7 +328,7 @@ void Serie() {
 	int i;
 	char *s;
 
-  for (s=&Pulsaciones,i=0;i<Num_pul;i++) {
+	for (s=&Pulsaciones,i=0;i<Num_pul;i++) {
 	 Parpadeo(*s++);
 	 delay(Pausa2);
 	 }
@@ -368,17 +368,49 @@ void Pensar() {
 
 int isPointIntoTriangle(struct TRIANGULO *t,int x,int y)
 {
+	// a=t->puntos[0]y[1]
+	// b=t->puntos[2]y[3]
+	// c=t->puntos[4]y[5]
+	int *p=t->puntos;
+	long ax=100L*(*p++),ay=100L*(*p++),
+		bx=100L*(*p++),by=100L*(*p++),
+		cx=100L*(*p++),cy=100L*(*p++),
+		px=100L*x,py=100L*y,
+
+	// d=b-a
+		dx=bx-ax,dy=by-ay,
+		ex,ey,w11,w12;
+	int w1,w2,is;
+
+	// evitar division por cero
+
+	if (labs(ay-cy)<100)
+		cy++;
+
+	// e=c-a
+
+	ex=cx-ax;
+	ey=cy-ay;
+	w11=ex*(ay-py)+ey*(px-ax);
+	w12=dx*ey-dy*ex;
+
+	w1=(int)(w11/w12);
+	w2=(py-ay-w1*dy)/ey;
+	is=w1>=0 && w2>=0 && (w1+w2)<=100;
+
+	return is;
+
 }
 
 int LeeTecla(int num) {
 
-  int tecla;
+	int tecla;
   char *s;
 
   do {
 	 if (Apunte)
 		while (!kbhit()) {
-		  Triangulo(num,1);
+			Triangulo(num,1);
 		  Triangulo(num,0);
 		  }
 	 tecla=toupper(getch());
@@ -386,13 +418,13 @@ int LeeTecla(int num) {
 	 s=strchr(Teclas,tecla);
 	 } while (!s);
 
-  return s-&Teclas;
+	return s-&Teclas;
 
   }
 
 void ParpadeoRapido(int num) {
 
-  int n;
+	int n;
 
   for (n=0;n<3;n++) {
 	 Triangulo(num,1);
@@ -410,7 +442,7 @@ int Sucesion() {
   int i,num;
   char *s;
 
-  for (s=&Pulsaciones,i=0;i<Num_pul;i++,s++) {
+	for (s=&Pulsaciones,i=0;i<Num_pul;i++,s++) {
 	 num=LeeTecla(*s);
 	 if (num==4) return 2;
 	 Parpadeo(num);
