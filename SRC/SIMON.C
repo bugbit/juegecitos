@@ -18,6 +18,9 @@
 #define PPAUSA    500
 #define PPAUSA2	100
 
+#define	TECLAS_ESC		4
+#define	TECLAS_SPACE	5
+
 typedef struct _MOUSEPOS
 {
 	unsigned x:16;
@@ -36,7 +39,7 @@ struct TRIANGULO {
 	};
 
 int hasMouse;
-char Teclas[]="QAWS\x1B";
+char Teclas[]="QAWS\x1B ";
 char Pulsaciones[PULSA_MAX];
 int Apunte=0,ytopview=0;
 unsigned Num_pul,Pausa=PPAUSA,Pausa2=PPAUSA2,Nivel;
@@ -328,11 +331,15 @@ void Serie() {
 	int i;
 	char *s;
 
+	if (hasMouse)
+		hidemouseptr();
 	for (s=&Pulsaciones,i=0;i<Num_pul;i++) {
 	 Parpadeo(*s++);
 	 delay(Pausa2);
 	 }
-  while (kbhit()) getch(); // borra buffer del teclado
+	while (kbhit()) getch(); // borra buffer del teclado
+	if (hasMouse)
+		showmouseptr();
 
   }
 
@@ -402,25 +409,50 @@ int isPointIntoTriangle(struct TRIANGULO *t,int x,int y)
 
 }
 
+int LeeTeclaMouse()
+{
+	return -1;
+}
+
+int LeeTeclaKeyboard()
+{
+	int tecla;
+	char *s;
+
+	if (!kbhit())
+		return -1;
+
+	tecla=toupper(getch());
+	s=strchr(Teclas,tecla);
+
+	if (s==NULL)
+		return -1;
+
+	return s-&Teclas;
+}
+
 int LeeTecla(int num) {
 
 	int tecla;
-  char *s;
 
-  do {
+	do {
 	 if (Apunte)
 		while (!kbhit()) {
+			if (hasMouse)
+				hidemouseptr();
 			Triangulo(num,1);
-		  Triangulo(num,0);
-		  }
-	 tecla=toupper(getch());
-	 if (tecla==' ') Apunte ^= 1;
-	 s=strchr(Teclas,tecla);
-	 } while (!s);
+			Triangulo(num,0);
+			if (hasMouse)
+				showmouseptr();
+			}
+	 tecla=LeeTeclaKeyboard();
+	 if (tecla==-1)
+		tecla=LeeTeclaMouse();
+	 if (tecla==TECLAS_SPACE) Apunte ^= 1;
+	 } while (tecla==-1);
 
-	return s-&Teclas;
-
-  }
+	return tecla;
+}
 
 void ParpadeoRapido(int num) {
 
@@ -433,7 +465,7 @@ void ParpadeoRapido(int num) {
 	 nosound();
 	 Triangulo(num,0);
 	 }
-  sleep(2);
+	sleep(2);
 
   }
 
@@ -444,11 +476,12 @@ int Sucesion() {
 
 	for (s=&Pulsaciones,i=0;i<Num_pul;i++,s++) {
 	 num=LeeTecla(*s);
-	 if (num==4) return 2;
+	 if (num==TECLAS_ESC) return 2;
 	 Parpadeo(num);
 	 if (*s!=num) {
 		ParpadeoRapido(*s);
 		Serie();
+
 		return 1;
 		}
 	 }
@@ -461,12 +494,16 @@ void Jugar() {
 
   int opc;
 
+	if (hasMouse)
+		showmouseptr();
 	do {
 	 Pensar();
 	 while ((opc=Sucesion())==1);
 	 } while (!opc);
+	if (hasMouse)
+		hidemouseptr();
 
-  }
+	}
 
 int main() {
 
