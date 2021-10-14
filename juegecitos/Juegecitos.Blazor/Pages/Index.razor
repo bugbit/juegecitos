@@ -13,6 +13,7 @@ bool debug=false;
 {
     <button @onclick="test1game_onclick">Test1Game</button>
     <button @onclick="pingpongame_onclick">Ping Pong</button>
+    <button @onclick="jetpacgame_onclick">Jetpac</button>
 }
 <Host @ref="host"></Host>
 @code
@@ -32,6 +33,14 @@ bool debug=false;
     {
 #if DEBUG
         host.ChangeGame(new Games.PingPong.PingPongGame());
+
+#endif
+    }
+
+    void jetpacgame_onclick(EventArgs e)
+    {
+#if DEBUG
+        host.ChangeGame(new Games.Jetpac.JetpacGame());
 
 #endif
     }
