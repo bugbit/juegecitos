@@ -40,6 +40,11 @@
         {
             load: [],
             unload: []
+        },
+        images:
+        {
+            load: [],
+            unload: []
         }
     }
     this.init = function (instance, main, canvas) {
@@ -114,7 +119,7 @@
         var url = BINDING.conv_string(_url);
         var as = new Audio("assets/" + url);
 
-        insertAsset(as, this.assets.sounds)
+        return insertAsset(as, this.assets.sounds)
     }
     this.unloadSound = function (i) {
         var as = getAsset(i, this.assets.sounds);
@@ -124,6 +129,19 @@
 
         return destroyAsset(i, this.assets.sounds);
     }
+    this.loadImage = function (_url) {
+        var url = BINDING.conv_string(_url);
+        var as = new Image();
+
+        as.src = "assets/" + url;
+
+        return insertAsset(as, this.assets.images)
+    }
+    this.unloadImage = function (i) {
+        var as = getAsset(i, this.assets.images);
+
+        return destroyAsset(i, this.assets.images);
+    }
     this.playSound = function (i) {
         var as = getAsset(i, this.assets.sounds);
 
@@ -131,6 +149,17 @@
             return false;
 
         as.play();
+
+        return true;
+    }
+
+    this.drawImage = function (i, dx, dy) {
+        var as = getAsset(i, this.assets.images);
+
+        if (!as)
+            return false;
+
+        this.context2d.drawImage(as, dx, dy);
 
         return true;
     }

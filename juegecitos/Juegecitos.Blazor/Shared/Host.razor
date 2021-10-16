@@ -3,7 +3,8 @@
 @implements Core.IHost;
 
 <div @ref="main" class="main" style="opacity: 1; width: 100%; height: 100% ">
-    <canvas @ref="canvas" class="center" @onkeydown="canvas_keydown" @onkeydown:preventDefault @onkeyup="canvas_keyup" @onkeyup:preventDefault>Your browser does not support the canvas element.</canvas>
+    <canvas @ref="canvas" class="center" @onkeydown="canvas_keydown" @onkeydown:preventDefault @onkeyup="canvas_keyup"
+        @onkeyup:preventDefault>Your browser does not support the canvas element.</canvas>
 </div>
 @code {
     [StructLayout(LayoutKind.Explicit)]
@@ -155,7 +156,11 @@
     // low
     public int loadSound(string url) => Js.InvokeUnmarshalled<string, int>("juegecitos.loadSound", url);
     public bool unloadSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.unloadSound", i);
+    public int loadImage(string url) => Js.InvokeUnmarshalled<string, int>("juegecitos.loadImage", url);
+    public bool unloadImage(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.unloadImage", i);
     public bool playSound(int i) => Js.InvokeUnmarshalled<int, bool>("juegecitos.playSound", i);
+    public bool drawImage(int i, int dx, int dy)
+    => Js.InvokeUnmarshalled<int, int, int, bool>("juegecitos.drawImage", i, dx, dy);
 
     // high
 
@@ -169,18 +174,33 @@
 
         return pRet;
     }
+    public void LoadImage(Core.Assets.AsHandler h, string url) => h.Handle = loadImage(url);
+    public bool UnLoadImage(Core.Assets.AsHandler h)
+    {
+        var pRet = unloadImage(h.Handle);
+
+        if (pRet)
+            h.Handle = Core.Constants.NullAsset;
+
+        return pRet;
+    }
 
     // 2d
 
-    public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width, height);
+    public void clearRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.clearRect", x, y, width,
+    height);
     public void setfillStyle(string style) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfillStyle", style);
     public void fillRect(int x, int y, int width, int height) => JS.InvokeVoid("juegecitos.fillRect", x, y, width, height);
     public void setfont(string font) => Js.InvokeUnmarshalled<string, int>("juegecitos.setfont", font);
-    public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.strokeText", text, x, y);
-    public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText", text, x, y);
-    public void setTransform(double a, double b, double c, double d, double e, double f) => JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
+    public void strokeText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int,
+    int>("juegecitos.strokeText", text, x, y);
+    public void fillText(string text, int x, int y) => Js.InvokeUnmarshalled<string, int, int, int>("juegecitos.fillText",
+    text, x, y);
+    public void setTransform(double a, double b, double c, double d, double e, double f) =>
+    JS.InvokeVoid("juegecitos.setTransform", a, b, c, d, e, f);
     public void beginPath() => Js.InvokeUnmarshalled<int>("juegecitos.beginPath");
     public void closePath() => Js.InvokeUnmarshalled<int>("juegecitos.closePath");
-    public void arc(int x, int y, double radius, double startAngle, double endAngle, bool counterclockwise) => JS.InvokeVoid("juegecitos.arc", x, y, radius, startAngle, endAngle, counterclockwise);
+    public void arc(int x, int y, double radius, double startAngle, double endAngle, bool counterclockwise) =>
+    JS.InvokeVoid("juegecitos.arc", x, y, radius, startAngle, endAngle, counterclockwise);
     public void fill() => Js.InvokeUnmarshalled<int>("juegecitos.fill");
 }

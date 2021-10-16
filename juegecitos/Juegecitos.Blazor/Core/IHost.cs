@@ -17,11 +17,16 @@ namespace Juegecitos.Blazor.Core
         //low
         int loadSound(string url);
         bool unloadSound(int i);
+        int loadImage(string url);
+        bool unloadImage(int i);
         bool playSound(int i);
+        bool drawImage(int i, int dx, int dy);
 
         //high
         void LoadSound(Assets.AsHandler h, string url);
         bool UnLoadSound(Assets.AsHandler h);
+        void LoadImage(Core.Assets.AsHandler h, string url);
+        bool UnLoadImage(Core.Assets.AsHandler h);
         // 2d
         void clearRect(int x, int y, int width, int height);
         void setfillStyle(string style);
