@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="juegecitos" Database="" Version="10000">
+  <Project Name="core" Path="core/core.project" Active="No"/>
+  <Project Name="jetpac" Path="jetpac/jetpac.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="core" ConfigName="Debug"/>
+      <Project Name="jetpac" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="core" ConfigName="Release"/>
+      <Project Name="jetpac" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

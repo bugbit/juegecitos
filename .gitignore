@@ -1,5 +1,10 @@
 # test
 
+# codelite
+
+.codelite
+build-Debug/
+
 jetpac_1.26/
 
 ## Ignore Visual Studio temporary files, build results, and
