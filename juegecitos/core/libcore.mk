@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := 
-ArLibs                 :=  
+Libs                   := $(LibrarySwitch)-l"stdc++" 
+ArLibs                 :=  "-l"stdc++"" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
@@ -50,7 +50,7 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := gcc
 CC       := gcc
-CXXFLAGS := -O3 -include pch.h -g $(Preprocessors)
+CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
 CFLAGS   :=  -g $(Preprocessors)
 ASFLAGS  := 
 AS       := as
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsGame.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
 
 
 
@@ -92,13 +92,13 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/core/jgsGame.cpp$(ObjectSuffix): jgsGame.cpp ../build-$(ConfigurationName)/core/jgsGame.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsGame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsGame.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsGame.cpp$(DependSuffix): jgsGame.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsGame.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsGame.cpp$(DependSuffix) -MM jgsGame.cpp
+../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix) -MM jgsgame.cpp
 
-../build-$(ConfigurationName)/core/jgsGame.cpp$(PreprocessSuffix): jgsGame.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsGame.cpp$(PreprocessSuffix) jgsGame.cpp
+../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix): jgsgame.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix) jgsgame.cpp
 
 
 -include ../build-$(ConfigurationName)/core//*$(DependSuffix)

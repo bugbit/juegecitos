@@ -3,7 +3,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="jgsGame.cpp"/>
+    <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="jgsparams.h"/>
@@ -14,11 +14,12 @@
   </VirtualDirectory>
   <Settings Type="Static Library">
     <GlobalSettings>
-      <Compiler Options="-O3 -include pch.h" C_Options="" Assembler="">
+      <Compiler Options="-Wall;-O3 -include pch.h" C_Options="" Assembler="">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="."/>
+        <Library Value="-l&quot;stdc++&quot;"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>

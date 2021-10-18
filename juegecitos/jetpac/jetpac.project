@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="jetpac" Version="11000" InternalType="Console">
   <VirtualDirectory Name="include">
+    <File Name="jpgame.h"/>
     <File Name="pch.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="jpGame.cpp"/>
+    <File Name="jpgame.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug">
+    <Project Name="libcore"/>
+  </Dependencies>
   <Settings Type="Executable">
     <GlobalSettings>
-      <Compiler Options="-O3 -include pch.h" C_Options="" Assembler="">
+      <Compiler Options="-Wall;-O3 -include pch.h" C_Options="" Assembler="">
         <IncludePath Value="."/>
-        <IncludePath Value="core"/>
+        <IncludePath Value="../core"/>
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="."/>
         <LibraryPath Value="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib"/>
         <Library Value="core"/>
+        <Library Value="stdc++"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
@@ -101,7 +106,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug">
-    <Project Name="libcore"/>
-  </Dependencies>
 </CodeLite_Project>

@@ -1,6 +1,6 @@
-#ifndef	__JGS_PARAMS_H
+#ifndef	__JGSPARAMS_H
 
-#define	__JGS_PARAMS_H
+#define	__JGSPARAMS_H
 
 typedef struct
 {

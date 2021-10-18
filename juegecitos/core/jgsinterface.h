@@ -1,11 +1,11 @@
-#ifndef	__JGS_INTERFACE_H
+#ifndef	__JGSINTERFACE_H
 
-#define	__JGS_INTERFACE_H
+#define	__JGSINTERFACE_H
 
 class jgsInitialize
 {
 public:
-	virtual void Initialize()=0;
+	inline virtual void Initialize(){}
 };
 
 #endif
