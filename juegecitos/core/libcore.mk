@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=18/10/21
+Date                   :=19/10/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -51,7 +51,7 @@ AR       := ar rcus
 CXX      := gcc
 CC       := gcc
 CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
-CFLAGS   :=  -g $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h -g $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/JGS_Game.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
 
 
 
@@ -92,6 +92,14 @@ PreBuild:
 ##
 ## Objects
 ##
+../build-$(ConfigurationName)/core/JGS_Game.cpp$(ObjectSuffix): JGS_Game.cpp ../build-$(ConfigurationName)/core/JGS_Game.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/JGS_Game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/JGS_Game.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/JGS_Game.cpp$(DependSuffix): JGS_Game.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/JGS_Game.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/JGS_Game.cpp$(DependSuffix) -MM JGS_Game.cpp
+
+../build-$(ConfigurationName)/core/JGS_Game.cpp$(PreprocessSuffix): JGS_Game.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/JGS_Game.cpp$(PreprocessSuffix) JGS_Game.cpp
+
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp

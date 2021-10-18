@@ -3,9 +3,12 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="JGS_Game.cpp"/>
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="JGS_params.h"/>
+    <File Name="JGS_game.h"/>
     <File Name="jgsparams.h"/>
     <File Name="jgsinterface.h"/>
     <File Name="jgsgame.h"/>
@@ -14,7 +17,7 @@
   </VirtualDirectory>
   <Settings Type="Static Library">
     <GlobalSettings>
-      <Compiler Options="-Wall;-O3 -include pch.h" C_Options="" Assembler="">
+      <Compiler Options="-Wall;-O3 -include pch.h" C_Options="-Wall;-O3 -include pch.h" Assembler="">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="">

@@ -18,9 +18,11 @@ protected:
 	int m_Argc;
 	char **m_Argv;
 	jgsParams m_Params;
+	SDL_Window *m_Wnd;
 	
 	virtual void Initialize();
 	virtual void InitializeParams();
+	inline virtual void InitializeRender(){}
 };
 
 #endif

@@ -5,7 +5,7 @@
 class jgsInitialize
 {
 public:
-	inline virtual void Initialize(){}
+	virtual void Initialize()=0;
 };
 
 #endif

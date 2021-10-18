@@ -4,7 +4,9 @@
 
 typedef struct
 {
-	Uint32 SDLflags;
+	Uint32 SDLflags,WndFlags;
+	char *title;
+	int w,h;
 } jgsParams;
 
 #endif
