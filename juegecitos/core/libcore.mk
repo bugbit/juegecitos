@@ -3,7 +3,7 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=core
+ProjectName            :=libcore
 ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
@@ -28,7 +28,7 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=../build-$(ConfigurationName)/lib/lib$(ProjectName).a
+OutputFile             :=../build-$(ConfigurationName)/lib/$(ProjectName).a
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
@@ -77,7 +77,7 @@ all: MakeIntermediateDirs ../build-$(ConfigurationName)/core/$(OutputFile)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(AR) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList)
-	@echo rebuilt > $(IntermediateDirectory)/core.relink
+	@echo rebuilt > $(IntermediateDirectory)/libcore.relink
 
 MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/core"

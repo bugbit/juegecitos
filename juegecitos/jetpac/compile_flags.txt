@@ -1,1 +1,2 @@
 -I/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
+-I/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/core

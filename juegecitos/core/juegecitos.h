@@ -2,7 +2,8 @@
 
 #define	__JUEGECITOS_H
 
-#include "jgs_interface.h"
-#include "jgs_game.h"
+#include "jgsparams.h"
+#include "jgsinterface.h"
+#include "jgsgame.h"
 
 #endif
