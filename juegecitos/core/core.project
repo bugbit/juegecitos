@@ -3,13 +3,9 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="JGS_Game.cpp"/>
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
-    <File Name="JGS_params.h"/>
-    <File Name="JGS_game.h"/>
-    <File Name="jgsparams.h"/>
     <File Name="jgsinterface.h"/>
     <File Name="jgsgame.h"/>
     <File Name="pch.h"/>
@@ -22,7 +18,8 @@
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="."/>
-        <Library Value="-l&quot;stdc++&quot;"/>
+        <Library Value="stdc++"/>
+        <Library Value="SDL2"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>

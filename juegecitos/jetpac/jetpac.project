@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="jetpac" Version="11000" InternalType="Console">
   <VirtualDirectory Name="include">
-    <File Name="JP_game.h"/>
     <File Name="jpgame.h"/>
     <File Name="pch.h"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="JP_game.cpp"/>
+    <File Name="jpgame.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug">
     <Project Name="libcore"/>
@@ -24,6 +23,7 @@
         <LibraryPath Value="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib"/>
         <Library Value="core"/>
         <Library Value="stdc++"/>
+        <Library Value="SDL2"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>

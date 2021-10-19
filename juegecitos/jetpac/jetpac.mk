@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../core $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)core $(LibrarySwitch)stdc++ 
-ArLibs                 :=  "core" "stdc++" 
+Libs                   := $(LibrarySwitch)core $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 
+ArLibs                 :=  "core" "stdc++" "SDL2" 
 LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib 
 
 ##
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/jetpac/JP_game.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) 
 
 
 
@@ -98,13 +98,13 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/jetpac/JP_game.cpp$(ObjectSuffix): JP_game.cpp ../build-$(ConfigurationName)/jetpac/JP_game.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/JP_game.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/JP_game.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/jetpac/JP_game.cpp$(DependSuffix): JP_game.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/JP_game.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/JP_game.cpp$(DependSuffix) -MM JP_game.cpp
+../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix): jpgame.cpp ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpgame.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix): jpgame.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix) -MM jpgame.cpp
 
-../build-$(ConfigurationName)/jetpac/JP_game.cpp$(PreprocessSuffix): JP_game.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/JP_game.cpp$(PreprocessSuffix) JP_game.cpp
+../build-$(ConfigurationName)/jetpac/jpgame.cpp$(PreprocessSuffix): jpgame.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(PreprocessSuffix) jpgame.cpp
 
 
 -include ../build-$(ConfigurationName)/jetpac//*$(DependSuffix)
