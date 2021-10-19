@@ -1,6 +1,6 @@
-#ifndef	__JGSINTERFACE_H
+#ifndef	GSINTERFACE_H
 
-#define	__JGSINTERFACE_H
+#define	JGSINTERFACE_H
 
 class jgsInitialize
 {

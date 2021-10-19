@@ -1,6 +1,6 @@
-#ifndef	__JPGAME_H
+#ifndef	JPGAME_H
 
-#define	__JPGAME_H
+#define	JPGAME_H
 
 #include "jgsgame.h"
 

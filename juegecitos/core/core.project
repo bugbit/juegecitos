@@ -3,9 +3,11 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="jgsApp.cpp"/>
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="jgsapp.h"/>
     <File Name="jgsinterface.h"/>
     <File Name="jgsgame.h"/>
     <File Name="pch.h"/>

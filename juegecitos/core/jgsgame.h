@@ -1,6 +1,6 @@
-#ifndef __JGSGAME__H
+#ifndef JGSGAME_H
 
-#define	__JGSGAME__H
+#define	JGSGAME_H
 
 #include "jgsinterface.h"
 
@@ -11,17 +11,6 @@ typedef struct
 	int w,h;
 } jgsParams;
 
-typedef struct
-{
-	float timeStamp,elapsedGameTime;
-} jgsGameTime;
-
-class jgsLoop
-{
-public:
-	inline virtual void Loop(SDL_Event &e,jgsGameTime &time){}
-};
-
 class jgsGame : public jgsInitialize
 {
 public:
@@ -30,7 +19,7 @@ public:
 		m_Argc=argc;
 		m_Argv=argv;
 	}
-	void Run();
+	
 protected:
 	int m_Argc;
 	char **m_Argv;
@@ -39,11 +28,6 @@ protected:
 	virtual void Initialize();
 	virtual void InitializeParams(jgsParams &params);
 	inline virtual void InitializeRender(){}
-private:
-	static jgsLoop *m_MainLoop;	
-	static jgsGameTime m_MainTime;
-	
-	static void GameLoop();
 };
 
 #endif

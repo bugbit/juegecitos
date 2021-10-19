@@ -1,4 +1,5 @@
 #include "jpgame.h"
+#include "jgsapp.h"
 
 /*static JGS_Params params=
 {
@@ -14,7 +15,8 @@ extern "C" int main(int argc, char** argv)
 {
 	jpGame game(argc,argv);
 	
-	game.Run();
+	jgsApp::Run();
+	
 	
 	return EXIT_SUCCESS;
 }
