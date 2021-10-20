@@ -7,9 +7,23 @@
 typedef struct
 {
 	Uint32 SDLflags,wndFlags;
-	char *title;
+	const char *title;
 	int w,h;
 } jgsParams;
+
+typedef struct {
+    float timeStamp, elapsedGameTime;
+} jgsGameTime;
+
+class jgsGame;
+
+class jgsLoop
+{
+public:
+    inline virtual void Loop(SDL_Event& e, jgsGameTime& time)
+    {
+    }
+};
 
 class jgsGame : public jgsInitialize
 {
@@ -20,6 +34,8 @@ public:
 		m_Argv=argv;
 	}
 	
+	void Run();
+	
 protected:
 	int m_Argc;
 	char **m_Argv;
@@ -28,6 +44,12 @@ protected:
 	virtual void Initialize();
 	virtual void InitializeParams(jgsParams &params);
 	inline virtual void InitializeRender(){}
+private:	
+    static jgsLoop* m_Loop;
+    static jgsGameTime m_Time;
+	static bool m_Quit;
+	
+    static void GameLoop();
 };
 
 #endif

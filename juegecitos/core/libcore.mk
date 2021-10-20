@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=19/10/21
+Date                   :=20/10/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsApp.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
 
 
 
@@ -92,14 +92,6 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/core/jgsApp.cpp$(ObjectSuffix): jgsApp.cpp ../build-$(ConfigurationName)/core/jgsApp.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsApp.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsApp.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsApp.cpp$(DependSuffix): jgsApp.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsApp.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsApp.cpp$(DependSuffix) -MM jgsApp.cpp
-
-../build-$(ConfigurationName)/core/jgsApp.cpp$(PreprocessSuffix): jgsApp.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsApp.cpp$(PreprocessSuffix) jgsApp.cpp
-
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp
