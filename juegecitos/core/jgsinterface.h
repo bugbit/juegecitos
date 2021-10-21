@@ -1,4 +1,4 @@
-#ifndef	GSINTERFACE_H
+#ifndef	JGSINTERFACE_H
 
 #define	JGSINTERFACE_H
 

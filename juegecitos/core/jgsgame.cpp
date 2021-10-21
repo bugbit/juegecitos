@@ -4,6 +4,8 @@ jgsLoop* jgsGame::m_Loop = new jgsLoop();
 jgsGameTime jgsGame::m_Time;
 bool jgsGame::m_Quit=false;
 
+static SDL_Renderer *render;
+
 void jgsGame::Initialize()
 {
     jgsParams params;
@@ -14,7 +16,7 @@ void jgsGame::Initialize()
     m_Wnd = SDL_CreateWindow(
         params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h, params.wndFlags);
     InitializeRender();
-	m_Render = SDL_CreateRenderer(m_Wnd, -1, SDL_RENDERER_ACCELERATED);
+	render= m_Render = SDL_CreateRenderer(m_Wnd, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void jgsGame::InitializeParams(jgsParams& params)
@@ -49,5 +51,22 @@ void jgsGame::GameLoop()
 			
 			return;
 		}
+		
+	SDL_RenderClear(render);
+
+    SDL_Rect rect;
+    rect.x = 250;
+    rect.y = 150;
+    rect.w = 200;
+    rect.h = 200;
+
+    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
+    SDL_RenderFillRect(render, &rect);
+
+    SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+
+    SDL_RenderPresent(render);
+		
+		
     m_Loop->Loop(e, m_Time);
 }
