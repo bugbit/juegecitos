@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Wasm
+## Release
 ProjectName            :=jetpac
-ConfigurationName      :=Wasm
+ConfigurationName      :=Release
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
@@ -16,11 +16,11 @@ CurrentFileFullPath    :=
 User                   :=Oscar
 Date                   :=23/10/21
 CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=emcc
-SharedObjectLinkerName :=
+LinkerName             :=gcc
+SharedObjectLinkerName :=gcc -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.i
+PreprocessSuffix       :=.o.i
 DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
@@ -32,24 +32,24 @@ OutputFile             :=../build-$(ConfigurationName)/bin/$(ProjectName)
 Preprocessors          :=$(PreprocessorSwitch)NDEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E
+PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-LinkOptions            :=  -s USE_SDL=2
+LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../core $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)core $(LibrarySwitch)stdc++ 
-ArLibs                 :=  "core" "stdc++" 
-LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib 
+Libs                   := $(LibrarySwitch)core $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2 
+ArLibs                 :=  "core" "stdc++" "SDL2" "SDL2" 
+LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib $(LibraryPathSwitch)$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := emar rcu
-CXX      := emcc
-CC       := emcc
+AR       := ar rcus
+CXX      := gcc
+CC       := gcc
 CXXFLAGS := -Wall -O3 -include pch.h -O2 -Wall $(Preprocessors)
 CFLAGS   := -Wall -O3 -include pch.h -O2 -Wall $(Preprocessors)
 ASFLAGS  := 
@@ -86,9 +86,6 @@ MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 
 PreBuild:
-	@echo Executing Pre Build commands ...
-	./source /home/oscar/emsdk/emsdk_env.sh
-	@echo Done
 
 
 ##

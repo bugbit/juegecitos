@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Wasm
+## Debug
 ProjectName            :=libcore
-ConfigurationName      :=Wasm
+ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
@@ -14,13 +14,13 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=23/10/21
-CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=emcc
-SharedObjectLinkerName :=
+Date                   :=10/23/21
+CodeLitePath           :=
+LinkerName             :=gcc
+SharedObjectLinkerName :=gcc -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.i
+PreprocessSuffix       :=.o.i
 DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
@@ -28,30 +28,30 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=../build-$(ConfigurationName)/lib/$(ProjectName).a
+OutputFile             :=../build-$(ConfigurationName)/lib/lib$(ProjectName).so
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E
+PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-LinkOptions            :=  -s USE_SDL=2
+LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)stdc++ 
-ArLibs                 :=  "stdc++" 
+Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 
+ArLibs                 :=  "stdc++" "SDL2" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := emar rcu
-CXX      := emcc
-CC       := emcc
-CXXFLAGS := -Wall -O3 -include pch.h  $(Preprocessors)
-CFLAGS   := -Wall -O3 -include pch.h  $(Preprocessors)
+AR       := ar rcus
+CXX      := gcc
+CC       := gcc
+CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h -g $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -59,7 +59,6 @@ AS       := as
 ##
 ## User defined environment variables
 ##
-CodeLiteDir:=/usr/share/codelite
 Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
 
 
@@ -87,9 +86,6 @@ MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/core"
 
 PreBuild:
-	@echo Executing Pre Build commands ...
-	./source /home/oscar/emsdk/emsdk_env.sh
-	@echo Done
 
 
 ##

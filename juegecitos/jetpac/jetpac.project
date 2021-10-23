@@ -10,7 +10,7 @@
     <File Name="jpgame.cpp"/>
   </VirtualDirectory>
   <Dependencies Name="Debug">
-    <Project Name="libcore"/>
+    <Project Name="core"/>
   </Dependencies>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -23,6 +23,7 @@
         <LibraryPath Value="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib"/>
         <Library Value="core"/>
         <Library Value="stdc++"/>
+        <Library Value="SDL2"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
@@ -30,9 +31,7 @@
       <Compiler Options="-g;-O0;-Wall" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
-      <Linker Options="" Required="yes">
-        <Library Value="SDL2"/>
-      </Linker>
+      <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(ProjectName)" IntermediateDirectory="" Command="$(WorkspacePath)/build-$(WorkspaceConfiguration)/bin/$(OutputFile)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib" PauseExecWhenProcTerminates="yes" IsGUIProgram="yes" IsEnabled="yes"/>
       <BuildSystem Name="CodeLite Makefile Generator"/>
@@ -73,6 +72,7 @@
         <Preprocessor Value="NDEBUG"/>
       </Compiler>
       <Linker Options="" Required="yes">
+        <LibraryPath Value="$(WorkspacePath)/cmake-build-$(WorkspaceConfiguration)/output"/>
         <Library Value="SDL2"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
