@@ -4,6 +4,8 @@
 
 .codelite
 build-Debug/
+build-Release/
+build-Wasm/
 
 jetpac_1.26/
 

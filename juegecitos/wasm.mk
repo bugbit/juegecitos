@@ -86,9 +86,6 @@ MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 
 PreBuild:
-	@echo Executing Pre Build commands ...
-	./source /home/oscar/emsdk/emsdk_env.sh
-	@echo Done
 
 
 ##

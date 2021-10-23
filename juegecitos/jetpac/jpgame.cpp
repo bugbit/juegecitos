@@ -18,7 +18,7 @@ void jpGame::InitializeParams(jgsParams &params)
 	params.h=570;
 }
 
-extern "C" int main(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	jpGame game(argc,argv);
 	

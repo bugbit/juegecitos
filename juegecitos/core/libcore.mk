@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Wasm
 ProjectName            :=libcore
-ConfigurationName      :=Debug
+ConfigurationName      :=Wasm
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
@@ -14,13 +14,13 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=21/10/21
+Date                   :=23/10/21
 CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=gcc
-SharedObjectLinkerName :=gcc -shared -fPIC
+LinkerName             :=emcc
+SharedObjectLinkerName :=
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
-PreprocessSuffix       :=.o.i
+PreprocessSuffix       :=.i
 DebugSwitch            :=-g 
 IncludeSwitch          :=-I
 LibrarySwitch          :=-l
@@ -32,26 +32,26 @@ OutputFile             :=../build-$(ConfigurationName)/lib/$(ProjectName).a
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
-PreprocessOnlySwitch   :=-E 
+PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-LinkOptions            :=  
+LinkOptions            :=  -s USE_SDL=2
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 
-ArLibs                 :=  "stdc++" "SDL2" 
+Libs                   := $(LibrarySwitch)stdc++ 
+ArLibs                 :=  "stdc++" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcus
-CXX      := gcc
-CC       := gcc
-CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
-CFLAGS   := -Wall -O3 -include pch.h -g $(Preprocessors)
+AR       := emar rcu
+CXX      := emcc
+CC       := emcc
+CXXFLAGS := -Wall -O3 -include pch.h  $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h  $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -87,6 +87,9 @@ MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/core"
 
 PreBuild:
+	@echo Executing Pre Build commands ...
+	./source /home/oscar/emsdk/emsdk_env.sh
+	@echo Done
 
 
 ##
