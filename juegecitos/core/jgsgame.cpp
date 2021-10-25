@@ -17,7 +17,7 @@ void jgsGame::Initialize()
     m_Wnd = SDL_CreateWindow(
         params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h, params.wndFlags);
     InitializeRender();
-	render= m_Render = SDL_CreateRenderer(m_Wnd, -1, SDL_RENDERER_ACCELERATED);
+	//render= m_Render = SDL_CreateRenderer(m_Wnd, -1, SDL_RENDERER_ACCELERATED);
 }
 
 void jgsGame::InitializeParams(jgsParams& params)

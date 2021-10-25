@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos/core
+CMAKE_SOURCE_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos/core
+CMAKE_BINARY_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/core/CMakeFiles /home/oscar/proyectos/oscar/juegecitos/juegecitos/core//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/core/CMakeFiles 0
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/CMakeFiles /home/oscar/proyectos/oscar/juegecitos/juegecitos/core//CMakeFiles/progress.marks
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,38 +103,54 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named libcore
+# Convenience name for target.
+core/CMakeFiles/core.dir/rule:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 core/CMakeFiles/core.dir/rule
+.PHONY : core/CMakeFiles/core.dir/rule
 
-# Build rule for target.
-libcore: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libcore
-.PHONY : libcore
+# Convenience name for target.
+core: core/CMakeFiles/core.dir/rule
+.PHONY : core
 
 # fast build rule for target.
-libcore/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcore.dir/build.make CMakeFiles/libcore.dir/build
-.PHONY : libcore/fast
+core/fast:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/build
+.PHONY : core/fast
+
+# target to build an object file
+cmake_pch.hxx.pch:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/cmake_pch.hxx.pch
+.PHONY : cmake_pch.hxx.pch
+
+# target to preprocess a source file
+cmake_pch.hxx.i:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/cmake_pch.hxx.i
+.PHONY : cmake_pch.hxx.i
+
+# target to generate assembly for a file
+cmake_pch.hxx.s:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/cmake_pch.hxx.s
+.PHONY : cmake_pch.hxx.s
 
 jgsgame.o: jgsgame.cpp.o
 .PHONY : jgsgame.o
 
 # target to build an object file
 jgsgame.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcore.dir/build.make CMakeFiles/libcore.dir/jgsgame.cpp.o
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/jgsgame.cpp.o
 .PHONY : jgsgame.cpp.o
 
 jgsgame.i: jgsgame.cpp.i
@@ -142,7 +158,7 @@ jgsgame.i: jgsgame.cpp.i
 
 # target to preprocess a source file
 jgsgame.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcore.dir/build.make CMakeFiles/libcore.dir/jgsgame.cpp.i
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/jgsgame.cpp.i
 .PHONY : jgsgame.cpp.i
 
 jgsgame.s: jgsgame.cpp.s
@@ -150,7 +166,7 @@ jgsgame.s: jgsgame.cpp.s
 
 # target to generate assembly for a file
 jgsgame.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libcore.dir/build.make CMakeFiles/libcore.dir/jgsgame.cpp.s
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f core/CMakeFiles/core.dir/build.make core/CMakeFiles/core.dir/jgsgame.cpp.s
 .PHONY : jgsgame.cpp.s
 
 # Help Target
@@ -161,7 +177,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... libcore"
+	@echo "... core"
+	@echo "... cmake_pch.hxx.pch"
+	@echo "... cmake_pch.hxx.i"
+	@echo "... cmake_pch.hxx.s"
 	@echo "... jgsgame.o"
 	@echo "... jgsgame.i"
 	@echo "... jgsgame.s"
@@ -176,6 +195,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

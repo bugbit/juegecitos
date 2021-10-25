@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
+CMAKE_SOURCE_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
+CMAKE_BINARY_DIR = /home/oscar/proyectos/oscar/juegecitos/juegecitos
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/CMakeFiles /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac//CMakeFiles/progress.marks
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/CMakeFiles 0
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/CMakeFiles /home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac//CMakeFiles/progress.marks
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/oscar/proyectos/oscar/juegecitos/juegecitos/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 clean
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,38 +103,54 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 preinstall
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named jetpac
+# Convenience name for target.
+jetpac/CMakeFiles/jetpac.dir/rule:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac/CMakeFiles/jetpac.dir/rule
+.PHONY : jetpac/CMakeFiles/jetpac.dir/rule
 
-# Build rule for target.
-jetpac: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 jetpac
+# Convenience name for target.
+jetpac: jetpac/CMakeFiles/jetpac.dir/rule
 .PHONY : jetpac
 
 # fast build rule for target.
 jetpac/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/jetpac.dir/build.make CMakeFiles/jetpac.dir/build
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/build
 .PHONY : jetpac/fast
+
+# target to build an object file
+cmake_pch.hxx.pch:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/cmake_pch.hxx.pch
+.PHONY : cmake_pch.hxx.pch
+
+# target to preprocess a source file
+cmake_pch.hxx.i:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/cmake_pch.hxx.i
+.PHONY : cmake_pch.hxx.i
+
+# target to generate assembly for a file
+cmake_pch.hxx.s:
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/cmake_pch.hxx.s
+.PHONY : cmake_pch.hxx.s
 
 jpgame.o: jpgame.cpp.o
 .PHONY : jpgame.o
 
 # target to build an object file
 jpgame.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/jetpac.dir/build.make CMakeFiles/jetpac.dir/jpgame.cpp.o
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/jpgame.cpp.o
 .PHONY : jpgame.cpp.o
 
 jpgame.i: jpgame.cpp.i
@@ -142,7 +158,7 @@ jpgame.i: jpgame.cpp.i
 
 # target to preprocess a source file
 jpgame.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/jetpac.dir/build.make CMakeFiles/jetpac.dir/jpgame.cpp.i
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/jpgame.cpp.i
 .PHONY : jpgame.cpp.i
 
 jpgame.s: jpgame.cpp.s
@@ -150,7 +166,7 @@ jpgame.s: jpgame.cpp.s
 
 # target to generate assembly for a file
 jpgame.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/jetpac.dir/build.make CMakeFiles/jetpac.dir/jpgame.cpp.s
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(MAKE) $(MAKESILENT) -f jetpac/CMakeFiles/jetpac.dir/build.make jetpac/CMakeFiles/jetpac.dir/jpgame.cpp.s
 .PHONY : jpgame.cpp.s
 
 # Help Target
@@ -162,6 +178,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... jetpac"
+	@echo "... cmake_pch.hxx.pch"
+	@echo "... cmake_pch.hxx.i"
+	@echo "... cmake_pch.hxx.s"
 	@echo "... jpgame.o"
 	@echo "... jpgame.i"
 	@echo "... jpgame.s"
@@ -176,6 +195,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/oscar/proyectos/oscar/juegecitos/juegecitos && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 
