@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "jgsgame.h"
 
 jgsLoop* jgsGame::m_Loop = new jgsLoop();

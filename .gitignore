@@ -1,11 +1,17 @@
 # test
 
+#gcc
+
+*.o
+*.a
+
 # codelite
 
 .codelite
 build-Debug/
 build-Release/
 build-Wasm/
+build/
 
 jetpac_1.26/
 

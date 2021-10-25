@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "jpgame.h"
 
 /*static JGS_Params params=
@@ -6,8 +7,7 @@
 };*/
 
 jpGame::jpGame(int argc,char **argv):jgsGame(argc,argv)
-{
-	
+{	
 }
 
 void jpGame::InitializeParams(jgsParams &params)
