@@ -24,13 +24,13 @@ public:
 class jgsRender
 {
 public:
-	inline void Render(jgsGameTime &time) {}
+	inline virtual void Render(jgsGameTime &time) {}
 };
 
 class jgsUpdate
 {
 public:
-	inline void Update(SDL_Event &e, jgsGameTime &time) {}
+	inline virtual void Update(SDL_Event &e, jgsGameTime &time) {}
 };
 
 #endif

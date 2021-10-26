@@ -19,7 +19,7 @@ typedef struct
     int render2DIdx, Render2DFlags, Render2DFlags2;
 } jgsParams;
 
-class jgsGame;
+class jgsScene;
 
 class jgsGame //: public jgsInitialize
 {
@@ -31,7 +31,13 @@ public:
     }
 
     int Run();
-    inline void SetSceneAct(jgsScene *scene) { m_Loop = scene; }
+    inline void SetSceneAct(jgsScene *scene) { m_Loop = (jgsLoop *)scene; }
+    inline int SDL_SetRenderDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+    {
+        return ::SDL_SetRenderDrawColor(m_Render, r, g, b, a);
+    }
+    inline int SDL_RenderFillRect(const SDL_Rect *rect) { return ::SDL_RenderFillRect(m_Render, rect); }
+    inline void SDL_RenderPresent() { ::SDL_RenderPresent(m_Render); }
 
 protected:
     std::string m_Error;

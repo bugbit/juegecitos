@@ -5,15 +5,18 @@
 #include "jgsinterface.h"
 #include "jgsgame.h"
 
+class jgsGame;
+
 class jgsScene : public jgsInitialize, public jgsRender, public jgsUpdate, public jgsLoop
 {
 public:
-    inline jgsScene(jgsGameTime &game) : m_Game(game) {}
+    inline jgsScene(jgsGame &game) : m_Game(game) {}
 
+    inline virtual void Initialize() {}
     void Loop(SDL_Event &e, jgsGameTime &time);
 
 protected:
-    jgsGameTime &m_Game;
+    jgsGame &m_Game;
 };
 
 #endif

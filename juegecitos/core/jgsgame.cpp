@@ -100,18 +100,18 @@ void jgsGame::GameLoop()
 
     SDL_RenderClear(render);
 
-    SDL_Rect rect;
-    rect.x = 250;
-    rect.y = 150;
-    rect.w = 200;
-    rect.h = 200;
+    // SDL_Rect rect;
+    // rect.x = 250;
+    // rect.y = 150;
+    // rect.w = 200;
+    // rect.h = 200;
 
-    SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
-    SDL_RenderFillRect(render, &rect);
+    // SDL_SetRenderDrawColor(render, 0, 255, 0, 255);
+    // SDL_RenderFillRect(render, &rect);
 
-    SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
+    // SDL_SetRenderDrawColor(render, 0, 0, 0, 255);
 
-    SDL_RenderPresent(render);
+    // SDL_RenderPresent(render);
 
     m_Loop->Loop(e, m_Time);
 }
