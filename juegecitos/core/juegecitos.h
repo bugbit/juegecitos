@@ -4,5 +4,6 @@
 
 #include "jgsinterface.h"
 #include "jgsgame.h"
+#include "jgsscene.h"
 
 #endif

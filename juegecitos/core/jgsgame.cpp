@@ -70,6 +70,7 @@ int jgsGame::Run()
 
         return EXIT_FAILURE;
     }
+    m_Time.timeStamp = SDL_GetTicks();
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(GameLoop, 60, 1);
 #else
@@ -84,6 +85,7 @@ int jgsGame::Run()
 void jgsGame::GameLoop()
 {
     SDL_Event e;
+    Uint32 timeStamp = SDL_GetTicks();
 
     if (SDL_PollEvent(&e))
         if (e.type == SDL_QUIT)
@@ -92,6 +94,9 @@ void jgsGame::GameLoop()
 
             return;
         }
+
+    m_Time.elapsedGameTime = timeStamp - m_Time.timeStamp;
+    m_Time.timeStamp = timeStamp;
 
     SDL_RenderClear(render);
 

@@ -3,8 +3,12 @@
 #define JGSGAME_H
 
 #include "jgsinterface.h"
+#include "jgsscene.h"
 
-enum ERenderType { Surface };
+enum ERenderType
+{
+    Surface
+};
 
 typedef struct
 {
@@ -12,23 +16,10 @@ typedef struct
     const char *title;
     int w, h;
     ERenderType renderType;
-    int render2DIdx,Render2DFlags,Render2DFlags2;    
+    int render2DIdx, Render2DFlags, Render2DFlags2;
 } jgsParams;
 
-typedef struct
-{
-    float timeStamp, elapsedGameTime;
-} jgsGameTime;
-
 class jgsGame;
-
-class jgsLoop
-{
-public:
-    inline virtual void Loop(SDL_Event &e, jgsGameTime &time)
-    {
-    }
-};
 
 class jgsGame //: public jgsInitialize
 {
@@ -40,6 +31,7 @@ public:
     }
 
     int Run();
+    inline void SetSceneAct(jgsScene *scene) { m_Loop = scene; }
 
 protected:
     std::string m_Error;
