@@ -1,7 +1,7 @@
-#ifdef WIN32
+#ifdef USE_STDAFX_H
 
-// stdafx.h: archivo de inclusión de los archivos de inclusión estándar del sistema
-// o archivos de inclusión específicos de un proyecto utilizados frecuentemente,
+// stdafx.h: archivo de inclusiï¿½n de los archivos de inclusiï¿½n estï¿½ndar del sistema
+// o archivos de inclusiï¿½n especï¿½ficos de un proyecto utilizados frecuentemente,
 // pero rara vez modificados
 //
 
@@ -13,7 +13,7 @@
 
 
 
-// TODO: mencionar aquí los encabezados adicionales que el programa necesita
+// TODO: mencionar aquï¿½ los encabezados adicionales que el programa necesita
 #include "pch.h"
 
 #endif

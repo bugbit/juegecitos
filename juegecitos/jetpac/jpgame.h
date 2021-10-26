@@ -10,7 +10,6 @@ public:
 	jpGame(int argc, char** argv);
 protected:
 	void InitializeParams(jgsParams &params);
-	void InitializeRender();
 };
 
 #endif

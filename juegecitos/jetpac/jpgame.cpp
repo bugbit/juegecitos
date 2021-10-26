@@ -18,11 +18,6 @@ void jpGame::InitializeParams(jgsParams &params)
 	params.h=570;
 }
 
-void jpGame::InitializeRender()
-{
-	SDL_CreateRenderer(-1, SDL_RENDERER_ACCELERATED);
-}
-
 int main(int argc, char** argv)
 {
 	jpGame game(argc,argv);

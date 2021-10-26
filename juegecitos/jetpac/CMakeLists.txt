@@ -17,6 +17,7 @@ include_directories(../core)
 add_executable(jetpac jpgame.cpp)
 
 target_precompile_headers(jetpac PUBLIC pch.h)
+target_compile_features(jetpac PUBLIC c_std_99)
 
 link_directories(../core)
 target_link_libraries(jetpac SDL2 core)

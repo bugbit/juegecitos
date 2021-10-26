@@ -4,11 +4,15 @@
 
 #include "jgsinterface.h"
 
+enum ERenderType { Surface };
+
 typedef struct
 {
     Uint32 SDLflags, wndFlags;
     const char *title;
     int w, h;
+    ERenderType renderType;
+    int render2DIdx,Render2DFlags;    
 } jgsParams;
 
 typedef struct
@@ -37,11 +41,6 @@ public:
 
     void Run();
 
-    inline void SDL_CreateRenderer(int index, Uint32 flags)
-    {
-        m_Render=::SDL_CreateRenderer(m_Wnd,index,flags);
-    }
-
 protected:
     int m_Argc;
     char **m_Argv;
@@ -50,9 +49,6 @@ protected:
 
     virtual void Initialize();
     virtual void InitializeParams(jgsParams &params);
-    inline virtual void InitializeRender()
-    {
-    }
     inline virtual void Destroy()
     {
         if (m_Render != NULL)
