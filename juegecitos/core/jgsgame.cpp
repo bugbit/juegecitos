@@ -7,24 +7,46 @@ bool jgsGame::m_Quit = false;
 
 static SDL_Renderer *render;
 
-void jgsGame::Initialize()
+bool jgsGame::Initialize()
 {
     jgsParams params;
 
-    InitializeParams(params);
+    if (!InitializeParams(params))
+        return false;
 
-    SDL_Init(params.SDLflags);
-    m_Wnd = SDL_CreateWindow(
-        params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h, params.wndFlags);
+    if (SDL_Init(params.SDLflags))
+    {
+        m_Error = "Unable to initialize SDL: " + std::string(SDL_GetError());
+
+        return false;
+    }
+
+    if ((m_Wnd = SDL_CreateWindow(params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h, params.wndFlags)) == NULL)
+    {
+        m_Error = "Could not create window: " + std::string(SDL_GetError());
+
+        return false;
+    }
+
     switch (params.renderType)
     {
     case Surface:
-        render=m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags);
+        if ((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags)) == NULL)
+        {
+            if (!params.Render2DFlags || ((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags2)) == NULL))
+            {
+                m_Error = "Render creation for surface fail : " + std::string(SDL_GetError());
+
+                return false;
+            }
+        }
         break;
     }
+
+    return true;
 }
 
-void jgsGame::InitializeParams(jgsParams &params)
+bool jgsGame::InitializeParams(jgsParams &params)
 {
     params.SDLflags = SDL_INIT_VIDEO;
     params.wndFlags = 0;
@@ -34,11 +56,20 @@ void jgsGame::InitializeParams(jgsParams &params)
     params.renderType = Surface;
     params.render2DIdx = -1;
     params.Render2DFlags = SDL_RENDERER_ACCELERATED;
+    params.Render2DFlags2 = SDL_RENDERER_SOFTWARE;
+
+    return true;
 }
 
-void jgsGame::Run()
+int jgsGame::Run()
 {
-    Initialize();
+    if (!Initialize())
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, m_Error.c_str());
+        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", m_Error.c_str(), NULL);
+
+        return EXIT_FAILURE;
+    }
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(GameLoop, 60, 1);
 #else
@@ -46,6 +77,8 @@ void jgsGame::Run()
         GameLoop();
     Destroy();
 #endif
+
+    return EXIT_SUCCESS;
 }
 
 void jgsGame::GameLoop()

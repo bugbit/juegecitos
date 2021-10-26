@@ -9,7 +9,7 @@ class jpGame : public jgsGame
 public:
 	jpGame(int argc, char** argv);
 protected:
-	void InitializeParams(jgsParams &params);
+	bool InitializeParams(jgsParams &params);
 };
 
 #endif

@@ -10,19 +10,19 @@ jpGame::jpGame(int argc,char **argv):jgsGame(argc,argv)
 {	
 }
 
-void jpGame::InitializeParams(jgsParams &params)
+bool jpGame::InitializeParams(jgsParams &params)
 {
 	jgsGame::InitializeParams(params);
 	params.title="Jetpac";
 	params.w=716;
 	params.h=570;
+
+	return true;
 }
 
 int main(int argc, char** argv)
 {
 	jpGame game(argc,argv);
 	
-	game.Run();
-	
-	return EXIT_SUCCESS;
+	return game.Run();
 }

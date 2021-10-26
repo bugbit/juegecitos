@@ -12,7 +12,7 @@ typedef struct
     const char *title;
     int w, h;
     ERenderType renderType;
-    int render2DIdx,Render2DFlags;    
+    int render2DIdx,Render2DFlags,Render2DFlags2;    
 } jgsParams;
 
 typedef struct
@@ -30,7 +30,7 @@ public:
     }
 };
 
-class jgsGame : public jgsInitialize
+class jgsGame //: public jgsInitialize
 {
 public:
     inline jgsGame(int argc, char **argv) : m_Wnd(NULL), m_Render(NULL)
@@ -39,16 +39,17 @@ public:
         m_Argv = argv;
     }
 
-    void Run();
+    int Run();
 
 protected:
+    std::string m_Error;
     int m_Argc;
     char **m_Argv;
     SDL_Window *m_Wnd;
     SDL_Renderer *m_Render;
 
-    virtual void Initialize();
-    virtual void InitializeParams(jgsParams &params);
+    virtual bool Initialize();
+    virtual bool InitializeParams(jgsParams &params);
     inline virtual void Destroy()
     {
         if (m_Render != NULL)
