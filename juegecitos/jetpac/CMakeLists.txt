@@ -14,7 +14,7 @@ if (EMSCRIPTEN)
 endif()
 
 include_directories(../core)
-add_executable(jetpac jpgame.cpp)
+add_executable(jetpac jpgame.cpp jplevelscene.cpp)
 
 target_precompile_headers(jetpac PUBLIC pch.h)
 target_compile_features(jetpac PUBLIC c_std_99)

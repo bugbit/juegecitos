@@ -32,6 +32,7 @@ public:
 
     int Run();
     inline void SetSceneAct(jgsScene *scene) { m_Loop = (jgsLoop *)scene; }
+    inline int SDL_RenderClear() { return ::SDL_RenderClear(m_Render); }
     inline int SDL_SetRenderDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
     {
         return ::SDL_SetRenderDrawColor(m_Render, r, g, b, a);

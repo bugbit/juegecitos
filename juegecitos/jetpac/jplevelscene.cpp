@@ -9,6 +9,8 @@ void jpLevelScene::Render(jgsGameTime &time)
     rect.y = 150;
     rect.w = 200;
     rect.h = 200;
+    
+    m_Game.SDL_RenderClear();
     m_Game.SDL_SetRenderDrawColor( 0, 255, 0, 255);
     m_Game.SDL_RenderFillRect( &rect);
 
