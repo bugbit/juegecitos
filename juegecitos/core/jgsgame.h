@@ -4,6 +4,7 @@
 
 #include "jgsinterface.h"
 #include "jgsscene.h"
+#include "jgsgameassets.h"
 
 enum ERenderType
 {
@@ -46,9 +47,13 @@ protected:
     char **m_Argv;
     SDL_Window *m_Wnd;
     SDL_Renderer *m_Render;
+    jgsGameAssets m_Assets;
+    void *m_AssetsData;
 
     virtual bool Initialize();
     virtual bool InitializeParams(jgsParams &params);
+    inline virtual void *PrepareLoadAssets() { return NULL; }
+    bool LoadAssets();
     inline virtual void Destroy()
     {
         if (m_Render != NULL)
@@ -68,6 +73,7 @@ private:
     static jgsGameTime m_Time;
     static bool m_Quit;
 
+    int GameError();
     static void GameLoop();
 };
 

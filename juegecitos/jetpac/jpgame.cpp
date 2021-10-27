@@ -1,11 +1,6 @@
 #include "stdafx.h"
 #include "jpgame.h"
 
-/*static JGS_Params params=
-{
-	SDL_INIT_VIDEO, 0, "Jetpac", 716, 570
-};*/
-
 jpGame::jpGame(int argc, char **argv) : jgsGame(argc, argv)
 {
 }
@@ -25,6 +20,15 @@ bool jpGame::Initialize()
 	SetSceneAct(m_LevelScene);
 
 	return true;
+}
+
+void *jpGame::PrepareLoadAssets()
+{
+	jpAssetsData *assetsData = new jpAssetsData();
+
+	m_Assets.Add(Texture,"base.png",(void *) &assetsData->texBase);
+
+	return assetsData;
 }
 
 void jpGame::Destroy()

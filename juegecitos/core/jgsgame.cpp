@@ -61,16 +61,29 @@ bool jgsGame::InitializeParams(jgsParams &params)
     return true;
 }
 
+bool jgsGame::LoadAssets()
+{
+    return m_Assets.LoadDatas();
+}
+
+int jgsGame::GameError()
+{
+    Destroy();
+
+    SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, m_Error.c_str());
+    SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", m_Error.c_str(), NULL);
+
+    return EXIT_FAILURE;
+}
+
 int jgsGame::Run()
 {
     if (!Initialize())
-    {
-        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, m_Error.c_str());
-        SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", m_Error.c_str(), NULL);
-
-        return EXIT_FAILURE;
-    }
+        return GameError();
+    m_AssetsData = PrepareLoadAssets();
     m_Time.timeStamp = SDL_GetTicks();
+    if (!LoadAssets())
+        return GameError();
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(GameLoop, 60, 1);
 #else
