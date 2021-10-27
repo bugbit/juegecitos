@@ -24,6 +24,18 @@ target_link_libraries(jetpac SDL2 core)
 if (EMSCRIPTEN)
 else(EMSCRIPTEN)
     target_link_libraries(jetpac SDL2main)
+    set(copy_source_dir "${CMAKE_SOURCE_DIR}/jetpac/assets")
+    set(copy_dest_dir "${CMAKE_BINARY_DIR}/jetpac/assets")
+    set(copy_file_name "*.png")
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${copy_dest_dir}
+    )
+    add_custom_command(
+        TARGET ${PROJECT_NAME} POST_BUILD 
+        COMMAND ${CMAKE_COMMAND} -E copy_directory "${copy_source_dir}" "${copy_dest_dir}"
+        COMMENT "Copying ${copy_file_name} to build directory"
+    )
 endif(EMSCRIPTEN)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

@@ -12,14 +12,14 @@ class jgsGame;
 class jgsGameAssetData
 {
 public:
-    inline jgsGameAssetData(jgsGameAssetType type, const char *file) : m_Type(type), m_File(file) {}
+    inline jgsGameAssetData(jgsGameAssetType type, const char *file) : m_Type(type), m_File(std::string("assets/") + file) {}
     inline virtual ~jgsGameAssetData() {}
 
     virtual void Load(jgsGame &game);
 
 protected:
     jgsGameAssetType m_Type;
-    const char *m_File;
+    std::string m_File;
     // void *vardata;
     // void *data;
 };
@@ -27,15 +27,11 @@ protected:
 class jgsTextureGameAssetData : public jgsGameAssetData
 {
 public:
-    inline jgsTextureGameAssetData(jgsGameAssetType type, const char *file, SDL_Texture **texture) : jgsGameAssetData(type, file)
+    inline jgsTextureGameAssetData(const char *file, SDL_Texture **texture) : jgsGameAssetData(Texture, file)
     {
         m_Texture = texture;
     }
-    inline virtual ~jgsTextureGameAssetData()
-    {
-        if (m_Texture != NULL && *m_Texture != NULL)
-            SDL_DestroyTexture(*m_Texture);
-    }
+    virtual ~jgsTextureGameAssetData();
     virtual void Load(jgsGame &game);
 
 protected:
@@ -45,8 +41,11 @@ protected:
 class jgsGameAssets
 {
 public:
-    void Add(jgsGameAssetType type, const char *file, void *vardata);
-    bool LoadDatas();
+    void Add(const char *file, SDL_Texture **Texture)
+    {
+        m_Datas.push_back(new jgsTextureGameAssetData(file, Texture));
+    }
+    bool LoadDatas(jgsGame &game);
 
 private:
     std::vector<jgsGameAssetData *> m_Datas;

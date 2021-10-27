@@ -41,6 +41,7 @@ public:
     }
     inline int SDL_RenderFillRect(const SDL_Rect *rect) { return ::SDL_RenderFillRect(m_Render, rect); }
     inline void SDL_RenderPresent() { ::SDL_RenderPresent(m_Render); }
+    inline void *GetAssetsData()const { return m_AssetsData; }
 
 protected:
     std::string m_Error;

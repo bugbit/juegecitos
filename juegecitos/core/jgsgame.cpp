@@ -63,7 +63,7 @@ bool jgsGame::InitializeParams(jgsParams &params)
 
 bool jgsGame::LoadAssets()
 {
-    return m_Assets.LoadDatas();
+    return m_Assets.LoadDatas(*this);
 }
 
 int jgsGame::GameError()
