@@ -17,7 +17,7 @@ bool jpGame::Initialize()
 		return false;
 	}
 
-	SetSceneAct(m_LevelScene);
+	m_MainScene = m_LevelScene;
 
 	return true;
 }
@@ -26,7 +26,7 @@ void *jpGame::PrepareLoadAssets()
 {
 	jpAssetsData *assetsData = new jpAssetsData();
 
-	m_Assets.Add("base.png",&assetsData->texBase);
+	m_Assets.Add("base.png", &assetsData->texBase);
 
 	return assetsData;
 }

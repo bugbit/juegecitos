@@ -7,6 +7,11 @@ class jpLevelScene : public jgsScene
 public:
     inline jpLevelScene(jgsGame &game) : jgsScene(game) {}
     void Render(jgsGameTime &time);
+
+protected:
+    SDL_Rect m_RectBase;
+
+    virtual void InitializeInternal();
 };
 
 #endif

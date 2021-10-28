@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#ifdef __EMSCRIPTEN__
+#include <SDL2/SDL_image.h>
+#endif
 #include "jgsgameassets.h"
 #include "jgsgame.h"
 

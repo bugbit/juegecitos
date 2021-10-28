@@ -25,14 +25,14 @@ class jgsScene;
 class jgsGame //: public jgsInitialize
 {
 public:
-    inline jgsGame(int argc, char **argv) : m_Wnd(NULL), m_Render(NULL)
+    inline jgsGame(int argc, char **argv) : m_Wnd(NULL), m_Render(NULL), m_MainScene(NULL), m_CurrentScene(NULL)
     {
         m_Argc = argc;
         m_Argv = argv;
     }
 
     int Run();
-    inline void SetSceneAct(jgsScene *scene) { m_Loop = (jgsLoop *)scene; }
+    void SetSceneAct(jgsScene *scene);
     inline SDL_Renderer *GetRender2D() const { return m_Render; }
     inline int SDL_RenderClear() { return ::SDL_RenderClear(m_Render); }
     inline int SDL_SetRenderDrawColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
@@ -40,13 +40,18 @@ public:
         return ::SDL_SetRenderDrawColor(m_Render, r, g, b, a);
     }
     inline int SDL_RenderFillRect(const SDL_Rect *rect) { return ::SDL_RenderFillRect(m_Render, rect); }
+    inline int SDL_RenderCopy(SDL_Texture *texture, const SDL_Rect *srcrect, const SDL_Rect *dstrect)
+    {
+        return ::SDL_RenderCopy(m_Render, texture, srcrect, dstrect);
+    }
     inline void SDL_RenderPresent() { ::SDL_RenderPresent(m_Render); }
-    inline void *GetAssetsData()const { return m_AssetsData; }
+    inline void *GetAssetsData() const { return m_AssetsData; }
 
 protected:
     std::string m_Error;
     int m_Argc;
     char **m_Argv;
+    jgsScene *m_MainScene, *m_CurrentScene;
     SDL_Window *m_Wnd;
     SDL_Renderer *m_Render;
     jgsGameAssets m_Assets;

@@ -76,14 +76,23 @@ int jgsGame::GameError()
     return EXIT_FAILURE;
 }
 
+void jgsGame::SetSceneAct(jgsScene *scene)
+{
+    scene->Initialize();
+    m_CurrentScene = scene;
+    m_Loop = (jgsLoop *)scene;
+}
+
 int jgsGame::Run()
 {
     if (!Initialize())
         return GameError();
+
     m_AssetsData = PrepareLoadAssets();
     m_Time.timeStamp = SDL_GetTicks();
     if (!LoadAssets())
         return GameError();
+    SetSceneAct(m_MainScene);
 #ifdef __EMSCRIPTEN__
     emscripten_set_main_loop(GameLoop, 60, 1);
 #else
