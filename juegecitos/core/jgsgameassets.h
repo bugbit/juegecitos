@@ -15,7 +15,7 @@ public:
     inline jgsGameAssetData(jgsGameAssetType type, const char *file) : m_Type(type), m_File(std::string("assets/") + file) {}
     inline virtual ~jgsGameAssetData() {}
 
-    virtual void Load(jgsGame &game);
+    virtual bool Load(jgsGame &game) { return true; }
 
 protected:
     jgsGameAssetType m_Type;
@@ -32,7 +32,7 @@ public:
         m_Texture = texture;
     }
     virtual ~jgsTextureGameAssetData();
-    virtual void Load(jgsGame &game);
+    virtual bool Load(jgsGame &game);
 
 protected:
     SDL_Texture **m_Texture;

@@ -1,0 +1,39 @@
+b2RopeStretch	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^struct b2RopeStretch$/;"	struct	line:28
+i1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	int32 i1, i2;$/;"	member	line:30	struct:b2RopeStretch	access:public
+i2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	int32 i1, i2;$/;"	member	line:30	struct:b2RopeStretch	access:public
+invMass1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invMass1, invMass2;$/;"	member	line:31	struct:b2RopeStretch	access:public
+invMass2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invMass1, invMass2;$/;"	member	line:31	struct:b2RopeStretch	access:public
+L	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float L;$/;"	member	line:32	struct:b2RopeStretch	access:public
+lambda	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float lambda;$/;"	member	line:33	struct:b2RopeStretch	access:public
+spring	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float spring;$/;"	member	line:34	struct:b2RopeStretch	access:public
+damper	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float damper;$/;"	member	line:35	struct:b2RopeStretch	access:public
+b2RopeBend	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^struct b2RopeBend$/;"	struct	line:38
+i1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	int32 i1, i2, i3;$/;"	member	line:40	struct:b2RopeBend	access:public
+i2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	int32 i1, i2, i3;$/;"	member	line:40	struct:b2RopeBend	access:public
+i3	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	int32 i1, i2, i3;$/;"	member	line:40	struct:b2RopeBend	access:public
+invMass1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invMass1, invMass2, invMass3;$/;"	member	line:41	struct:b2RopeBend	access:public
+invMass2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invMass1, invMass2, invMass3;$/;"	member	line:41	struct:b2RopeBend	access:public
+invMass3	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invMass1, invMass2, invMass3;$/;"	member	line:41	struct:b2RopeBend	access:public
+invEffectiveMass	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float invEffectiveMass;$/;"	member	line:42	struct:b2RopeBend	access:public
+lambda	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float lambda;$/;"	member	line:43	struct:b2RopeBend	access:public
+L1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float L1, L2;$/;"	member	line:44	struct:b2RopeBend	access:public
+L2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float L1, L2;$/;"	member	line:44	struct:b2RopeBend	access:public
+alpha1	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float alpha1, alpha2;$/;"	member	line:45	struct:b2RopeBend	access:public
+alpha2	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float alpha1, alpha2;$/;"	member	line:45	struct:b2RopeBend	access:public
+spring	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float spring;$/;"	member	line:46	struct:b2RopeBend	access:public
+damper	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^	float damper;$/;"	member	line:47	struct:b2RopeBend	access:public
+b2Rope	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^b2Rope::b2Rope()$/;"	function	line:50	class:b2Rope	signature:()	returns:b2Rope :: 
+~b2Rope	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^b2Rope::~b2Rope()$/;"	function	line:66	class:b2Rope	signature:()	returns:b2Rope :: 
+Create	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::Create(const b2RopeDef& def)$/;"	function	line:77	class:b2Rope	signature:(const b2RopeDef& def)	returns:void b2Rope :: 
+SetTuning	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SetTuning(const b2RopeTuning& tuning)$/;"	function	line:187	class:b2Rope	signature:(const b2RopeTuning& tuning)	returns:void b2Rope :: 
+Step	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::Step(float dt, int32 iterations, const b2Vec2& position)$/;"	function	line:244	class:b2Rope	signature:(float dt, int32 iterations, const b2Vec2& position)	returns:void b2Rope :: 
+Reset	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::Reset(const b2Vec2& position)$/;"	function	line:332	class:b2Rope	signature:(const b2Vec2& position)	returns:void b2Rope :: 
+SolveStretch_PBD	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveStretch_PBD()$/;"	function	line:354	class:b2Rope	signature:()	returns:void b2Rope :: 
+SolveStretch_XPBD	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveStretch_XPBD(float dt)$/;"	function	line:385	class:b2Rope	signature:(float dt)	returns:void b2Rope :: 
+SolveBend_PBD_Angle	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveBend_PBD_Angle()$/;"	function	line:433	class:b2Rope	signature:()	returns:void b2Rope :: 
+SolveBend_XPBD_Angle	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveBend_XPBD_Angle(float dt)$/;"	function	line:504	class:b2Rope	signature:(float dt)	returns:void b2Rope :: 
+ApplyBendForces	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::ApplyBendForces(float dt)$/;"	function	line:592	class:b2Rope	signature:(float dt)	returns:void b2Rope :: 
+SolveBend_PBD_Distance	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveBend_PBD_Distance()$/;"	function	line:673	class:b2Rope	signature:()	returns:void b2Rope :: 
+SolveBend_PBD_Height	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveBend_PBD_Height()$/;"	function	line:709	class:b2Rope	signature:()	returns:void b2Rope :: 
+SolveBend_PBD_Triangle	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::SolveBend_PBD_Triangle()$/;"	function	line:758	class:b2Rope	signature:()	returns:void b2Rope :: 
+Draw	/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/src/rope/b2_rope.cpp	/^void b2Rope::Draw(b2Draw* draw) const$/;"	function	line:793	class:b2Rope	signature:(b2Draw* draw) const	returns:void b2Rope :: 

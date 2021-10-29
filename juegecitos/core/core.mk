@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Release
+## Debug
 ProjectName            :=core
-ConfigurationName      :=Release
+ConfigurationName      :=<New...>
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=23/10/21
+Date                   :=30/10/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2 
-ArLibs                 :=  "stdc++" "SDL2" "SDL2" 
+Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 
+ArLibs                 :=  "stdc++" "SDL2" "SDL2_image" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
@@ -50,8 +50,8 @@ LibPath                := $(LibraryPathSwitch).
 AR       := ar rcus
 CXX      := gcc
 CC       := gcc
-CXXFLAGS := -Wall -O3 -include pch.h  $(Preprocessors)
-CFLAGS   := -Wall -O3 -include pch.h  $(Preprocessors)
+CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h -g $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) 
 
 
 
@@ -99,6 +99,30 @@ PreBuild:
 
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix): jgsgame.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix) jgsgame.cpp
+
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix): jgsgameassets.cpp ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgameassets.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgameassets.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix): jgsgameassets.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix) -MM jgsgameassets.cpp
+
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix): jgsgameassets.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix) jgsgameassets.cpp
+
+../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix): jgsscene.cpp ../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsscene.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix): jgsscene.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix) -MM jgsscene.cpp
+
+../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix): jgsscene.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix) jgsscene.cpp
+
+../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix): jgstexturegameassets.cpp ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgstexturegameassets.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgstexturegameassets.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(DependSuffix): jgstexturegameassets.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(DependSuffix) -MM jgstexturegameassets.cpp
+
+../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(PreprocessSuffix): jgstexturegameassets.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(PreprocessSuffix) jgstexturegameassets.cpp
 
 
 -include ../build-$(ConfigurationName)/core//*$(DependSuffix)

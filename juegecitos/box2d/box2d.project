@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="box2d" Version="11000" InternalType="Library">
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <VirtualDirectory Name="rope">
+      <File Name="../extern/box2d/src/rope/b2_rope.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="dynamics">
+      <File Name="../extern/box2d/src/dynamics/b2_world_callbacks.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_world.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_wheel_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_weld_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_revolute_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_pulley_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_prismatic_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_polygon_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_polygon_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_polygon_circle_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_polygon_circle_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_mouse_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_motor_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_island.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_island.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_gear_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_friction_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_fixture.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_edge_polygon_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_edge_polygon_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_edge_circle_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_edge_circle_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_distance_joint.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_contact_solver.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_contact_solver.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_contact_manager.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_circle_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_circle_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_chain_polygon_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_chain_polygon_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_chain_circle_contact.h"/>
+      <File Name="../extern/box2d/src/dynamics/b2_chain_circle_contact.cpp"/>
+      <File Name="../extern/box2d/src/dynamics/b2_body.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="common">
+      <File Name="../extern/box2d/src/common/b2_timer.cpp"/>
+      <File Name="../extern/box2d/src/common/b2_stack_allocator.cpp"/>
+      <File Name="../extern/box2d/src/common/b2_settings.cpp"/>
+      <File Name="../extern/box2d/src/common/b2_math.cpp"/>
+      <File Name="../extern/box2d/src/common/b2_draw.cpp"/>
+      <File Name="../extern/box2d/src/common/b2_block_allocator.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="collision">
+      <File Name="../extern/box2d/src/collision/b2_time_of_impact.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_polygon_shape.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_edge_shape.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_dynamic_tree.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_distance.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_collision.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_collide_polygon.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_collide_edge.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_collide_circle.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_circle_shape.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_chain_shape.cpp"/>
+      <File Name="../extern/box2d/src/collision/b2_broad_phase.cpp"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <File Name="../extern/box2d/include/box2d/box2d.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_world_callbacks.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_world.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_wheel_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_weld_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_types.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_time_step.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_timer.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_time_of_impact.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_stack_allocator.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_shape.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_settings.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_rope.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_revolute_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_pulley_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_prismatic_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_polygon_shape.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_mouse_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_motor_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_math.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_growable_stack.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_gear_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_friction_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_fixture.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_edge_shape.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_dynamic_tree.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_draw.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_distance_joint.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_distance.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_contact_manager.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_contact.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_common.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_collision.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_circle_shape.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_chain_shape.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_broad_phase.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_body.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_block_allocator.h"/>
+    <File Name="../extern/box2d/include/box2d/b2_api.h"/>
+  </VirtualDirectory>
+  <Settings Type="Static Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+        <IncludePath Value="../extern/box2d/include/"/>
+        <IncludePath Value="../extern/box2d/src"/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu gcc" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="lib$(ProjectName).a" IntermediateDirectory="" Command="$(WorkspacePath)/build-$(WorkspaceConfiguration)/bin/$(OutputFile)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="CodeLite Makefile Generator"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu gcc" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="lib$(ProjectName).a" IntermediateDirectory="" Command="$(WorkspacePath)/build-$(WorkspaceConfiguration)/bin/$(OutputFile)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="CodeLite Makefile Generator"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="wasm" CompilerType="emcc" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="lib$(ProjectName).a" IntermediateDirectory="" Command="$(WorkspacePath)/build-$(WorkspaceConfiguration)/bin/$(OutputFile)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="CodeLite Makefile Generator"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName/>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+</CodeLite_Project>

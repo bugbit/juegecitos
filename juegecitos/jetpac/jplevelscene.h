@@ -9,7 +9,7 @@ public:
     void Render(jgsGameTime &time);
 
 protected:
-    SDL_Rect m_RectBase;
+    SDL_Rect m_RectBase,m_RectImgBaseSrc;
 
     virtual void InitializeInternal();
 };
