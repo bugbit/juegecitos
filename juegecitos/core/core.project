@@ -3,12 +3,14 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="jgsbox2dscene.cpp"/>
     <File Name="jgstexturegameassets.cpp"/>
     <File Name="jgsscene.cpp"/>
     <File Name="jgsgameassets.cpp"/>
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="jgsbox2dscene.h"/>
     <File Name="jgsgameobj.h"/>
     <File Name="jgsscene.h"/>
     <File Name="jgsgameassets.h"/>

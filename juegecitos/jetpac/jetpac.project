@@ -27,6 +27,7 @@
         <LibraryPath Value="."/>
         <LibraryPath Value="$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib"/>
         <Library Value="core"/>
+        <Library Value="box2d"/>
         <Library Value="stdc++"/>
       </Linker>
       <ResourceCompiler Options=""/>

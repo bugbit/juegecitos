@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) 
 
 
 
@@ -92,6 +92,14 @@ PreBuild:
 ##
 ## Objects
 ##
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix): jgsbox2dscene.cpp ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsbox2dscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsbox2dscene.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix): jgsbox2dscene.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix) -MM jgsbox2dscene.cpp
+
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix): jgsbox2dscene.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix) jgsbox2dscene.cpp
+
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp

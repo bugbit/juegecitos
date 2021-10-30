@@ -83,6 +83,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="jgsbox2dscene.h" />
     <ClInclude Include="jgsgame.h" />
     <ClInclude Include="jgsgameassets.h" />
     <ClInclude Include="jgsgameobj.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jgsbox2dscene.cpp" />
     <ClCompile Include="jgsgame.cpp" />
     <ClCompile Include="jgsgameassets.cpp" />
     <ClCompile Include="jgsscene.cpp" />
