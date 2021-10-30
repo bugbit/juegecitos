@@ -31,11 +31,15 @@
 /// This function is used to ensure that a floating point number is not a NaN or infinity.
 inline bool b2IsValid(float x)
 {
+// Compatibity MSVC 6.0
+// Begin Change
+// 	return isfinite(x);
 #ifndef _MSC_VER
 	return isfinite(x);
 #else
 	return !_isnan(x);
 #endif
+// End Change
 }
 
 #define	b2Sqrt(x)	sqrtf(x)

@@ -26,6 +26,7 @@ public:
         , m_Render(NULL)
         , m_MainScene(NULL)
         , m_CurrentScene(NULL)
+        , m_AssetsData(NULL)
     {
 	m_Argc = argc;
 	m_Argv = argv;
@@ -73,14 +74,14 @@ public:
     }
 
 protected:
-    std::string m_Error;
     int m_Argc;
     char** m_Argv;
-    jgsScene *m_MainScene, *m_CurrentScene;
     SDL_Window* m_Wnd;
     SDL_Renderer* m_Render;
-    jgsGameAssets m_Assets;
+    jgsScene *m_MainScene, *m_CurrentScene;
+    std::string m_Error;
     void* m_AssetsData;
+    jgsGameAssets m_Assets;
 
     virtual bool Initialize();
     virtual bool InitializeParams(jgsParams& params);

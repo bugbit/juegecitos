@@ -4,7 +4,7 @@
 ##
 ## Debug
 ProjectName            :=core
-ConfigurationName      :=<New...>
+ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
@@ -36,7 +36,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
 LinkOptions            :=  
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../extern/box2d/include/ $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 

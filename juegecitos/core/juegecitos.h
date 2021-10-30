@@ -6,5 +6,6 @@
 #include "jgsgame.h"
 #include "jgsscene.h"
 #include "jgsgameassets.h"
+#include "jgsgameobj.h"
 
 #endif

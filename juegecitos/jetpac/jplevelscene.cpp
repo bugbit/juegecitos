@@ -20,12 +20,12 @@ void jpLevelScene::InitializeInternal()
 
 void jpLevelScene::Render(jgsGameTime &time)
 {
-    SDL_Rect rect;
+    /*SDL_Rect rect;
 
     rect.x = 250;
     rect.y = 150;
     rect.w = 200;
-    rect.h = 200;
+    rect.h = 200;*/
 
     m_Game.SDL_RenderClear();
     // m_Game.SDL_SetRenderDrawColor( 0, 255, 0, 255);

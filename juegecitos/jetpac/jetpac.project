@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="jetpac" Version="11000" InternalType="Console">
   <VirtualDirectory Name="include">
+    <File Name="jplevelobj.h"/>
     <File Name="jplevelscene.h"/>
     <File Name="jpgame.h"/>
     <File Name="pch.h"/>
@@ -8,6 +9,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="jplevelobj.cpp"/>
     <File Name="jplevelscene.cpp"/>
     <File Name="jpgame.cpp"/>
   </VirtualDirectory>
@@ -18,6 +20,7 @@
     <GlobalSettings>
       <Compiler Options="-Wall;-O3 -include pch.h" C_Options="-Wall;-O3 -include pch.h" Assembler="">
         <IncludePath Value="."/>
+        <IncludePath Value="../extern/box2d/include/"/>
         <IncludePath Value="../core"/>
       </Compiler>
       <Linker Options="">

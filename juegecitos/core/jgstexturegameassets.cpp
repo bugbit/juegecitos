@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "jgsgame.h"
 #include "jgsgameassets.h"
 #include "stdafx.h"

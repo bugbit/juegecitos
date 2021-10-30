@@ -9,6 +9,7 @@
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="jgsgameobj.h"/>
     <File Name="jgsscene.h"/>
     <File Name="jgsgameassets.h"/>
     <File Name="jgsinterface.h"/>
@@ -20,6 +21,7 @@
     <GlobalSettings>
       <Compiler Options="-Wall;-O3 -include pch.h" C_Options="-Wall;-O3 -include pch.h" Assembler="">
         <IncludePath Value="."/>
+        <IncludePath Value="../extern/box2d/include/"/>
       </Compiler>
       <Linker Options="">
         <LibraryPath Value="."/>

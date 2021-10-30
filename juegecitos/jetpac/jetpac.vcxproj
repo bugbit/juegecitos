@@ -39,11 +39,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>..\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\core;..\extern\box2d\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>..\core;$(IncludePath)</IncludePath>
+    <IncludePath>..\core;..\extern\box2d\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="jetpac.h" />
     <ClInclude Include="jpgame.h" />
+    <ClInclude Include="jplevelobj.h" />
     <ClInclude Include="jplevelscene.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jpgame.cpp" />
+    <ClCompile Include="jplevelobj.cpp" />
     <ClCompile Include="jplevelscene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

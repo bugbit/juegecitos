@@ -36,6 +36,9 @@
     <ClInclude Include="jgsgameassets.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="jgsgameobj.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jgsgame.cpp">
