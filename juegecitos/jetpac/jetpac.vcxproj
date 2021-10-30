@@ -92,6 +92,7 @@
     <ClInclude Include="jpgame.h" />
     <ClInclude Include="jplevelobj.h" />
     <ClInclude Include="jplevelscene.h" />
+    <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -109,6 +110,9 @@
     <ResourceCompile Include="jetpac.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\box2d\box2d.vcxproj">
+      <Project>{ff361f38-3bf1-4946-89e2-d8c123589412}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\core\core.vcxproj">
       <Project>{05c7cbbc-9341-4d76-b838-25cb312af1b3}</Project>
     </ProjectReference>

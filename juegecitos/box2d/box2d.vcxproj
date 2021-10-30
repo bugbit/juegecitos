@@ -148,6 +148,7 @@
     <ClCompile Include="..\extern\box2d\src\common\b2_settings.cpp" />
     <ClCompile Include="..\extern\box2d\src\common\b2_stack_allocator.cpp" />
     <ClCompile Include="..\extern\box2d\src\common\b2_timer.cpp" />
+    <ClCompile Include="..\extern\box2d\src\dynamics\b2_body.cpp" />
     <ClCompile Include="..\extern\box2d\src\dynamics\b2_chain_circle_contact.cpp" />
     <ClCompile Include="..\extern\box2d\src\dynamics\b2_chain_polygon_contact.cpp" />
     <ClCompile Include="..\extern\box2d\src\dynamics\b2_circle_contact.cpp" />

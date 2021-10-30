@@ -317,5 +317,8 @@
     <ClCompile Include="..\extern\box2d\src\rope\b2_rope.cpp">
       <Filter>Archivos de código fuente\rope</Filter>
     </ClCompile>
+    <ClCompile Include="..\extern\box2d\src\dynamics\b2_body.cpp">
+      <Filter>Archivos de código fuente\dynamics</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

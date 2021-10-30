@@ -39,8 +39,8 @@ LinkOptions            :=
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../extern/box2d/include/ $(IncludeSwitch)../core $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)core $(LibrarySwitch)box2d $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 
-ArLibs                 :=  "core" "box2d" "stdc++" "SDL2" "SDL2_image" 
+Libs                   := $(LibrarySwitch)core $(LibrarySwitch)box2d $(LibrarySwitch)stdc++ $(LibrarySwitch)m $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 
+ArLibs                 :=  "core" "box2d" "stdc++" "m" "SDL2" "SDL2_image" 
 LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib 
 
 ##
@@ -72,11 +72,18 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d $(Objects) 
+$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)/core.relink" $(Objects) 
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
+
+"$(IntermediateDirectory)/core.relink":
+	@mkdir -p $(IntermediateDirectory)
+	@echo stam > "$(IntermediateDirectory)/core.relink"
+
+
+
 
 MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"

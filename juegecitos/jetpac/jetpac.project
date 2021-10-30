@@ -29,6 +29,7 @@
         <Library Value="core"/>
         <Library Value="box2d"/>
         <Library Value="stdc++"/>
+        <Library Value="m"/>
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
