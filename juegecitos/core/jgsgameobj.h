@@ -29,7 +29,7 @@ protected:
     const Uint8 m_Type2;
 };
 
-class jgsGameObj : public jgsGameObjType, jgsInitialize, jgsUpdate
+class jgsGameObj : public jgsGameObjType, public jgsInitialize
 {
 public:
     inline jgsGameObj(jgsScene& scene, jgsGameObjType1 type1 = GameObj, Uint8 type2 = 0)
@@ -44,11 +44,6 @@ public:
 
     inline virtual void Initialize()
     {
-    }
-
-    inline virtual void Update(SDL_Event& e, jgsGameTime& time)
-    {
-	jgsUpdate::Update(e, time);
     }
 
 protected:
@@ -68,19 +63,12 @@ public:
 
     inline virtual ~jgsGameObjB2World()
     {
-	if(m_World != NULL)
-	    delete m_World;
     }
 
     inline virtual void Initialize()
     {
 	jgsGameObj::Initialize();
 	m_World = InitializeWorld();
-    }
-
-    inline virtual void Update(SDL_Event& e, jgsGameTime& time)
-    {
-	jgsGameObj::Update(e, time);
     }
 
 protected:
@@ -93,7 +81,7 @@ protected:
     }
 };
 
-class jgsGameObjB2Body : jgsGameObj
+class jgsGameObjB2Body : public jgsGameObj, public jgsUpdate
 {
 public:
     inline jgsGameObjB2Body(jgsScene& scene, Uint8 type2 = 0)
@@ -118,7 +106,7 @@ public:
 
     inline virtual void Update(SDL_Event& e, jgsGameTime& time)
     {
-	jgsGameObj::Update(e, time);
+	jgsUpdate::Update(e, time);
     }
 
 protected:

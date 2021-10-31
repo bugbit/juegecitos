@@ -17,6 +17,9 @@ public:
     }
 
     void Initialize();
+    inline virtual void Destroy()
+    {
+    }
     void Loop(SDL_Event& e, jgsGameTime& time);
 
     inline bool IsInit() const

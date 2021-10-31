@@ -23,7 +23,12 @@ public:
     {
     }
 
-    // jgsUpdate::Update(e, time);
+    inline virtual void Destroy()
+    {
+	jgsScene::Destroy();
+	if(m_World != NULL)
+	    delete m_World;
+    }
 
     virtual void Update(SDL_Event& e, jgsGameTime& time);
 
