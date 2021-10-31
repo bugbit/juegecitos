@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) 
 
 
 
@@ -92,29 +92,13 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix) -MM jgsgame.cpp
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix): jgsbox2dscene.cpp ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsbox2dscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsbox2dscene.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix): jgsbox2dscene.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix) -MM jgsbox2dscene.cpp
 
-../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix): jgsgame.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix) jgsgame.cpp
-
-../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix): jgsgameassets.cpp ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgameassets.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgameassets.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix): jgsgameassets.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix) -MM jgsgameassets.cpp
-
-../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix): jgsgameassets.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix) jgsgameassets.cpp
-
-../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix): jgsscene.cpp ../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsscene.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix): jgsscene.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix) -MM jgsscene.cpp
-
-../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix): jgsscene.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix) jgsscene.cpp
+../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix): jgsbox2dscene.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix) jgsbox2dscene.cpp
 
 ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(ObjectSuffix): jgstexturegameassets.cpp ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgstexturegameassets.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgstexturegameassets.cpp$(ObjectSuffix) $(IncludePath)
@@ -124,13 +108,29 @@ PreBuild:
 ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(PreprocessSuffix): jgstexturegameassets.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgstexturegameassets.cpp$(PreprocessSuffix) jgstexturegameassets.cpp
 
-../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix): jgsbox2dscene.cpp ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsbox2dscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsbox2dscene.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix): jgsbox2dscene.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(DependSuffix) -MM jgsbox2dscene.cpp
+../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix): jgsscene.cpp ../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsscene.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix): jgsscene.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsscene.cpp$(DependSuffix) -MM jgsscene.cpp
 
-../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix): jgsbox2dscene.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsbox2dscene.cpp$(PreprocessSuffix) jgsbox2dscene.cpp
+../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix): jgsscene.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsscene.cpp$(PreprocessSuffix) jgsscene.cpp
+
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix): jgsgameassets.cpp ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgameassets.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgameassets.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix): jgsgameassets.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgameassets.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgameassets.cpp$(DependSuffix) -MM jgsgameassets.cpp
+
+../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix): jgsgameassets.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgameassets.cpp$(PreprocessSuffix) jgsgameassets.cpp
+
+../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix): jgsgame.cpp ../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/core/jgsgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jgsgame.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix): jgsgame.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/core/jgsgame.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/core/jgsgame.cpp$(DependSuffix) -MM jgsgame.cpp
+
+../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix): jgsgame.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/core/jgsgame.cpp$(PreprocessSuffix) jgsgame.cpp
 
 
 -include ../build-$(ConfigurationName)/core//*$(DependSuffix)

@@ -8,5 +8,6 @@
 #include "jgsbox2dscene.h"
 #include "jgsgameassets.h"
 #include "jgsgameobj.h"
+#include "jgsspriterrender.h"
 
 #endif

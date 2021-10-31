@@ -50,6 +50,22 @@ protected:
     const jgsScene& m_Scene;
 };
 
+class jgsGameObjComponent : public jgsRender
+{
+public:
+    inline jgsGameObjComponent(jgsGameObj& obj)
+        : m_Obj(obj)
+    {
+    }
+    inline virtual void Render(jgsGameTime& time)
+    {
+	jgsRender::Render(time);
+    }
+
+protected:
+    jgsGameObj& m_Obj;
+};
+
 class jgsGameObjB2World : jgsGameObj
 {
 public:

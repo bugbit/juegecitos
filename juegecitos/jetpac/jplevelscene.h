@@ -2,16 +2,17 @@
 
 #define JPLEVELSCENE_h
 
-class jpLevelScene : public jgsBox2dScene
+class jpLevelScene : public jgsScene
 {
 public:
-    inline jpLevelScene(jgsGame &game) : jgsBox2dScene(game) {}
+    inline jpLevelScene(jgsGame &game) : jgsScene(game) {}
     void Render(jgsGameTime &time);
 
 protected:
-    SDL_Rect m_RectBase,m_RectImgBaseSrc;
+	jgsSpriteRender *m_SpriterBase;
 
     virtual void InitializeInternal();
+	virtual void Destroy();
 };
 
 #endif

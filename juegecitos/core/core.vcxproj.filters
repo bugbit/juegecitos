@@ -42,6 +42,9 @@
     <ClInclude Include="jgsbox2dscene.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="jgsspriterrender.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="jgsgame.cpp">

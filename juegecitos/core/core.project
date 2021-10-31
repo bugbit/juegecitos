@@ -10,6 +10,7 @@
     <File Name="jgsgame.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
+    <File Name="jgsspriterrender.h"/>
     <File Name="jgsbox2dscene.h"/>
     <File Name="jgsgameobj.h"/>
     <File Name="jgsscene.h"/>
