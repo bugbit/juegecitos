@@ -4,6 +4,11 @@
 
 void jpLevelScene::InitializeInternal()
 {
+	// Define the gravity vector.
+	b2Vec2 gravity(0.0f, 0.0f);
+	
+	m_World=new b2World(gravity);
+	
     int w, h, ws, hs; // texture width & height
     SDL_Rect m_RectBase, m_RectImgBaseSrc;
 
@@ -20,7 +25,7 @@ void jpLevelScene::InitializeInternal()
     m_RectBase.h = h;
 
     m_SpriterBase = new jgsSpriteRender(
-        m_Game.GetRender2D(), ((jpAssetsData*)m_Game.GetAssetsData())->texBase, m_RectBase, m_RectImgBaseSrc);
+        m_Game.GetRender2D(), ((jpAssetsData*)m_Game.GetAssetsData())->texBase, &m_RectBase, &m_RectImgBaseSrc);
 }
 
 void jpLevelScene::Destroy()

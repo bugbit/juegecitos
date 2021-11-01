@@ -19,6 +19,7 @@ class jgsInitialize
 {
 public:
 	virtual void Initialize() = 0;
+    inline virtual void Destroy()=0;
 };
 
 class jgsRender

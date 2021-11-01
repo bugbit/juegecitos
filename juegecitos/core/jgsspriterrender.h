@@ -8,15 +8,27 @@
 class jgsSpriteRenderBase : public jgsRender
 {
 public:
-    inline jgsSpriteRenderBase(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect& rect, SDL_Rect& rectimgsrc)
+    inline jgsSpriteRenderBase(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect* rect, SDL_Rect* rectimgsrc)
         : m_Render(render)
         , m_Texture(texture)
-        , m_Rect(rect)
-        , m_RectImgSrc(rectimgsrc)
     {
+	if(rect != NULL) {
+	    m_Rect = new SDL_Rect();
+	    *m_Rect = *rect;
+	} else
+	    m_Rect = NULL;
+	if(rectimgsrc != NULL) {
+	    m_RectImgSrc = new SDL_Rect();
+	    *m_RectImgSrc = *rectimgsrc;
+	} else
+	    m_RectImgSrc = NULL;
     }
     inline virtual ~jgsSpriteRenderBase()
     {
+	if(m_Rect)
+	    delete m_Rect;
+	if(m_RectImgSrc)
+	    delete m_RectImgSrc;
     }
     inline virtual void Render(jgsGameTime& time)
     {
@@ -26,27 +38,27 @@ public:
 protected:
     SDL_Renderer* m_Render;
     SDL_Texture* m_Texture;
-    SDL_Rect m_Rect, m_RectImgSrc;
+    SDL_Rect *m_Rect, *m_RectImgSrc;
 };
 
 class jgsSpriteRender : public jgsSpriteRenderBase
 {
 public:
-    inline jgsSpriteRender(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect& rect, SDL_Rect& rectimgsrc)
+    inline jgsSpriteRender(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect* rect, SDL_Rect* rectimgsrc)
         : jgsSpriteRenderBase(render, texture, rect, rectimgsrc)
     {
     }
 
     inline virtual void Render(jgsGameTime& time)
     {
-	SDL_RenderCopy(m_Render, m_Texture, &m_RectImgSrc, &m_Rect);
+	SDL_RenderCopy(m_Render, m_Texture, m_RectImgSrc, m_Rect);
     }
 };
 
 class jgsB2BodySpriteRender : public jgsSpriteRender
 {
 public:
-    inline jgsB2BodySpriteRender(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect& rect, SDL_Rect& rectimgsrc)
+    inline jgsB2BodySpriteRender(SDL_Renderer* render, SDL_Texture* texture, SDL_Rect* rect, SDL_Rect* rectimgsrc)
         : jgsSpriteRender(render, texture, rect, rectimgsrc)
     {
 	int w, h;
@@ -59,8 +71,8 @@ public:
     {
 	const b2Vec2& pos = m_Body->GetPosition();
 
-	m_Rect.x = pos.x - m_Desp.x;
-	m_Rect.y = pos.y - m_Desp.x;
+	m_Rect->x = pos.x - m_Desp.x;
+	m_Rect->y = pos.y - m_Desp.y;
 	jgsSpriteRender::Render(time);
     }
 

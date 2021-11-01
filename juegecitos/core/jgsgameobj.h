@@ -9,9 +9,14 @@ enum jgsGameObjType1 { GameObj, GO_B2Body };
 class jgsGameObjType
 {
 public:
-    inline jgsGameObjType(jgsGameObjType1 type1 = GameObj, Uint8 type2 = 0)
+    inline jgsGameObjType(jgsGameObjType1 type1 = GameObj,
+        Uint8 type2 = 0,
+        bool isupdate = false,
+        bool isrender = false)
         : m_Type1(type1)
         , m_Type2(type2)
+        , m_IsUpdate(isupdate)
+        , m_IsRender(isrender)
     {
     }
 
@@ -27,6 +32,7 @@ public:
 protected:
     const jgsGameObjType1 m_Type1;
     const Uint8 m_Type2;
+    const bool m_IsUpdate, m_IsRender;
 };
 
 class jgsGameObj : public jgsGameObjType, public jgsInitialize
@@ -45,56 +51,12 @@ public:
     inline virtual void Initialize()
     {
     }
+    inline virtual void Destroy()
+    {
+    }
 
 protected:
     const jgsScene& m_Scene;
-};
-
-class jgsGameObjComponent : public jgsRender
-{
-public:
-    inline jgsGameObjComponent(jgsGameObj& obj)
-        : m_Obj(obj)
-    {
-    }
-    inline virtual void Render(jgsGameTime& time)
-    {
-	jgsRender::Render(time);
-    }
-
-protected:
-    jgsGameObj& m_Obj;
-};
-
-class jgsGameObjB2World : jgsGameObj
-{
-public:
-    inline jgsGameObjB2World(jgsScene& scene, Uint8 type2 = 0)
-        : jgsGameObj(scene, GO_B2Body, type2)
-        , m_World(NULL)
-        , m_PixelsPerMeter(1)
-    {
-	// m_Body->SetUserData(this);
-    }
-
-    inline virtual ~jgsGameObjB2World()
-    {
-    }
-
-    inline virtual void Initialize()
-    {
-	jgsGameObj::Initialize();
-	m_World = InitializeWorld();
-    }
-
-protected:
-    b2World* m_World;
-    float m_PixelsPerMeter;
-
-    inline virtual b2World* InitializeWorld()
-    {
-	return NULL;
-    }
 };
 
 class jgsGameObjB2Body : public jgsGameObj, public jgsUpdate
@@ -114,10 +76,9 @@ public:
     {
 	jgsGameObj::Initialize();
     }
-    inline void InitializeBody(jgsGameObjB2World& world)
+    inline virtual void Destroy()
     {
-	m_Body = CreateBody(world);
-	m_Body->SetUserData(this);
+	jgsGameObj::Destroy();
     }
 
     inline virtual void Update(SDL_Event& e, jgsGameTime& time)
@@ -127,11 +88,6 @@ public:
 
 protected:
     b2Body* m_Body;
-
-    inline virtual b2Body* CreateBody(jgsGameObjB2World& world)
-    {
-	return NULL;
-    }
 };
 
 #endif

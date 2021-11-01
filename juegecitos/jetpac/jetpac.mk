@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=31/10/21
+Date                   :=01/11/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) 
 
 
 
@@ -72,7 +72,7 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)/core.relink" $(Objects) 
+$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)/core.relink" "$(IntermediateDirectory)/box2d.relink" $(Objects) 
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
@@ -81,6 +81,11 @@ $(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)
 "$(IntermediateDirectory)/core.relink":
 	@mkdir -p $(IntermediateDirectory)
 	@echo stam > "$(IntermediateDirectory)/core.relink"
+
+
+"$(IntermediateDirectory)/box2d.relink":
+	@mkdir -p $(IntermediateDirectory)
+	@echo stam > "$(IntermediateDirectory)/box2d.relink"
 
 
 
@@ -98,13 +103,13 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(ObjectSuffix): jplevelobj.cpp ../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jplevelobj.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jplevelobj.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(DependSuffix): jplevelobj.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(DependSuffix) -MM jplevelobj.cpp
+../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix): jpplatform.cpp ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpplatform.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpplatform.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(DependSuffix): jpplatform.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(DependSuffix) -MM jpplatform.cpp
 
-../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(PreprocessSuffix): jplevelobj.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jplevelobj.cpp$(PreprocessSuffix) jplevelobj.cpp
+../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(PreprocessSuffix): jpplatform.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(PreprocessSuffix) jpplatform.cpp
 
 ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix): jpgame.cpp ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpgame.cpp$(ObjectSuffix) $(IncludePath)

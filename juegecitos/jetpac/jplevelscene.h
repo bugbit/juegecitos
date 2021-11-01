@@ -2,10 +2,10 @@
 
 #define JPLEVELSCENE_h
 
-class jpLevelScene : public jgsScene
+class jpLevelScene : public jgsBox2dScene
 {
 public:
-    inline jpLevelScene(jgsGame &game) : jgsScene(game) {}
+    inline jpLevelScene(jgsGame &game) : jgsBox2dScene(game) {}
     void Render(jgsGameTime &time);
 
 protected:
