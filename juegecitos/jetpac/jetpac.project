@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="jetpac" Version="11000" InternalType="Console">
   <VirtualDirectory Name="include">
+    <File Name="jpgameobjstype.h"/>
     <File Name="jpplatform.h"/>
     <File Name="jplevelscene.h"/>
     <File Name="jpgame.h"/>
