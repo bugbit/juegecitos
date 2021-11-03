@@ -27,6 +27,8 @@ void *jpGame::PrepareLoadAssets()
 	jpAssetsData *assetsData = new jpAssetsData();
 
 	m_Assets.Add("base.png", &assetsData->texBase);
+	m_Assets.Add("platform.png", &assetsData->texPlaform);
+	m_Assets.Add("platform2.png", &assetsData->texPlaform2);
 
 	return assetsData;
 }

@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=02/11/21
+Date                   :=03/11/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) 
 
 
 
@@ -103,14 +103,6 @@ PreBuild:
 ##
 ## Objects
 ##
-../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix): jplevelscene.cpp ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jplevelscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jplevelscene.cpp$(ObjectSuffix) $(IncludePath)
-../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix): jplevelscene.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix) -MM jplevelscene.cpp
-
-../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(PreprocessSuffix): jplevelscene.cpp
-	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(PreprocessSuffix) jplevelscene.cpp
-
 ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix): jpgame.cpp ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpgame.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix): jpgame.cpp
@@ -126,6 +118,14 @@ PreBuild:
 
 ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(PreprocessSuffix): jpplatform.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(PreprocessSuffix) jpplatform.cpp
+
+../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix): jplevelscene.cpp ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jplevelscene.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jplevelscene.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix): jplevelscene.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(DependSuffix) -MM jplevelscene.cpp
+
+../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(PreprocessSuffix): jplevelscene.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(PreprocessSuffix) jplevelscene.cpp
 
 
 -include ../build-$(ConfigurationName)/jetpac//*$(DependSuffix)

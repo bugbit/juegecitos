@@ -10,39 +10,44 @@ class jgsGame;
 class jgsScene : public jgsInitialize, public jgsRender, public jgsUpdate, public jgsLoop
 {
 public:
-    inline jgsScene(jgsGame& game)
-        : m_Game(game)
-        , m_IsInit(false)
-    {
-    }
+	inline jgsScene(jgsGame& game)
+		: m_Game(game)
+		, m_IsInit(false)
+	{
+	}
 
-    void Initialize();
-    inline virtual void Destroy()
-    {
-    }
-    void Loop(SDL_Event& e, jgsGameTime& time);
+	void Initialize();
+	inline virtual void Destroy()
+	{
+	}
+	void Loop(SDL_Event& e, jgsGameTime& time);
 
-    inline bool IsInit() const
-    {
-	return m_IsInit;
-    }
+	inline bool IsInit() const
+	{
+		return m_IsInit;
+	}
 
-    inline virtual void Update(SDL_Event& e, jgsGameTime& time)
-    {
-	jgsUpdate::Update(e, time);
-    }
-    inline virtual void Render(jgsGameTime& time)
-    {
-	jgsRender::Render(time);
-    }
+	inline jgsGame &GetGame() const
+	{
+		return m_Game;
+	}
+
+	inline virtual void Update(SDL_Event& e, jgsGameTime& time)
+	{
+		jgsUpdate::Update(e, time);
+	}
+	inline virtual void Render(jgsGameTime& time)
+	{
+		jgsRender::Render(time);
+	}
 
 protected:
-    jgsGame& m_Game;
-    bool m_IsInit;
+	jgsGame& m_Game;
+	bool m_IsInit;
 
-    inline virtual void InitializeInternal()
-    {
-    }
+	inline virtual void InitializeInternal()
+	{
+	}
 };
 
 #endif
