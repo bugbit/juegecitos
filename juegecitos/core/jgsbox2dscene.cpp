@@ -1,17 +1,22 @@
 #include "stdafx.h"
 #include "jgsbox2dscene.h"
 
-b2Body *jgsBox2dScene::CreateGroundBody(SDL_Rect &r)
+b2Body *jgsBox2dScene::CreateGroundBody(jgsGameObjB2Body *obj,SDL_Rect &r,float density)
 {
 	b2BodyDef groundBodyDef;
+	float x=PixelToMeter(r.x);
+	float y=PixelToMeter(r.y);
+	float hx=PixelToMeter(r.w/2);
+	float hy=PixelToMeter(r.h/2);
 
 	// Define the ground body.
-	SetPositionCenterBox(groundBodyDef,r);
+	groundBodyDef.userData.pointer=reinterpret_cast<uintptr_t>(obj);
+	groundBodyDef.position.Set(x+hx,y+hy);
 
 	// Define the ground box shape.
 	b2PolygonShape groundBox;
-	
-	groundBox.SetAsBox(PixelToMeter(r.w),PixelToMeter(r.h));
+
+	groundBox.SetAsBox(hx,hy);
 
 	// Call the body factory which allocates memory for the ground body
 	// from a pool and creates the ground box shape (also from a pool).
@@ -19,9 +24,51 @@ b2Body *jgsBox2dScene::CreateGroundBody(SDL_Rect &r)
 	b2Body *groundBody = m_World->CreateBody(&groundBodyDef);
 
 	// Add the ground fixture to the ground body.
-	groundBody->CreateFixture(&groundBox, 0.0f);
+	groundBody->CreateFixture(&groundBox, density);
 
 	return groundBody;
+}
+
+b2Body* jgsBox2dScene::CreateDynamicBody(jgsGameObjB2Body *obj,SDL_Rect& r,b2Vec2 &desp,float density, float friction)
+{
+	b2BodyDef bodyDef;
+	float x=PixelToMeter(r.x);
+	float y=PixelToMeter(r.y);
+	float hx=PixelToMeter(r.w/2);
+	float hy=PixelToMeter(r.h/2);
+
+	// Define the dynamic body. We set its position and call the body factory.
+	bodyDef.userData.pointer=reinterpret_cast<uintptr_t>(obj);
+	bodyDef.type = b2_dynamicBody;
+	//SetPositionCenterBox(bodyDef,r);
+	bodyDef.position.Set(x+hx,y+hy);
+
+	// Define the ground box shape.
+	b2PolygonShape dynamicBox;
+
+	dynamicBox.SetAsBox(hx,hy);
+
+	// Define the dynamic body fixture.
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+
+	// Set the box density to be non-zero, so it will be dynamic.
+	fixtureDef.density = density;
+
+	// Override the default friction.
+	fixtureDef.friction = friction;
+
+	// Call the body factory which allocates memory for the ground body
+	// from a pool and creates the ground box shape (also from a pool).
+	// The body is also added to the world.
+	b2Body *body = m_World->CreateBody(&bodyDef);
+
+	// Add the shape to the body.
+	body->CreateFixture(&fixtureDef);
+
+	desp=b2Vec2(r.w/2,r.h/2);
+
+	return body;
 }
 
 void jgsBox2dScene::Update(SDL_Event& e, jgsGameTime& time)

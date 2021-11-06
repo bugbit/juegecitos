@@ -3,7 +3,7 @@
 #define JPPLAFORM_H
 
 #include "jpgameobjstype.h"
-#include "jgsbox2dscene.h"
+#include "jgsgameobj.h"
 
 class jpPlaform : public jgsGameObjB2Body, public jgsRender
 {
@@ -22,7 +22,6 @@ public:
 	}
 
 private:
-	// jgsB2BodySpriteRender* m_Render;
 	SDL_Texture* m_Texture;
 	SDL_Rect m_Rect, m_RectImgSrc;
 };

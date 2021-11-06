@@ -5,7 +5,7 @@
 #include "jplevelscene.h"
 
 typedef struct {
-	SDL_Texture *texBase,*texPlaform,*texPlaform2;
+	SDL_Texture *texBase,*texPlaform,*texPlaform2,*texJetman;
 } jpAssetsData;
 
 class jpGame : public jgsGame

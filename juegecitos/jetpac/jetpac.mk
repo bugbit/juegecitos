@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=03/11/21
+Date                   :=04/11/21
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -60,7 +60,7 @@ AS       := as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) 
+Objects0=../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jpplatform.cpp$(ObjectSuffix) ../build-$(ConfigurationName)/jetpac/jplevelscene.cpp$(ObjectSuffix) 
 
 
 
@@ -103,6 +103,14 @@ PreBuild:
 ##
 ## Objects
 ##
+../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(ObjectSuffix): jpjetman.cpp ../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpjetman.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpjetman.cpp$(ObjectSuffix) $(IncludePath)
+../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(DependSuffix): jpjetman.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(ObjectSuffix) -MF../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(DependSuffix) -MM jpjetman.cpp
+
+../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(PreprocessSuffix): jpjetman.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) ../build-$(ConfigurationName)/jetpac/jpjetman.cpp$(PreprocessSuffix) jpjetman.cpp
+
 ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(ObjectSuffix): jpgame.cpp ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac/jpgame.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/jpgame.cpp$(ObjectSuffix) $(IncludePath)
 ../build-$(ConfigurationName)/jetpac/jpgame.cpp$(DependSuffix): jpgame.cpp

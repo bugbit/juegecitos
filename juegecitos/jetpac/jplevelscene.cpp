@@ -26,6 +26,7 @@ void jpLevelScene::InitializeInternal()
 	m_Game.SDL_GetWindowSize(&ws, &hs);
 
 	m_PlaformBase=new jpPlaform(*this,pAssetsData->texBase, rect, rectsrc);
+	m_PlaformBase->Initialize();
 
 	SDL_QueryTexture(pAssetsData->texPlaform2, NULL, NULL, &w,&h); // get the width and height of the texture
 
@@ -39,6 +40,7 @@ void jpLevelScene::InitializeInternal()
 	rect.h = h;
 
 	m_PlaformLeft=new jpPlaform(*this,pAssetsData->texPlaform2, rect, rectsrc);
+	m_PlaformLeft->Initialize();
 
 	rect.x = 530;
 	rect.y = 140;
@@ -46,6 +48,7 @@ void jpLevelScene::InitializeInternal()
 	rect.h = h;
 
 	m_PlaformRight=new jpPlaform(*this,pAssetsData->texPlaform2, rect, rectsrc);
+	m_PlaformRight->Initialize();
 
 	SDL_QueryTexture(pAssetsData->texPlaform, NULL, NULL, &w,&h); // get the width and height of the texture
 
@@ -59,6 +62,17 @@ void jpLevelScene::InitializeInternal()
 	rect.h = h;
 
 	m_PlaformCenter=new jpPlaform(*this,pAssetsData->texPlaform, rect, rectsrc);
+	m_PlaformCenter->Initialize();
+
+	SDL_QueryTexture(pAssetsData->texJetman, NULL, NULL, &w,&h); // get the width and height of the texture
+
+	rect.x = 350;
+	rect.y = 458;
+	rect.w = w;
+	rect.h = h;
+
+	m_Player=new jpJetMan(*this,pAssetsData->texJetman, rect);
+	m_Player->Initialize();
 }
 
 void jpLevelScene::Destroy()
@@ -87,6 +101,12 @@ void jpLevelScene::Destroy()
 
 		m_PlaformRight = NULL;
 	}
+	if(m_Player != NULL) {
+		m_Player->Destroy();
+		delete m_Player;
+
+		m_Player = NULL;
+	}
 }
 
 void jpLevelScene::Render(jgsGameTime& time)
@@ -109,6 +129,7 @@ void jpLevelScene::Render(jgsGameTime& time)
 	m_PlaformLeft->Render(time);
 	m_PlaformCenter->Render(time);
 	m_PlaformRight->Render(time);
+	m_Player->Render(time);
 
 	m_Game.SDL_RenderPresent();
 }

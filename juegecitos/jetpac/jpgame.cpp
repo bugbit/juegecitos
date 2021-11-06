@@ -10,8 +10,7 @@ bool jpGame::Initialize()
 	if (!jgsGame::Initialize())
 		return false;
 
-	if ((m_LevelScene = new jpLevelScene(*this)) == NULL)
-	{
+	if ((m_LevelScene = new jpLevelScene(*this)) == NULL) {
 		m_Error = "not enough memory";
 
 		return false;
@@ -26,9 +25,10 @@ void *jpGame::PrepareLoadAssets()
 {
 	jpAssetsData *assetsData = new jpAssetsData();
 
-	m_Assets.Add("base.png", &assetsData->texBase);
-	m_Assets.Add("platform.png", &assetsData->texPlaform);
-	m_Assets.Add("platform2.png", &assetsData->texPlaform2);
+	m_Assets.Add("scenery/base.png", &assetsData->texBase);
+	m_Assets.Add("scenery/platform.png", &assetsData->texPlaform);
+	m_Assets.Add("scenery/platform2.png", &assetsData->texPlaform2);
+	m_Assets.Add("jetman/jetman_0_left_0.png", &assetsData->texJetman);
 
 	return assetsData;
 }

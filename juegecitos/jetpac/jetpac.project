@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="jetpac" Version="11000" InternalType="Console">
   <VirtualDirectory Name="include">
+    <File Name="jpjetman.h"/>
     <File Name="jpgameobjstype.h"/>
     <File Name="jpplatform.h"/>
     <File Name="jplevelscene.h"/>
@@ -10,6 +11,7 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
+    <File Name="jpjetman.cpp"/>
     <File Name="jpplatform.cpp"/>
     <File Name="jplevelscene.cpp"/>
     <File Name="jpgame.cpp"/>

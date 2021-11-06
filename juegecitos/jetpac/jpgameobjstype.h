@@ -1,10 +1,7 @@
-#ifndef	JPGAMEOBJSTYPE_H
+#ifndef JPGAMEOBJSTYPE_H
 
-#define	JPGAMEOBJSTYPE_H
+#define JPGAMEOBJSTYPE_H
 
-enum jpGameObjType
-{
-	jpPlatformType
-};
+enum jpGameObjType { jpPlatformType, jpJetManType };
 
 #endif
