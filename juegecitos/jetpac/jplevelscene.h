@@ -16,6 +16,7 @@ public:
 
     float ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float fraction)
     {
+	jgsGameObjB2Body* x = reinterpret_cast<jgsGameObjB2Body*>(fixture->GetBody()->GetUserData().pointer);
 	m_fixture = fixture;
 	m_point = point;
 	m_normal = normal;

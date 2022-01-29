@@ -1,52 +1,49 @@
-#include "stdafx.h"
 #include "jgsgame.h"
+#include "stdafx.h"
 
-jgsLoop *jgsGame::m_Loop = new jgsLoop();
+jgsLoop* jgsGame::m_Loop = new jgsLoop();
 jgsGameTime jgsGame::m_Time;
 bool jgsGame::m_Quit = false;
 
-static SDL_Renderer *render;
+static SDL_Renderer* render;
 
 bool jgsGame::Initialize()
 {
     jgsParams params;
 
-    if (!InitializeParams(params))
-        return false;
+    if(!InitializeParams(params))
+	return false;
 
-    if (SDL_Init(params.SDLflags))
-    {
-        m_Error = "Unable to initialize SDL: " + std::string(SDL_GetError());
+    if(SDL_Init(params.SDLflags)) {
+	m_Error = "Unable to initialize SDL: " + std::string(SDL_GetError());
 
-        return false;
+	return false;
     }
 
-    if ((m_Wnd = SDL_CreateWindow(params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h, params.wndFlags)) == NULL)
-    {
-        m_Error = "Could not create window: " + std::string(SDL_GetError());
+    if((m_Wnd = SDL_CreateWindow(params.title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, params.w, params.h,
+            params.wndFlags)) == NULL) {
+	m_Error = "Could not create window: " + std::string(SDL_GetError());
 
-        return false;
+	return false;
     }
 
-    switch (params.renderType)
-    {
+    switch(params.renderType) {
     case Surface:
-        if ((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags)) == NULL)
-        {
-            if (!params.Render2DFlags || ((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags2)) == NULL))
-            {
-                m_Error = "Render creation for surface fail : " + std::string(SDL_GetError());
+	if((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags)) == NULL) {
+	    if(!params.Render2DFlags ||
+	        ((render = m_Render = SDL_CreateRenderer(m_Wnd, params.render2DIdx, params.Render2DFlags2)) == NULL)) {
+		m_Error = "Render creation for surface fail : " + std::string(SDL_GetError());
 
-                return false;
-            }
-        }
-        break;
+		return false;
+	    }
+	}
+	break;
     }
 
     return true;
 }
 
-bool jgsGame::InitializeParams(jgsParams &params)
+bool jgsGame::InitializeParams(jgsParams& params)
 {
     params.SDLflags = SDL_INIT_VIDEO;
     params.wndFlags = 0;
@@ -76,28 +73,34 @@ int jgsGame::GameError()
     return EXIT_FAILURE;
 }
 
-void jgsGame::SetSceneAct(jgsScene *scene)
+void jgsGame::SetSceneAct(jgsScene* scene)
 {
     scene->Initialize();
     m_CurrentScene = scene;
-    m_Loop = (jgsLoop *)scene;
+    m_Loop = (jgsLoop*)scene;
 }
 
 int jgsGame::Run()
 {
-    if (!Initialize())
-        return GameError();
+    if(!Initialize())
+	return GameError();
 
     m_AssetsData = PrepareLoadAssets();
     m_Time.timeStamp = SDL_GetTicks();
-    if (!LoadAssets())
-        return GameError();
+    if(!LoadAssets())
+	return GameError();
     SetSceneAct(m_MainScene);
 #ifdef __EMSCRIPTEN__
-    emscripten_set_main_loop(GameLoop, 60, 1);
+    emscripten_set_main_loop(GameLoop, 0, 1);
 #else
-    while (!m_Quit)
-        GameLoop();
+    // simulamos 60 fps por segundo como en el wasm
+    uint32 timeFrame = SDL_GetTicks() + 16;
+
+    while(!m_Quit)
+	if(SDL_GetTicks() >= timeFrame) {
+	    timeFrame = SDL_GetTicks() + 16;
+	    GameLoop();
+	}
     Destroy();
 #endif
 
@@ -109,13 +112,12 @@ void jgsGame::GameLoop()
     SDL_Event e;
     Uint32 timeStamp = SDL_GetTicks();
 
-    if (SDL_PollEvent(&e))
-        if (e.type == SDL_QUIT)
-        {
-            m_Quit = true;
+    if(SDL_PollEvent(&e))
+	if(e.type == SDL_QUIT) {
+	    m_Quit = true;
 
-            return;
-        }
+	    return;
+	}
 
     m_Time.elapsedGameTime = timeStamp - m_Time.timeStamp;
     m_Time.timeStamp = timeStamp;

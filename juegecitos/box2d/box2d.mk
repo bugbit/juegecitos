@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## wasm
+## Debug
 ProjectName            :=box2d
-ConfigurationName      :=wasm
+ConfigurationName      :=Debug
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/box2d
@@ -16,8 +16,8 @@ CurrentFileFullPath    :=
 User                   :=Oscar
 Date                   :=29/01/22
 CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=emcc
-SharedObjectLinkerName :=emcc -shared -fPIC
+LinkerName             :=gcc
+SharedObjectLinkerName :=gcc -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.o.i
@@ -47,9 +47,9 @@ LibPath                := $(LibraryPathSwitch).
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := emar rcus
-CXX      := emcc
-CC       := emcc
+AR       := ar rcus
+CXX      := gcc
+CC       := gcc
 CXXFLAGS := -Wall -O3 -g $(Preprocessors)
 CFLAGS   := -Wall -O3 -g $(Preprocessors)
 ASFLAGS  := 
