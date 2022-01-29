@@ -14,7 +14,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=04/11/21
+Date                   :=29/01/22
 CodeLitePath           :=/home/oscar/.codelite
 LinkerName             :=gcc
 SharedObjectLinkerName :=gcc -shared -fPIC
@@ -72,23 +72,11 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)/core.relink" "$(IntermediateDirectory)/box2d.relink" $(Objects) 
+$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d $(Objects) 
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
-
-"$(IntermediateDirectory)/core.relink":
-	@mkdir -p $(IntermediateDirectory)
-	@echo stam > "$(IntermediateDirectory)/core.relink"
-
-
-"$(IntermediateDirectory)/box2d.relink":
-	@mkdir -p $(IntermediateDirectory)
-	@echo stam > "$(IntermediateDirectory)/box2d.relink"
-
-
-
 
 MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
