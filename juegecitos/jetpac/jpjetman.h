@@ -17,6 +17,8 @@ public:
         , m_ImpulseJetpac(15 * 0.00001f)
         , m_ImpulseGavity(15 * 0.00001f)
         , m_ImpulseWalk(15 * 0.00001f)
+        , m_IsJetPac(false)
+        , m_Direction(0)
     {
     }
     void Initialize();

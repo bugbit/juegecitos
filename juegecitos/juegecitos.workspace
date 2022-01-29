@@ -4,7 +4,7 @@
   <Project Name="core" Path="core/core.project" Active="No"/>
   <Project Name="box2d" Path="box2d/box2d.project"/>
   <BuildMatrix>
-    <WorkspaceConfiguration Name="Debug" Selected="yes">
+    <WorkspaceConfiguration Name="Debug" Selected="no">
       <Environment/>
       <Project Name="box2d" ConfigName="Debug"/>
       <Project Name="core" ConfigName="Debug"/>
@@ -22,7 +22,7 @@
       <Project Name="core" ConfigName=""/>
       <Project Name="box2d" ConfigName="Debug"/>
     </WorkspaceConfiguration>
-    <WorkspaceConfiguration Name="wasm" Selected="no">
+    <WorkspaceConfiguration Name="wasm" Selected="yes">
       <Environment/>
       <Project Name="box2d" ConfigName="wasm"/>
       <Project Name="core" ConfigName="wasm"/>

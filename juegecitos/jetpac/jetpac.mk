@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## wasm
 ProjectName            :=jetpac
-ConfigurationName      :=Debug
+ConfigurationName      :=wasm
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
@@ -16,8 +16,8 @@ CurrentFileFullPath    :=
 User                   :=Oscar
 Date                   :=29/01/22
 CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=gcc
-SharedObjectLinkerName :=gcc -shared -fPIC
+LinkerName             :=emcc
+SharedObjectLinkerName :=emcc -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.o.i
@@ -28,30 +28,30 @@ OutputSwitch           :=-o
 LibraryPathSwitch      :=-L
 PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
-OutputFile             :=../build-$(ConfigurationName)/bin/$(ProjectName)
+OutputFile             :=../build-$(ConfigurationName)/bin/$(ProjectName).html
 Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-LinkOptions            :=  
+LinkOptions            :=  -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file assets
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../extern/box2d/include/ $(IncludeSwitch)../core $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)core $(LibrarySwitch)box2d $(LibrarySwitch)stdc++ $(LibrarySwitch)m $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 
-ArLibs                 :=  "core" "box2d" "stdc++" "m" "SDL2" "SDL2_image" 
+Libs                   := $(LibrarySwitch)core $(LibrarySwitch)box2d $(LibrarySwitch)stdc++ $(LibrarySwitch)m 
+ArLibs                 :=  "core" "box2d" "stdc++" "m" 
 LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)$(WorkspacePath)/build-$(WorkspaceConfiguration)/lib 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcus
-CXX      := gcc
-CC       := gcc
-CXXFLAGS := -Wall -O3 -include pch.h -g -O0 -Wall $(Preprocessors)
-CFLAGS   := -Wall -O3 -include pch.h -g -O0 -Wall $(Preprocessors)
+AR       := emar rcus
+CXX      := emcc
+CC       := emcc
+CXXFLAGS := -Wall -O3 -include pch.h -g -O0 -Wall -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file assets $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h -g -O0 -Wall -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' --preload-file assets $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
@@ -72,11 +72,23 @@ Objects=$(Objects0)
 .PHONY: all clean PreBuild PrePreBuild PostBuild MakeIntermediateDirs
 all: MakeIntermediateDirs $(OutputFile)
 
-$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d $(Objects) 
+$(OutputFile): ../build-$(ConfigurationName)/jetpac/.d "$(IntermediateDirectory)/box2d.relink" "$(IntermediateDirectory)/core.relink" $(Objects) 
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects0)  > $(ObjectsFileList)
 	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
+
+"$(IntermediateDirectory)/box2d.relink":
+	@mkdir -p $(IntermediateDirectory)
+	@echo stam > "$(IntermediateDirectory)/box2d.relink"
+
+
+"$(IntermediateDirectory)/core.relink":
+	@mkdir -p $(IntermediateDirectory)
+	@echo stam > "$(IntermediateDirectory)/core.relink"
+
+
+
 
 MakeIntermediateDirs:
 	@mkdir -p "../build-$(ConfigurationName)/jetpac"
