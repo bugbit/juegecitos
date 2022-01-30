@@ -20,7 +20,7 @@ public:
 	inline virtual void Destroy()
 	{
 	}
-	void Loop(SDL_Event& e, jgsGameTime& time);
+	void Loop(jgsEvents& e, jgsGameTime& time);
 
 	inline bool IsInit() const
 	{
@@ -32,7 +32,7 @@ public:
 		return m_Game;
 	}
 
-	inline virtual void Update(SDL_Event& e, jgsGameTime& time)
+	inline virtual void Update(jgsEvents& e, jgsGameTime& time)
 	{
 		jgsUpdate::Update(e, time);
 	}

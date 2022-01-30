@@ -33,7 +33,7 @@ public:
 			delete m_World;
 	}
 
-	virtual void Update(SDL_Event& e, jgsGameTime& time);
+	virtual void Update(jgsEvents& e, jgsGameTime& time);
 
 	inline virtual void Render(jgsGameTime& time)
 	{
@@ -95,11 +95,11 @@ protected:
 		return NULL;
 	}
 
-	inline virtual void UpdateBeforeStep(SDL_Event& e, jgsGameTime& time)
+	inline virtual void UpdateBeforeStep(jgsEvents& e, jgsGameTime& time)
 	{
 	}
-	virtual void UpdateStep(SDL_Event& e, jgsGameTime& time);
-	inline virtual void UpdateAfterStep(SDL_Event& e, jgsGameTime& time)
+	virtual void UpdateStep(jgsEvents& e, jgsGameTime& time);
+	inline virtual void UpdateAfterStep(jgsEvents& e, jgsGameTime& time)
 	{
 	}
 };

@@ -20,18 +20,19 @@ public:
 
 protected:
     jpPlaform *m_PlaformBase, *m_PlaformLeft, *m_PlaformCenter, *m_PlaformRight;
+    jpPlaformNoRender* m_PlaformTop,  *m_PlaformTranspL,*m_PlaformTranspR;
     jpJetMan* m_Player;
 
     virtual void InitializeInternal();
     virtual void Destroy();
 
-    inline virtual void UpdateBeforeStep(SDL_Event& e, jgsGameTime& time)
+    inline virtual void UpdateBeforeStep(jgsEvents& e, jgsGameTime& time)
     {
 	jgsBox2dScene::UpdateBeforeStep(e, time);
 	m_Player->FixedUpdate(e, time);
     }
 
-    inline virtual void UpdateAfterStep(SDL_Event& e, jgsGameTime& time)
+    inline virtual void UpdateAfterStep(jgsEvents& e, jgsGameTime& time)
     {
 
 	jgsBox2dScene::UpdateAfterStep(e, time);

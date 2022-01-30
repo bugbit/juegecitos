@@ -71,7 +71,7 @@ b2Body* jgsBox2dScene::CreateDynamicBody(jgsGameObjB2Body *obj,SDL_Rect& r,b2Vec
 	return body;
 }
 
-void jgsBox2dScene::Update(SDL_Event& e, jgsGameTime& time)
+void jgsBox2dScene::Update(jgsEvents & e, jgsGameTime& time)
 {
 	jgsScene::Update(e,time);
 	UpdateBeforeStep(e,time);
@@ -79,7 +79,7 @@ void jgsBox2dScene::Update(SDL_Event& e, jgsGameTime& time)
 	UpdateAfterStep(e,time);
 }
 
-void jgsBox2dScene::UpdateStep(SDL_Event& e, jgsGameTime& time)
+void jgsBox2dScene::UpdateStep(jgsEvents & e, jgsGameTime& time)
 {
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
 	// second (60Hz) and 10 iterations. This provides a high quality simulation

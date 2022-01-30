@@ -10,7 +10,7 @@ void jgsScene::Initialize()
     }
 }
 
-void jgsScene::Loop(SDL_Event &e, jgsGameTime &time)
+void jgsScene::Loop(jgsEvents &e, jgsGameTime &time)
 {
     Update(e,time);
     Render(time);

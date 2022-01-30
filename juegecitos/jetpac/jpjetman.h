@@ -67,7 +67,7 @@ public:
 	m_IsLand = isLand;
     }
 
-    inline virtual void FixedUpdate(SDL_Event& e, jgsGameTime& time)
+    inline virtual void FixedUpdate(jgsEvents& e, jgsGameTime& time)
     {
 	jgsGameObjB2Body::FixedUpdate(e, time);
 
@@ -108,31 +108,19 @@ m_IsLand = false;
 	m_Body->SetLinearVelocity(impulse);
     }
 
-    inline virtual void Update(SDL_Event& e, jgsGameTime& time)
+    inline virtual void Update(jgsEvents& e, jgsGameTime& time)
     {
-	switch(e.type) {
-	case SDL_KEYDOWN:
-	    switch(e.key.keysym.sym) {
-	    case SDLK_UP:
-		m_IsJetPac = true;
-		break;
-	    case SDLK_LEFT:
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_UP))
+	    m_IsJetPac = false;
+	else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP))
+	    m_IsJetPac = true;
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT))
+	    m_Direction = 0;
+	else {
+	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_LEFT))
 		m_Direction = -1;
-		break;
-	    case SDLK_RIGHT:
+	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_RIGHT))
 		m_Direction = 1;
-		break;
-	    }
-	    break;
-	case SDL_KEYUP:
-	    switch(e.key.keysym.sym) {
-	    case SDLK_UP:
-		m_IsJetPac = false;
-		break;
-	    case SDLK_LEFT:
-	    case SDLK_RIGHT:
-		m_Direction = 0;
-	    }
 	}
     }
 

@@ -109,15 +109,21 @@ int jgsGame::Run()
 
 void jgsGame::GameLoop()
 {
-    SDL_Event e;
+    jgsEvents e;
+    SDL_Event* eptr;
     Uint32 timeStamp = SDL_GetTicks();
 
-    if(SDL_PollEvent(&e))
-	if(e.type == SDL_QUIT) {
+    e.numEvents = 0;
+    eptr = e.events;
+    while(SDL_PollEvent(eptr)) {
+	if(eptr->type == SDL_QUIT) {
 	    m_Quit = true;
 
 	    return;
 	}
+	eptr++;
+	e.numEvents++;
+    }
 
     m_Time.elapsedGameTime = timeStamp - m_Time.timeStamp;
     m_Time.timeStamp = timeStamp;

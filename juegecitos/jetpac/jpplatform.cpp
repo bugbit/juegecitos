@@ -2,7 +2,7 @@
 #include "jpplatform.h"
 #include "jgsbox2dscene.h"
 
-void jpPlaform::Initialize()
+void jpPlaformNoRender::Initialize()
 {	
 	jgsBox2dScene &scene=(jgsBox2dScene &) m_Scene;
 

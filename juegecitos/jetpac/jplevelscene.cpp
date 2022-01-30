@@ -53,23 +53,46 @@ void jpLevelScene::InitializeInternal()
     m_World = new b2World(gravity);
 
     int w, h, ws, hs; // texture width & height
+    int wh;
     SDL_Rect rect, rectsrc;
     jpAssetsData* pAssetsData = (jpAssetsData*)m_Game.GetAssetsData();
 
     SDL_QueryTexture(pAssetsData->texBase, NULL, NULL, &w, &h); // get the width and height of the texture
     m_Game.SDL_GetWindowSize(&ws, &hs);
-    rectsrc.x = (w - ws) / 2;
+    wh = (w - ws) / 2;
+    // rectsrc.x = (w - ws) / 2;
+    rectsrc.x = 0;
     rectsrc.y = 0;
     rectsrc.w = ws;
     rectsrc.h = h;
-    rect.x = 0;
+    rect.x = -wh;
     rect.y = hs - h;
-    rect.w = ws;
+    // rect.w = ws;
+    rect.w = w;
     rect.h = h;
     m_Game.SDL_GetWindowSize(&ws, &hs);
 
     m_PlaformBase = new jpPlaform(*this, pAssetsData->texBase, rect, rectsrc);
     m_PlaformBase->Initialize();
+
+    rect.y = -h;
+
+    m_PlaformTop = new jpPlaformNoRender(*this, (int)jpGameObjType::jpPlatformTopType, rect);
+    m_PlaformTop->Initialize();
+
+    rect.x = -2 * wh;
+    rect.y = 0;
+    rect.w = wh;
+    rect.h = hs;
+
+    m_PlaformTranspL = new jpPlaformNoRender(*this, (int)jpGameObjType::jpPlatformTransportLType, rect);
+    m_PlaformTranspL->Initialize();
+
+    rect.x = ws + wh;
+    rect.y = 0;
+
+    m_PlaformTranspR = new jpPlaformNoRender(*this, (int)jpGameObjType::jpPlatformTransportRType, rect);
+    m_PlaformTranspR->Initialize();
 
     SDL_QueryTexture(pAssetsData->texPlaform2, NULL, NULL, &w, &h); // get the width and height of the texture
 
@@ -146,6 +169,28 @@ void jpLevelScene::Destroy()
 
 	m_PlaformRight = NULL;
     }
+
+    if(m_PlaformTop != NULL) {
+	m_PlaformTop->Destroy();
+	delete m_PlaformTop;
+
+	m_PlaformTop = NULL;
+    }
+
+    if(m_PlaformTranspL != NULL) {
+	m_PlaformTranspL->Destroy();
+	delete m_PlaformTranspL;
+
+	m_PlaformTranspL = NULL;
+    }
+
+    if(m_PlaformTranspR != NULL) {
+	m_PlaformTranspR->Destroy();
+	delete m_PlaformTranspR;
+
+	m_PlaformTranspR = NULL;
+    }
+
     if(m_Player != NULL) {
 	m_Player->Destroy();
 	delete m_Player;

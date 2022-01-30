@@ -2,6 +2,12 @@
 
 #define JPGAMEOBJSTYPE_H
 
-enum jpGameObjType { jpPlatformType, jpJetManType };
+enum jpGameObjType {
+    jpPlatformTopType,
+    jpPlatformType,
+    jpPlatformTransportLType,
+    jpPlatformTransportRType,
+    jpJetManType
+};
 
 #endif

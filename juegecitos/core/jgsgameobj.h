@@ -91,11 +91,11 @@ public:
 	jgsGameObj::Destroy();
     }
 
-    inline virtual void FixedUpdate(SDL_Event& e, jgsGameTime& time)
+    inline virtual void FixedUpdate(jgsEvents& e, jgsGameTime& time)
     {
     }
 
-    inline virtual void Update(SDL_Event& e, jgsGameTime& time)
+    inline virtual void Update(jgsEvents& e, jgsGameTime& time)
     {
 	jgsUpdate::Update(e, time);
     }
