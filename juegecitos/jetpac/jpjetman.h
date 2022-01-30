@@ -67,6 +67,26 @@ public:
 	m_IsLand = isLand;
     }
 
+    inline bool IsPosTransp() const
+    {
+	return m_IsPosTransp;
+    }
+
+    inline void SetIsPosTransp(bool isPosTransp)
+    {
+	m_IsPosTransp = isPosTransp;
+    }
+
+    inline const b2Vec2& GetPosTransp() const
+    {
+	return m_PosTransp;
+    }
+
+    inline void SetPosTransp(const b2Vec2& p)
+    {
+	m_PosTransp = p;
+    }
+
     inline virtual void FixedUpdate(jgsEvents& e, jgsGameTime& time)
     {
 	jgsGameObjB2Body::FixedUpdate(e, time);
@@ -104,7 +124,10 @@ m_IsLand = false;
 	b2Vec2 impulse(m_ImpulseWalk * m_Direction,
 	    /*(m_IsLand) ? 0 :*/ (m_IsJetPac) ? -m_ImpulseJetpac : m_ImpulseGavity * time.elapsedGameTime);
 
-	// m_Body->ApplyLinearImpulseToCenter(impulse, true);
+	if(m_IsPosTransp) {
+	    m_Body->SetTransform(m_PosTransp, 0);
+	    m_IsPosTransp = false;
+	}
 	m_Body->SetLinearVelocity(impulse);
     }
 
@@ -134,9 +157,9 @@ private:
     // JetManLandCastCallback m_LandCB;
     SDL_Texture* m_Texture;
     SDL_Rect m_Rect;
-    b2Vec2 m_Desp, m_Impulse;
+    b2Vec2 m_Desp, m_Impulse, m_PosTransp;
     float m_ImpulseJetpac, m_ImpulseGavity, m_ImpulseWalk;
-    bool m_IsJetPac, m_IsLand;
+    bool m_IsJetPac, m_IsLand, m_IsPosTransp;
     int m_Direction;
 };
 

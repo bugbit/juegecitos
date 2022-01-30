@@ -2,30 +2,41 @@
 #include "jplevelscene.h"
 #include "stdafx.h"
 
-class MyContactListener : public b2ContactListener
+class jpContactListener : public b2ContactListener
 {
 public:
     void BeginContact(b2Contact* c)
     {
 	b2Body* bA = c->GetFixtureA()->GetBody();
 	b2Body* bB = c->GetFixtureB()->GetBody();
-	const b2Vec2& vA = bA->GetPosition();
-	const b2Vec2& vB = bB->GetPosition();
 	jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
 	jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
-	jpJetMan* objJM;
 
-	// jetman is land
-	if(objA != NULL && objA->GetType1() == jgsGameObjType1::GO_B2Body &&
-	    objA->GetType2() == jpGameObjType::jpPlatformType && objB != NULL &&
-	    objB->GetType1() == jgsGameObjType1::GO_B2Body && objB->GetType2() == jpGameObjType::jpJetManType) {
-	    if(vB.y < vA.y) {
-		objJM = (jpJetMan*)objB;
-		objJM->SetLand(!objJM->IsJetPac());
+	if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
+	    objB->GetType1() != jgsGameObjType1::GO_B2Body)
+	    return;
+
+	const b2Vec2& vA = bA->GetPosition();
+	const b2Vec2& vB = bB->GetPosition();
+	jpJetMan* objJM;
+	jpPlaformTransport* objPT;
+
+	// is jetman contact
+	if(objB->GetType2() == jpGameObjType::jpJetManType) {
+	    objJM = (jpJetMan*)objB;
+
+	    // jetman is land
+	    if(objA->GetType2() == jpGameObjType::jpPlatformType) {
+		if(vB.y < vA.y) {
+
+		    objJM->SetLand(!objJM->IsJetPac());
+		}
+	    } else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
+		objPT = (jpPlaformTransport*)objA;
+		objJM->SetPosTransp(objPT->GetDest()->GetBody()->GetPosition());
+		objJM->SetIsPosTransp(true);
 	    }
 	}
-	// contact->GetFixtureA()->GetShape()->
-	/* handle begin event */
     }
 
     void EndContact(b2Contact* contact)
@@ -85,14 +96,17 @@ void jpLevelScene::InitializeInternal()
     rect.w = wh;
     rect.h = hs;
 
-    m_PlaformTranspL = new jpPlaformNoRender(*this, (int)jpGameObjType::jpPlatformTransportLType, rect);
+    m_PlaformTranspL = new jpPlaformTransport(*this, (int)jpGameObjType::jpPlatformTransportLType, rect);
     m_PlaformTranspL->Initialize();
 
     rect.x = ws + wh;
     rect.y = 0;
 
-    m_PlaformTranspR = new jpPlaformNoRender(*this, (int)jpGameObjType::jpPlatformTransportRType, rect);
+    m_PlaformTranspR = new jpPlaformTransport(*this, (int)jpGameObjType::jpPlatformTransportRType, rect);
     m_PlaformTranspR->Initialize();
+
+    m_PlaformTranspL->SetDest(m_PlaformTranspR);
+    m_PlaformTranspR->SetDest(m_PlaformTranspL);
 
     SDL_QueryTexture(pAssetsData->texPlaform2, NULL, NULL, &w, &h); // get the width and height of the texture
 
@@ -140,7 +154,7 @@ void jpLevelScene::InitializeInternal()
     m_Player = new jpJetMan(*this, pAssetsData->texJetman, rect);
     m_Player->Initialize();
 
-    m_World->SetContactListener(new MyContactListener());
+    m_World->SetContactListener(new jpContactListener());
 }
 
 void jpLevelScene::Destroy()

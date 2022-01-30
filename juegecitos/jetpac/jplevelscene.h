@@ -20,7 +20,8 @@ public:
 
 protected:
     jpPlaform *m_PlaformBase, *m_PlaformLeft, *m_PlaformCenter, *m_PlaformRight;
-    jpPlaformNoRender* m_PlaformTop,  *m_PlaformTranspL,*m_PlaformTranspR;
+    jpPlaformNoRender* m_PlaformTop;
+    jpPlaformTransport *m_PlaformTranspL, *m_PlaformTranspR;
     jpJetMan* m_Player;
 
     virtual void InitializeInternal();

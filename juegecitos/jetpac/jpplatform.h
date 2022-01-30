@@ -19,6 +19,28 @@ protected:
     SDL_Rect m_Rect;
 };
 
+class jpPlaformTransport : public jpPlaformNoRender
+{
+public:
+    inline jpPlaformTransport(jgsBox2dScene& scene, Uint8 type2, SDL_Rect& rect)
+        : jpPlaformNoRender(scene, type2, rect)
+    {
+    }
+
+    inline void SetDest(jpPlaformTransport* dest)
+    {
+	m_Dest = dest;
+    }
+
+    inline jpPlaformTransport* GetDest() const
+    {
+	return m_Dest;
+    }
+
+private:
+    jpPlaformTransport* m_Dest;
+};
+
 class jpPlaform : public jpPlaformNoRender, public jgsRender
 {
 public:
