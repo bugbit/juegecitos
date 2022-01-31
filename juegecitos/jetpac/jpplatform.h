@@ -24,6 +24,7 @@ class jpPlaformTransport : public jpPlaformNoRender
 public:
     inline jpPlaformTransport(jgsBox2dScene& scene, Uint8 type2, SDL_Rect& rect)
         : jpPlaformNoRender(scene, type2, rect)
+        , m_IsToTransport(false)
     {
     }
 
@@ -37,8 +38,19 @@ public:
 	return m_Dest;
     }
 
+    inline void SetIsToTransport(bool isTo)
+    {
+	m_IsToTransport = isTo;
+    }
+
+    inline bool const IsToTransport() const
+    {
+	return m_IsToTransport;
+    }
+
 private:
     jpPlaformTransport* m_Dest;
+    bool m_IsToTransport;
 };
 
 class jpPlaform : public jpPlaformNoRender, public jgsRender

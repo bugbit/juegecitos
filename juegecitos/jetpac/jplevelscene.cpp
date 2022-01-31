@@ -31,17 +31,44 @@ public:
 
 		    objJM->SetLand(!objJM->IsJetPac());
 		}
+		// transport
 	    } else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
 		objPT = (jpPlaformTransport*)objA;
-		objJM->SetPosTransp(objPT->GetDest()->GetBody()->GetPosition());
+
+		if(objPT->IsToTransport())
+		    return;
+
+		jpPlaformTransport* objPTD = objPT->GetDest();
+		const b2Vec2& v2 = objPTD->GetBody()->GetPosition();
+		const b2Vec2& v3 = objPT->GetBody()->GetPosition();
+
+		objPTD->SetIsToTransport(true);
+		objJM->SetPosTransp(b2Vec2(v2.x + (v3.x - vB.x), vB.y));
 		objJM->SetIsPosTransp(true);
 	    }
 	}
     }
 
-    void EndContact(b2Contact* contact)
+    void EndContact(b2Contact* c)
     {
-	/* handle end event */
+	b2Body* bA = c->GetFixtureA()->GetBody();
+	b2Body* bB = c->GetFixtureB()->GetBody();
+	jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
+	jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
+	jpPlaformTransport* objPT;
+
+	if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
+	    objB->GetType1() != jgsGameObjType1::GO_B2Body)
+	    return;
+
+	if(objB->GetType2() == jpGameObjType::jpJetManType) {
+	    // transport
+	} else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
+	    objPT = (jpPlaformTransport*)objA;
+
+	    if(objPT->IsToTransport())
+		objPT->SetIsToTransport(false);
+	}
     }
 
     void PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
@@ -102,7 +129,7 @@ void jpLevelScene::InitializeInternal()
     rect.x = ws + wh;
     rect.y = 0;
 
-    m_PlaformTranspR = new jpPlaformTransport(*this, (int)jpGameObjType::jpPlatformTransportRType, rect);
+    m_PlaformTranspR = new jpPlaformTransport(*this, (int)jpGameObjType::jpPlatformTransportLType, rect);
     m_PlaformTranspR->Initialize();
 
     m_PlaformTranspL->SetDest(m_PlaformTranspR);
