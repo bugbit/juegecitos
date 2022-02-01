@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## wasm
 ProjectName            :=core
-ConfigurationName      :=Debug
+ConfigurationName      :=wasm
 WorkspaceConfiguration := $(ConfigurationName)
 WorkspacePath          :=/home/oscar/proyectos/oscar/juegecitos/juegecitos
 ProjectPath            :=/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
@@ -14,10 +14,10 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Oscar
-Date                   :=31/01/22
+Date                   :=01/02/22
 CodeLitePath           :=/home/oscar/.codelite
-LinkerName             :=gcc
-SharedObjectLinkerName :=gcc -shared -fPIC
+LinkerName             :=emcc
+SharedObjectLinkerName :=emcc -shared -fPIC
 ObjectSuffix           :=.o
 DependSuffix           :=.o.d
 PreprocessSuffix       :=.o.i
@@ -35,23 +35,23 @@ ArchiveOutputSwitch    :=
 PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :=$(IntermediateDirectory)/ObjectsList.txt
 PCHCompileFlags        :=
-LinkOptions            :=  
+LinkOptions            :=  -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]'
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)../extern/box2d/include/ $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
-Libs                   := $(LibrarySwitch)stdc++ $(LibrarySwitch)SDL2 $(LibrarySwitch)SDL2_image 
-ArLibs                 :=  "stdc++" "SDL2" "SDL2_image" 
+Libs                   := $(LibrarySwitch)stdc++ 
+ArLibs                 :=  "stdc++" 
 LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
 ## AR, CXX, CC, AS, CXXFLAGS and CFLAGS can be overriden using an environment variables
 ##
-AR       := ar rcus
-CXX      := gcc
-CC       := gcc
-CXXFLAGS := -Wall -O3 -include pch.h -g $(Preprocessors)
-CFLAGS   := -Wall -O3 -include pch.h -g $(Preprocessors)
+AR       := emar rcus
+CXX      := emcc
+CC       := emcc
+CXXFLAGS := -Wall -O3 -include pch.h -g -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' $(Preprocessors)
+CFLAGS   := -Wall -O3 -include pch.h -g -s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='["png"]' $(Preprocessors)
 ASFLAGS  := 
 AS       := as
 
