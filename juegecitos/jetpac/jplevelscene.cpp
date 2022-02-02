@@ -1,5 +1,6 @@
 #include "jpgame.h"
 #include "jplevelscene.h"
+#include "jpjetman.h"
 #include "stdafx.h"
 
 class jpContactListener : public b2ContactListener
@@ -175,7 +176,7 @@ void jpLevelScene::InitializeInternal()
     m_PlaformCenter = new jpPlaform(*this, pAssetsData->texPlaform, rect, rectsrc);
     m_PlaformCenter->Initialize();
 
-    SDL_QueryTexture(pAssetsData->texJetman, NULL, NULL, &w, &h); // get the width and height of the texture
+    SDL_QueryTexture(pAssetsData->texJetman[0][0][0], NULL, NULL, &w, &h); // get the width and height of the texture
 
     rect.x = 350;
     rect.y = 458;

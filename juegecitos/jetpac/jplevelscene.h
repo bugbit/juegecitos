@@ -4,6 +4,9 @@
 
 #include "jpjetman.h"
 #include "jpplatform.h"
+//#include "jpjetman.h"
+
+class jpJetMan;
 
 class jpLevelScene : public jgsBox2dScene
 {
