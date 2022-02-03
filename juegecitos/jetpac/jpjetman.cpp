@@ -2,6 +2,8 @@
 #include "jpjetman.h"
 #include "stdafx.h"
 
+const int jpJetMan::m_LandNumFrameToIdx3[] = { 0, 2, 1, 2 };
+
 void jpJetMan::Initialize()
 {
     jgsBox2dScene& scene = (jgsBox2dScene&)m_Scene;

@@ -1,6 +1,6 @@
 #include "jpgame.h"
-#include "jplevelscene.h"
 #include "jpjetman.h"
+#include "jplevelscene.h"
 #include "stdafx.h"
 
 class jpContactListener : public b2ContactListener
@@ -54,26 +54,32 @@ public:
 
     void EndContact(b2Contact* c)
     {
-	/*
-b2Body* bA = c->GetFixtureA()->GetBody();
-b2Body* bB = c->GetFixtureB()->GetBody();
-jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
-jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
-jpPlaformTransport* objPT;
+	b2Body* bA = c->GetFixtureA()->GetBody();
+	b2Body* bB = c->GetFixtureB()->GetBody();
+	jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
+	jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
+	jpJetMan* objJM;
+	// jpPlaformTransport* objPT;
 
-if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
-    objB->GetType1() != jgsGameObjType1::GO_B2Body)
-    return;
+	if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
+	    objB->GetType1() != jgsGameObjType1::GO_B2Body)
+	    return;
 
-if(objB->GetType2() == jpGameObjType::jpJetManType) {
-    // transport
-} else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
-    objPT = (jpPlaformTransport*)objA;
+	if(objB->GetType2() == jpGameObjType::jpJetManType) {
+	    objJM = (jpJetMan*)objB;
 
-    if(objPT->IsToTransport())
-	objPT->SetIsToTransport(false);
-}
- */
+	    // jetman is land
+	    if(objA->GetType2() == jpGameObjType::jpPlatformType) {
+		objJM->SetLand(!objJM->IsJetPac());
+		// transport
+	    }
+	    /*else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
+	                   objPT = (jpPlaformTransport*)objA;
+
+	                   if(objPT->IsToTransport())
+	                       objPT->SetIsToTransport(false);
+	               }*/
+	}
     }
 
     void PreSolve(b2Contact* contact, const b2Manifold* oldManifold)

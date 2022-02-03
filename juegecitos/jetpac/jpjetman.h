@@ -20,11 +20,14 @@ public:
         , m_ImpulseJetpac(5)
         , m_ImpulseGavity(15 * 0.01f)
         , m_ImpulseWalk(1)
+        , m_TimeActFrame(0)
+        , m_TimeFrame(500)
         , m_IsJetPac(false)
         , m_IsLand(false)
         , m_Direction(0)
         , m_Idx1(0)
         , m_Idx2(0)
+        , m_Idx3(0)
         , m_NumFrame(0)
     {
     }
@@ -91,29 +94,66 @@ public:
 
     inline virtual void Update(jgsEvents& e, jgsGameTime& time)
     {
-	if(e.IsKeyCode(SDL_KEYUP, SDLK_UP))
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_UP)) {
+	    if(m_IsJetPac) {
+		m_Idx3 = m_NumFrame = 0;
+		m_TimeActFrame = 0;
+		m_ChangeTexture = true;
+	    }
 	    m_IsJetPac = false;
-	else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP)) {
+	} else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP)) {
+	    if(!m_IsJetPac) {
+		m_Idx3 = m_NumFrame = 0;
+		m_TimeActFrame = 0;
+		m_ChangeTexture = true;
+	    }
 	    m_IsJetPac = true;
 	    m_Idx1 = idx0_texJetman_air;
 	    m_ChangeTexture = true;
 	}
 	if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT))
+	{
 	    m_Direction = 0;
+		m_Idx3 = m_NumFrame = 0;
+	    m_ChangeTexture = true;
+	}
 	else {
 	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_LEFT)) {
+		if(m_Direction != -1) {
+		    m_Idx3 = m_NumFrame = 0;
+		    m_TimeActFrame = 0;
+		    m_ChangeTexture = true;
+		}
 		m_Direction = -1;
 		m_Idx2 = idx1_texJetman_left;
 		m_ChangeTexture = true;
 	    }
 	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_RIGHT)) {
+		if(m_Direction != 1) {
+		    m_Idx3 = m_NumFrame = 0;
+		    m_TimeActFrame = 0;
+		    m_ChangeTexture = true;
+		}
 		m_Direction = 1;
 		m_Idx2 = idx1_texJetman_right;
 		m_ChangeTexture = true;
 	    }
 	}
+	m_TimeActFrame += time.timeStamp;
+	if(m_TimeActFrame > m_TimeFrame) {
+	    m_TimeActFrame -= m_TimeFrame;
+	    m_ChangeTexture = true;
+	    if(!m_IsLand) {
+		m_NumFrame += (m_NumFrame + 1) % 2;
+		m_Idx3 = m_NumFrame;
+	    } else if(m_Direction) {
+		m_NumFrame += (m_NumFrame + 1) % 4;
+		m_Idx3 = m_LandNumFrameToIdx3[m_NumFrame];
+	    } else
+		m_Idx3 = m_NumFrame = 0;
+	}
 	if(m_ChangeTexture) {
-	    m_Texture = m_Textures[m_Idx1][m_Idx2][m_NumFrame];
+	    m_Texture = m_Textures[m_Idx1][m_Idx2][m_Idx3];
 	    m_ChangeTexture = false;
 	}
     }
@@ -125,14 +165,16 @@ public:
     }
 
 private:
+    static const int m_LandNumFrameToIdx3[];
     // JetManLandCastCallback m_LandCB;
     texJetmanData& m_Textures;
     SDL_Texture* m_Texture;
     SDL_Rect m_Rect;
     b2Vec2 m_Desp, m_Impulse, m_PosTransp;
     float m_ImpulseJetpac, m_ImpulseGavity, m_ImpulseWalk;
+    uint32 m_TimeActFrame, m_TimeFrame;
     bool m_IsJetPac, m_IsLand, m_IsPosTransp, m_ChangeTexture;
-    int m_Direction, m_Idx1, m_Idx2, m_NumFrame;
+    int m_Direction, m_Idx1, m_Idx2, m_Idx3, m_NumFrame;
 };
 
 #endif
