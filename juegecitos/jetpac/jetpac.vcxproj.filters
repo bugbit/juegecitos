@@ -33,9 +33,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="jetpac.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="jpgame.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>

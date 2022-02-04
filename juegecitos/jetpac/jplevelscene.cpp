@@ -1,7 +1,7 @@
+#include "stdafx.h"
 #include "jpgame.h"
 #include "jpjetman.h"
 #include "jplevelscene.h"
-#include "stdafx.h"
 
 class jpContactListener : public b2ContactListener
 {
@@ -29,8 +29,7 @@ public:
 	    // jetman is land
 	    if(objA->GetType2() == jpGameObjType::jpPlatformType) {
 		if(vB.y < vA.y) {
-
-		    objJM->SetLand(!objJM->IsJetPac());
+		    objJM->SetLand(true);
 		}
 		// transport
 	    } else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
@@ -70,7 +69,7 @@ public:
 
 	    // jetman is land
 	    if(objA->GetType2() == jpGameObjType::jpPlatformType) {
-		objJM->SetLand(!objJM->IsJetPac());
+		objJM->SetLand(false);
 		// transport
 	    }
 	    /*else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {

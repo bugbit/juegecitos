@@ -17,11 +17,13 @@ public:
         , m_Textures(textures)
         , m_Texture(textures[0][0][0])
         , m_Rect(rect)
-        , m_ImpulseJetpac(5)
-        , m_ImpulseGavity(15 * 0.01f)
-        , m_ImpulseWalk(1)
+		,m_IsPosTransp(false)
+		,m_PosTransp(0,0)
+        , m_ImpulseJetpac(5* 0.1f)
+        , m_ImpulseGavity(5 * 0.1f)
+        , m_ImpulseWalk(1* 0.1f)
         , m_TimeActFrame(0)
-        , m_TimeFrame(500)
+        , m_TimeFrame(43)
         , m_IsJetPac(false)
         , m_IsLand(false)
         , m_Direction(0)
@@ -79,11 +81,8 @@ public:
     {
 	jgsGameObjB2Body::FixedUpdate(e, time);
 
-	if(!m_IsJetPac && m_IsLand)
-	    m_IsLand = false;
-
-	b2Vec2 impulse(m_ImpulseWalk * m_Direction,
-	    /*(m_IsLand) ? 0 :*/ (m_IsJetPac) ? -m_ImpulseJetpac : m_ImpulseGavity * time.elapsedGameTime);
+	b2Vec2 impulse(m_ImpulseWalk * m_Direction* time.elapsed,
+	    /*(m_IsLand) ? 0 :*/ ((m_IsJetPac) ? -m_ImpulseJetpac : m_ImpulseGavity) * time.elapsed);
 
 	if(m_IsPosTransp) {
 	    m_Body->SetTransform(m_PosTransp, 0);
@@ -95,67 +94,41 @@ public:
     inline virtual void Update(jgsEvents& e, jgsGameTime& time)
     {
 	if(e.IsKeyCode(SDL_KEYUP, SDLK_UP)) {
-	    if(m_IsJetPac) {
-		m_Idx3 = m_NumFrame = 0;
-		m_TimeActFrame = 0;
-		m_ChangeTexture = true;
-	    }
 	    m_IsJetPac = false;
 	} else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP)) {
-	    if(!m_IsJetPac) {
-		m_Idx3 = m_NumFrame = 0;
-		m_TimeActFrame = 0;
-		m_ChangeTexture = true;
-	    }
 	    m_IsJetPac = true;
-	    m_Idx1 = idx0_texJetman_air;
-	    m_ChangeTexture = true;
 	}
-	if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT))
-	{
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT)) {
 	    m_Direction = 0;
-		m_Idx3 = m_NumFrame = 0;
-	    m_ChangeTexture = true;
-	}
-	else {
+	} else {
 	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_LEFT)) {
-		if(m_Direction != -1) {
-		    m_Idx3 = m_NumFrame = 0;
-		    m_TimeActFrame = 0;
-		    m_ChangeTexture = true;
-		}
 		m_Direction = -1;
-		m_Idx2 = idx1_texJetman_left;
-		m_ChangeTexture = true;
 	    }
 	    if(e.IsKeyCode(SDL_KEYDOWN, SDLK_RIGHT)) {
-		if(m_Direction != 1) {
-		    m_Idx3 = m_NumFrame = 0;
-		    m_TimeActFrame = 0;
-		    m_ChangeTexture = true;
-		}
 		m_Direction = 1;
-		m_Idx2 = idx1_texJetman_right;
-		m_ChangeTexture = true;
 	    }
 	}
-	m_TimeActFrame += time.timeStamp;
-	if(m_TimeActFrame > m_TimeFrame) {
-	    m_TimeActFrame -= m_TimeFrame;
-	    m_ChangeTexture = true;
-	    if(!m_IsLand) {
-		m_NumFrame += (m_NumFrame + 1) % 2;
-		m_Idx3 = m_NumFrame;
-	    } else if(m_Direction) {
-		m_NumFrame += (m_NumFrame + 1) % 4;
-		m_Idx3 = m_LandNumFrameToIdx3[m_NumFrame];
-	    } else
-		m_Idx3 = m_NumFrame = 0;
-	}
-	if(m_ChangeTexture) {
-	    m_Texture = m_Textures[m_Idx1][m_Idx2][m_Idx3];
-	    m_ChangeTexture = false;
-	}
+	m_Idx1 = (m_IsLand) ? idx0_texJetman_land : idx0_texJetman_air;
+	if(m_Direction != 0)
+	    m_Idx2 = (m_Direction > 0) ? idx1_texJetman_right : idx1_texJetman_left;
+	if(m_IsJetPac || m_Direction != 0) {
+	    m_TimeActFrame += time.elapsed;
+	    if(m_TimeActFrame > m_TimeFrame) {
+		m_TimeActFrame -= m_TimeFrame;
+		m_ChangeTexture = true;
+		if(!m_IsLand) {
+		    m_NumFrame = (m_NumFrame + 1) % 2;
+		    m_Idx3 = m_NumFrame;
+		} else {
+		    m_NumFrame = (m_NumFrame + 1) % 4;
+		    m_Idx3 = m_LandNumFrameToIdx3[m_NumFrame];
+		}
+	    }
+	} else
+	    m_Idx3 = m_TimeActFrame = 0;
+	SDL_Texture* t = m_Textures[m_Idx1][m_Idx2][m_Idx3];
+	if(t != NULL)
+	    m_Texture = t;
     }
 
     inline void virtual Render(jgsGameTime& time)

@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include "jgsbox2dscene.h"
 #include "jpjetman.h"
-#include "stdafx.h"
 
 const int jpJetMan::m_LandNumFrameToIdx3[] = { 0, 2, 1, 2 };
 

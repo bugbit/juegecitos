@@ -3,7 +3,7 @@
 #define JGSINTERFACE_H
 
 typedef struct {
-    Uint32 timeStamp, elapsedGameTime;
+    Uint32 timeStamp, elapsed /* timeGameStamp, elapsedGameTime*/;
 } jgsGameTime;
 
 typedef struct {
@@ -35,7 +35,7 @@ typedef struct {
 class jgsLoop
 {
 public:
-    inline virtual void Loop(jgsEvents & e, jgsGameTime& time)
+    inline virtual void Loop(jgsEvents& e, jgsGameTime& time)
     {
     }
 };
@@ -58,7 +58,7 @@ public:
 class jgsUpdate
 {
 public:
-    inline virtual void Update(jgsEvents & e, jgsGameTime& time)
+    inline virtual void Update(jgsEvents& e, jgsGameTime& time)
     {
     }
 };

@@ -1,5 +1,5 @@
-#include "jgsgame.h"
 #include "stdafx.h"
+#include "jgsgame.h"
 
 jgsLoop* jgsGame::m_Loop = new jgsLoop();
 jgsGameTime jgsGame::m_Time;
@@ -111,7 +111,6 @@ void jgsGame::GameLoop()
 {
     jgsEvents e;
     SDL_Event* eptr;
-    Uint32 timeStamp = SDL_GetTicks();
 
     e.numEvents = 0;
     eptr = e.events;
@@ -124,8 +123,10 @@ void jgsGame::GameLoop()
 	eptr++;
 	e.numEvents++;
     }
+	
+    Uint32 timeStamp = SDL_GetTicks();
 
-    m_Time.elapsedGameTime = timeStamp - m_Time.timeStamp;
+    m_Time.elapsed = timeStamp - m_Time.timeStamp;
     m_Time.timeStamp = timeStamp;
 
     m_Loop->Loop(e, m_Time);

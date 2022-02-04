@@ -88,7 +88,6 @@
     <None Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="jetpac.h" />
     <ClInclude Include="jpgame.h" />
     <ClInclude Include="jpjetman.h" />
     <ClInclude Include="jplevelscene.h" />

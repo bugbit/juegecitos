@@ -1,6 +1,6 @@
+#include "stdafx.h"
 #include "jpgame.h"
 #include "jplevelscene.h"
-#include "stdafx.h"
 
 jpGame::jpGame(int argc, char** argv)
     : jgsGame(argc, argv)
