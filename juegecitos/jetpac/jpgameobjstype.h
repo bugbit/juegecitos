@@ -7,7 +7,9 @@ enum jpGameObjType {
     jpPlatformType,
     jpPlatformTransportLType,
     jpPlatformTransportRType,
-    jpJetManType
+    jpJetManType,
+    jpItem,
+    jpItemRocket,
 };
 
 #endif

@@ -41,6 +41,8 @@ void* jpGame::PrepareLoadAssets()
 	m_Assets.Add("jetman/jetman_1_left_1.png", &assetsData->texJetman[idx0_texJetman_air][idx1_texJetman_left][1]);
     m_Assets.Add("jetman/jetman_1_right_0.png", &assetsData->texJetman[idx0_texJetman_air][idx1_texJetman_right][0]);
 	m_Assets.Add("jetman/jetman_1_right_1.png", &assetsData->texJetman[idx0_texJetman_air][idx1_texJetman_right][1]);
+	memset(assetsData->texRocket,0,sizeof(assetsData->texRocket));
+	m_Assets.Add("rockets/rocket_one_stage_one.png",&assetsData->texRocket[idx_textRocket_stage_one]);
 
     return assetsData;
 }

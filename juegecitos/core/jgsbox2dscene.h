@@ -74,6 +74,11 @@ public:
 		body.position.Set(pos.x, pos.y);
 	}
 
+	inline b2World *GetWorld()const
+	{
+		return m_World;
+	}
+
 	inline void GetPosition(b2Body *body,b2Vec2 &desp,SDL_Rect &r)
 	{
 		b2Vec2 pos=MeterToPixel((b2Vec2 &)body->GetPosition())-desp;
