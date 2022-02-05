@@ -6,7 +6,7 @@ const int jpJetMan::m_LandNumFrameToIdx3[] = { 0, 2, 1, 2 };
 
 void jpJetMan::Initialize()
 {
-    jgsBox2dScene& scene = (jgsBox2dScene&)m_Scene;
+	jgsBox2dScene& scene = (jgsBox2dScene&)m_Scene;
 
-    m_Body = scene.CreateDynamicBody(this, m_Rect, m_Desp, 1.0f, 0);
+	m_Body = scene.CreateDynamicBody(this, m_Rect, m_Desp, 1.0f, 0);
 }

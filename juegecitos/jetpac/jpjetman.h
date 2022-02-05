@@ -5,157 +5,186 @@
 #include "jgsbox2dscene.h"
 #include "jgsgameobj.h"
 #include "jpgame.h"
-#include "jpitem.h"
 #include "jpgameobjstype.h"
+#include "jpitem.h"
 
 class ApplyImpulseToCenter;
 class jpJetMan : public jgsGameObjB2Body, public jgsRender
 {
-public:
-	inline jpJetMan(jgsScene& scene, texJetmanData& textures, SDL_Rect& rect)
-		: jgsGameObjB2Body(scene, jpGameObjType::jpJetManType)
-		, m_Textures(textures)
-		, m_Texture(textures[0][0][0])
-		, m_Rect(rect)
-		, m_Desp(0, 0)
-		, m_IsPosTransp(false)
-		, m_PosTransp(0, 0)
-		, m_ImpulseJetpac(5 * 0.1f)
-		, m_ImpulseGavity(5 * 0.1f)
-		, m_ImpulseWalk(1 * 0.1f)
-		, m_TimeActFrame(0)
-		, m_TimeFrame(43)
-		, m_IsJetPac(false)
-		, m_IsLand(false)
-		, m_Direction(0)
-		, m_Idx1(0)
-		, m_Idx2(0)
-		, m_Idx3(0)
-		, m_NumFrame(0)
-	{
-	}
-	void Initialize();
+  public:
+    inline jpJetMan(jgsScene& scene, texJetmanData& textures, SDL_Rect& rect)
+        : jgsGameObjB2Body(scene, jpGameObjType::jpJetManType)
+        , m_Textures(textures)
+        , m_Texture(textures[0][0][0])
+        , m_Rect(rect)
+        , m_Desp(0, 0)
+        , m_IsPosTransp(false)
+        , m_PosTransp(0, 0)
+        , m_IsSetLoadObj(false)
+        , m_SetLoadObj(NULL)
+        , m_LoadObj(NULL)
+        , m_ImpulseJetpac(5 * 0.1f)
+        , m_ImpulseGavity(5 * 0.1f)
+        , m_ImpulseWalk(1 * 0.1f)
+        , m_TimeActFrame(0)
+        , m_TimeFrame(43)
+        , m_IsJetPac(false)
+        , m_IsLand(false)
+        , m_Direction(0)
+        , m_Idx1(0)
+        , m_Idx2(0)
+        , m_Idx3(0)
+        , m_NumFrame(0)
+    {
+    }
+    void Initialize();
 
-	inline const SDL_Rect& GetRect() const
-	{
-		return m_Rect;
-	}
+    inline const SDL_Rect& GetRect() const
+    {
+	return m_Rect;
+    }
 
-	inline bool const IsJetPac() const
-	{
-		return m_IsJetPac;
-	}
+    inline bool const IsJetPac() const
+    {
+	return m_IsJetPac;
+    }
 
-	inline bool IsLand() const
-	{
-		return m_IsLand;
-	}
+    inline bool IsLand() const
+    {
+	return m_IsLand;
+    }
 
-	inline void SetLand(bool isLand)
-	{
-		m_IsLand = isLand;
-	}
+    inline void SetLand(bool isLand)
+    {
+	m_IsLand = isLand;
+    }
 
-	inline bool IsPosTransp() const
-	{
-		return m_IsPosTransp;
-	}
+    inline bool IsPosTransp() const
+    {
+	return m_IsPosTransp;
+    }
 
-	inline void SetIsPosTransp(bool isPosTransp)
-	{
-		m_IsPosTransp = isPosTransp;
-	}
+    inline void SetIsPosTransp(bool isPosTransp)
+    {
+	m_IsPosTransp = isPosTransp;
+    }
 
-	inline const b2Vec2& GetPosTransp() const
-	{
-		return m_PosTransp;
-	}
+    inline const b2Vec2& GetPosTransp() const
+    {
+	return m_PosTransp;
+    }
 
-	inline void SetPosTransp(const b2Vec2& p)
-	{
-		m_PosTransp = p;
-	}
-	
+    inline void SetPosTransp(const b2Vec2& p)
+    {
+	m_PosTransp = p;
+    }
 
-	inline void LoadItem(jpItemBase *item)
-	{
+    inline void SetIsSetLoadObj(bool is)
+    {
+	m_IsSetLoadObj = is;
+    }
+
+    inline void SetLoadItem(jpItemBase* item)
+    {
+	m_SetLoadObj = item;
+    }
+
+    inline virtual void FixedUpdate(jgsEvents& e, jgsGameTime& time)
+    {
+	jgsGameObjB2Body::FixedUpdate(e, time);
+
+	b2Vec2 impulse(m_ImpulseWalk * m_Direction * time.elapsed,
+	               /*(m_IsLand) ? 0 :*/ ((m_IsJetPac) ? -m_ImpulseJetpac : m_ImpulseGavity) * time.elapsed);
+
+	if(m_IsPosTransp)
+	    {
+		m_Body->SetTransform(m_PosTransp, 0);
+		m_IsPosTransp = false;
+	    }
+	m_Body->SetLinearVelocity(impulse);
+    }
+
+    inline virtual void Update(jgsEvents& e, jgsGameTime& time)
+    {
+	if(m_IsSetLoadObj)
+	    {
 		b2DistanceJointDef jointDef;
-		
-		jointDef.Initialize(m_Body, item->GetBody(),b2Vec2(),b2Vec2());
+
+		jointDef.Initialize(m_SetLoadObj->GetBody(), m_Body, m_Body->GetPosition(), m_Body->GetPosition());
 		jointDef.collideConnected = true;
 		b2RevoluteJoint* joint = (b2RevoluteJoint*)Getb2Scene().GetWorld()->CreateJoint(&jointDef);
-	}
+		m_IsSetLoadObj = false;
+		m_SetLoadObj = NULL;
+	    }
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_UP))
+	    {
+		m_IsJetPac = false;
+	    }
+	else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP))
+	    {
+		m_IsJetPac = true;
+	    }
+	if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT))
+	    {
+		m_Direction = 0;
+	    }
+	else
+	    {
+		if(e.IsKeyCode(SDL_KEYDOWN, SDLK_LEFT))
+		    {
+			m_Direction = -1;
+		    }
+		if(e.IsKeyCode(SDL_KEYDOWN, SDLK_RIGHT))
+		    {
+			m_Direction = 1;
+		    }
+	    }
+	m_Idx1 = (m_IsLand) ? idx0_texJetman_land : idx0_texJetman_air;
+	if(m_Direction != 0)
+	    m_Idx2 = (m_Direction > 0) ? idx1_texJetman_right : idx1_texJetman_left;
+	if(m_IsJetPac || m_Direction != 0)
+	    {
+		m_TimeActFrame += time.elapsed;
+		if(m_TimeActFrame > m_TimeFrame)
+		    {
+			m_TimeActFrame -= m_TimeFrame;
+			if(!m_IsLand)
+			    {
+				m_NumFrame = (m_NumFrame + 1) % 2;
+				m_Idx3 = m_NumFrame;
+			    }
+			else
+			    {
+				m_NumFrame = (m_NumFrame + 1) % 4;
+				m_Idx3 = m_LandNumFrameToIdx3[m_NumFrame];
+			    }
+		    }
+	    }
+	else
+	    m_Idx3 = m_TimeActFrame = 0;
+	SDL_Texture* t = m_Textures[m_Idx1][m_Idx2][m_Idx3];
+	if(t != NULL)
+	    m_Texture = t;
+    }
 
-	inline virtual void FixedUpdate(jgsEvents& e, jgsGameTime& time)
-	{
-		jgsGameObjB2Body::FixedUpdate(e, time);
+    inline void virtual Render(jgsGameTime& time)
+    {
+	Getb2Scene().GetPosition(m_Body, m_Desp, m_Rect);
+	m_Scene.GetGame().SDL_RenderCopy(m_Texture, NULL, &m_Rect);
+    }
 
-		b2Vec2 impulse(m_ImpulseWalk * m_Direction * time.elapsed,
-		               /*(m_IsLand) ? 0 :*/ ((m_IsJetPac) ? -m_ImpulseJetpac : m_ImpulseGavity) * time.elapsed);
-
-		if(m_IsPosTransp) {
-			m_Body->SetTransform(m_PosTransp, 0);
-			m_IsPosTransp = false;
-		}
-		m_Body->SetLinearVelocity(impulse);
-	}
-
-	inline virtual void Update(jgsEvents& e, jgsGameTime& time)
-	{
-		if(e.IsKeyCode(SDL_KEYUP, SDLK_UP)) {
-			m_IsJetPac = false;
-		} else if(e.IsKeyCode(SDL_KEYDOWN, SDLK_UP)) {
-			m_IsJetPac = true;
-		}
-		if(e.IsKeyCode(SDL_KEYUP, SDLK_LEFT) || e.IsKeyCode(SDL_KEYUP, SDLK_RIGHT)) {
-			m_Direction = 0;
-		} else {
-			if(e.IsKeyCode(SDL_KEYDOWN, SDLK_LEFT)) {
-				m_Direction = -1;
-			}
-			if(e.IsKeyCode(SDL_KEYDOWN, SDLK_RIGHT)) {
-				m_Direction = 1;
-			}
-		}
-		m_Idx1 = (m_IsLand) ? idx0_texJetman_land : idx0_texJetman_air;
-		if(m_Direction != 0)
-			m_Idx2 = (m_Direction > 0) ? idx1_texJetman_right : idx1_texJetman_left;
-		if(m_IsJetPac || m_Direction != 0) {
-			m_TimeActFrame += time.elapsed;
-			if(m_TimeActFrame > m_TimeFrame) {
-				m_TimeActFrame -= m_TimeFrame;
-				if(!m_IsLand) {
-					m_NumFrame = (m_NumFrame + 1) % 2;
-					m_Idx3 = m_NumFrame;
-				} else {
-					m_NumFrame = (m_NumFrame + 1) % 4;
-					m_Idx3 = m_LandNumFrameToIdx3[m_NumFrame];
-				}
-			}
-		} else
-			m_Idx3 = m_TimeActFrame = 0;
-		SDL_Texture* t = m_Textures[m_Idx1][m_Idx2][m_Idx3];
-		if(t != NULL)
-			m_Texture = t;
-	}
-
-	inline void virtual Render(jgsGameTime& time)
-	{
-		Getb2Scene().GetPosition(m_Body, m_Desp, m_Rect);
-		m_Scene.GetGame().SDL_RenderCopy(m_Texture, NULL, &m_Rect);
-	}
-
-private:
-	static const int m_LandNumFrameToIdx3[];
-	// JetManLandCastCallback m_LandCB;
-	texJetmanData& m_Textures;
-	SDL_Texture* m_Texture;
-	SDL_Rect m_Rect;
-	b2Vec2 m_Desp, m_Impulse, m_PosTransp;
-	float m_ImpulseJetpac, m_ImpulseGavity, m_ImpulseWalk;
-	uint32 m_TimeActFrame, m_TimeFrame;
-	bool m_IsJetPac, m_IsLand, m_IsPosTransp;
-	int m_Direction, m_Idx1, m_Idx2, m_Idx3, m_NumFrame;
+  private:
+    static const int m_LandNumFrameToIdx3[];
+    // JetManLandCastCallback m_LandCB;
+    texJetmanData& m_Textures;
+    SDL_Texture* m_Texture;
+    SDL_Rect m_Rect;
+    b2Vec2 m_Desp, m_Impulse, m_PosTransp;
+    float m_ImpulseJetpac, m_ImpulseGavity, m_ImpulseWalk;
+    uint32 m_TimeActFrame, m_TimeFrame;
+    bool m_IsJetPac, m_IsLand, m_IsPosTransp, m_IsSetLoadObj;
+    int m_Direction, m_Idx1, m_Idx2, m_Idx3, m_NumFrame;
+    jpItemBase *m_SetLoadObj, *m_LoadObj;
 };
 
 #endif

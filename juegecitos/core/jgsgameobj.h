@@ -48,22 +48,6 @@ public:
 	{
 	}
 
-	inline static bool IsType2ObjAB(Uint8 type2A,Uint8 type2B,jgsGameObj **objA,jgsGameObj **objB)
-	{
-		jgsGameObj *a=*objA;
-		jgsGameObj *b=*objB;
-
-		if (a->GetType2()==type2A && b->GetType2()==type2B)
-			return true;
-
-		if (b->GetType2()==type2A && a->GetType2()==type2B) {
-			*objA=b;
-			*objB=a;
-
-			return true;
-		}
-	}
-
 	inline virtual void Initialize()
 	{
 	}

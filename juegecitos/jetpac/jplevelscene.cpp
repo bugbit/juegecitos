@@ -6,48 +6,67 @@
 class jpContactListener : public b2ContactListener
 {
 public:
-	void BeginContact(b2Contact* c)
+	void BeginContact(b2Contact *c)
 	{
-		b2Body* bA = c->GetFixtureA()->GetBody();
-		b2Body* bB = c->GetFixtureB()->GetBody();
-		jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
-		jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
+		b2Body *bA = c->GetFixtureA()->GetBody();
+		b2Body *bB = c->GetFixtureB()->GetBody();
+		jgsGameObj *objA = reinterpret_cast<jgsGameObj *>(bA->GetUserData().pointer);
+		jgsGameObj *objB = reinterpret_cast<jgsGameObj *>(bB->GetUserData().pointer);
 
-		if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
-		   objB->GetType1() != jgsGameObjType1::GO_B2Body)
+		if (objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
+			objB->GetType1() != jgsGameObjType1::GO_B2Body)
 			return;
 
-		const b2Vec2& vA = bA->GetPosition();
-		const b2Vec2& vB = bB->GetPosition();
-		jpJetMan* objJM;
-		jpPlaformTransport* objPT;
-
-		printf("obja %d objb %d\n",objA->GetType2(),objB->GetType2() );
-		if (objA->GetType2() == jpGameObjType::jpJetManType && (objB->GetType2() == jpGameObjType::jpItem ||objB->GetType2() == jpGameObjType::jpItemRocket)) {
-			objJM = (jpJetMan*)objA;
-			printf("loaditem");
-			objJM->LoadItem((jpItemBase*) objA);
+		if (objA->GetType2() == jpGameObjType::jpJetManType)
+		{
+			if (BeginContact((jpJetMan *)objA, objB))
+				return;
 		}
+		if (objB->GetType2() == jpGameObjType::jpJetManType)
+		{
+			if (BeginContact((jpJetMan *)objB, objA))
+				return;
+		}
+
+		const b2Vec2 &vA = bA->GetPosition();
+		const b2Vec2 &vB = bB->GetPosition();
+		jpJetMan *objJM;
+		jpPlaformTransport *objPT;
+
+		printf("obja %d objb %d\n", objA->GetType2(), objB->GetType2());
+		/*if(objA->GetType2() == jpGameObjType::jpJetManType &&
+		   (objB->GetType2() == jpGameObjType::jpItem || objB->GetType2() == jpGameObjType::jpItemRocket))
+			{
+				objJM = (jpJetMan*)objA;
+				printf("loaditem");
+				objJM->SetLoadItem((jpItemBase*)objA);
+			}*/
 		// is jetman contact
-		if(objB->GetType2() == jpGameObjType::jpJetManType) {
-			objJM = (jpJetMan*)objB;
+		if (objB->GetType2() == jpGameObjType::jpJetManType)
+		{
+			objJM = (jpJetMan *)objB;
 			// jetman is land
-			if(objA->GetType2() == jpGameObjType::jpPlatformType) {
-				if(vB.y < vA.y) {
+			if (objA->GetType2() == jpGameObjType::jpPlatformType)
+			{
+				if (vB.y < vA.y)
+				{
 					objJM->SetLand(true);
 				}
 				// transport
-			} else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
-				objPT = (jpPlaformTransport*)objA;
+			}
+			else if (objA->GetType2() == jpGameObjType::jpPlatformTransportLType)
+			{
+				objPT = (jpPlaformTransport *)objA;
 
-				if(objPT->IsToTransport()) {
+				if (objPT->IsToTransport())
+				{
 					objPT->SetIsToTransport(false);
 					return;
 				}
 
-				jpPlaformTransport* objPTD = objPT->GetDest();
-				const b2Vec2& v2 = objPTD->GetBody()->GetPosition();
-				const b2Vec2& v3 = objPT->GetBody()->GetPosition();
+				jpPlaformTransport *objPTD = objPT->GetDest();
+				const b2Vec2 &v2 = objPTD->GetBody()->GetPosition();
+				const b2Vec2 &v3 = objPT->GetBody()->GetPosition();
 
 				objPTD->SetIsToTransport(true);
 				objJM->SetPosTransp(b2Vec2(v2.x + (v3.x - vB.x), vB.y));
@@ -56,44 +75,61 @@ public:
 		}
 	}
 
-	void EndContact(b2Contact* c)
+	void EndContact(b2Contact *c)
 	{
-		b2Body* bA = c->GetFixtureA()->GetBody();
-		b2Body* bB = c->GetFixtureB()->GetBody();
-		jgsGameObj* objA = reinterpret_cast<jgsGameObj*>(bA->GetUserData().pointer);
-		jgsGameObj* objB = reinterpret_cast<jgsGameObj*>(bB->GetUserData().pointer);
-		jpJetMan* objJM;
+		b2Body *bA = c->GetFixtureA()->GetBody();
+		b2Body *bB = c->GetFixtureB()->GetBody();
+		jgsGameObj *objA = reinterpret_cast<jgsGameObj *>(bA->GetUserData().pointer);
+		jgsGameObj *objB = reinterpret_cast<jgsGameObj *>(bB->GetUserData().pointer);
+		jpJetMan *objJM;
 		// jpPlaformTransport* objPT;
 
-		if(objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
-		   objB->GetType1() != jgsGameObjType1::GO_B2Body)
+		if (objA == NULL || objA->GetType1() != jgsGameObjType1::GO_B2Body || objB == NULL ||
+			objB->GetType1() != jgsGameObjType1::GO_B2Body)
 			return;
 
-		if(objB->GetType2() == jpGameObjType::jpJetManType) {
-			objJM = (jpJetMan*)objB;
+		if (objB->GetType2() == jpGameObjType::jpJetManType)
+		{
+			objJM = (jpJetMan *)objB;
 
 			// jetman is land
-			if(objA->GetType2() == jpGameObjType::jpPlatformType) {
+			if (objA->GetType2() == jpGameObjType::jpPlatformType)
+			{
 				objJM->SetLand(false);
 				// transport
 			}
 			/*else if(objA->GetType2() == jpGameObjType::jpPlatformTransportLType) {
-			               objPT = (jpPlaformTransport*)objA;
+						   objPT = (jpPlaformTransport*)objA;
 
-			               if(objPT->IsToTransport())
-			                   objPT->SetIsToTransport(false);
-			           }*/
+						   if(objPT->IsToTransport())
+							   objPT->SetIsToTransport(false);
+					   }*/
 		}
 	}
 
-	void PreSolve(b2Contact* contact, const b2Manifold* oldManifold)
+	void PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
 	{
 		// contact->SetEnabled(false);
 	}
 
-	void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse)
+	void PostSolve(b2Contact *contact, const b2ContactImpulse *impulse)
 	{
 		/* handle post-solve event */
+	}
+
+private:
+	bool BeginContact(jpJetMan *jm, jgsGameObj *obj)
+	{
+		if (obj->GetType2() == jpGameObjType::jpItem || obj->GetType2() == jpGameObjType::jpItemRocket)
+		{
+			printf("loaditem");
+			jm->SetIsSetLoadObj(true);
+			jm->SetLoadItem((jpItemBase *)obj);
+
+			return true;
+		}
+
+		return false;
 	}
 };
 
@@ -107,7 +143,7 @@ void jpLevelScene::InitializeInternal()
 	int w, h, ws, hs; // texture width & height
 	int wh;
 	SDL_Rect rect, rectsrc;
-	jpAssetsData* pAssetsData = (jpAssetsData*)m_Game.GetAssetsData();
+	jpAssetsData *pAssetsData = (jpAssetsData *)m_Game.GetAssetsData();
 
 	SDL_QueryTexture(pAssetsData->texBase, NULL, NULL, &w, &h); // get the width and height of the texture
 	m_Game.SDL_GetWindowSize(&ws, &hs);
@@ -195,14 +231,15 @@ void jpLevelScene::InitializeInternal()
 	m_Player = new jpJetMan(*this, pAssetsData->texJetman, rect);
 	m_Player->Initialize();
 
-	SDL_QueryTexture(pAssetsData->texRocket[idx_textRocket_stage_one], NULL, NULL, &w, &h); // get the width and height of the texture
+	SDL_QueryTexture(pAssetsData->texRocket[idx_textRocket_stage_one], NULL, NULL, &w,
+					 &h); // get the width and height of the texture
 
 	rect.x = 460;
 	rect.y = 494;
 	rect.w = w;
 	rect.h = h;
 
-	jpRocketItem *itemr=new jpRocketItem(*this,pAssetsData->texRocket[idx_textRocket_stage_one],rect);
+	jpRocketItem *itemr = new jpRocketItem(*this, pAssetsData->texRocket[idx_textRocket_stage_one], rect);
 	itemr->Initialize();
 	m_Items.push_back(itemr);
 
@@ -211,63 +248,71 @@ void jpLevelScene::InitializeInternal()
 
 void jpLevelScene::Destroy()
 {
-	if(m_PlaformBase != NULL) {
+	if (m_PlaformBase != NULL)
+	{
 		m_PlaformBase->Destroy();
 		delete m_PlaformBase;
 
 		m_PlaformBase = NULL;
 	}
-	if(m_PlaformLeft != NULL) {
+	if (m_PlaformLeft != NULL)
+	{
 		m_PlaformLeft->Destroy();
 		delete m_PlaformLeft;
 
 		m_PlaformLeft = NULL;
 	}
-	if(m_PlaformCenter != NULL) {
+	if (m_PlaformCenter != NULL)
+	{
 		m_PlaformCenter->Destroy();
 		delete m_PlaformCenter;
 
 		m_PlaformCenter = NULL;
 	}
-	if(m_PlaformRight != NULL) {
+	if (m_PlaformRight != NULL)
+	{
 		m_PlaformRight->Destroy();
 		delete m_PlaformRight;
 
 		m_PlaformRight = NULL;
 	}
 
-	if(m_PlaformTop != NULL) {
+	if (m_PlaformTop != NULL)
+	{
 		m_PlaformTop->Destroy();
 		delete m_PlaformTop;
 
 		m_PlaformTop = NULL;
 	}
 
-	if(m_PlaformTranspL != NULL) {
+	if (m_PlaformTranspL != NULL)
+	{
 		m_PlaformTranspL->Destroy();
 		delete m_PlaformTranspL;
 
 		m_PlaformTranspL = NULL;
 	}
 
-	if(m_PlaformTranspR != NULL) {
+	if (m_PlaformTranspR != NULL)
+	{
 		m_PlaformTranspR->Destroy();
 		delete m_PlaformTranspR;
 
 		m_PlaformTranspR = NULL;
 	}
 
-	if(m_Player != NULL) {
+	if (m_Player != NULL)
+	{
 		m_Player->Destroy();
 		delete m_Player;
 
 		m_Player = NULL;
 	}
-	while(m_Items.size()>0)
+	while (m_Items.size() > 0)
 		m_Items.pop_back();
 }
 
-void jpLevelScene::Render(jgsGameTime& time)
+void jpLevelScene::Render(jgsGameTime &time)
 {
 	/*SDL_Rect rect;
 
@@ -289,7 +334,8 @@ void jpLevelScene::Render(jgsGameTime& time)
 	m_PlaformRight->Render(time);
 	m_Player->Render(time);
 
-	for(auto item = m_Items.begin(); item != m_Items.end(); item++) {
+	for (auto item = m_Items.begin(); item != m_Items.end(); item++)
+	{
 		(*item)->Render(time);
 	}
 

@@ -14,20 +14,27 @@ if (EMSCRIPTEN)
 endif()
 
 include_directories(../core)
-add_executable(jetpac jpgame.cpp jplevelscene.cpp)
+include_directories(../extern/box2d/include)
+add_executable(jetpac jpgame.cpp jplevelscene.cpp jpplatform.cpp jpjetman.cpp jpitem.cpp)
 
 target_precompile_headers(jetpac PUBLIC pch.h)
 target_compile_features(jetpac PUBLIC c_std_99)
 
 link_directories(../core)
-target_link_libraries(jetpac SDL2 core)
+target_link_libraries(jetpac core box2d)
 if (EMSCRIPTEN)
-    target_link_libraries(${PROJECT_NAME} "-s USE_SDL=2")
-    target_link_libraries(${PROJECT_NAME} "-s USE_SDL_IMAGE=2")
-    target_link_libraries(${PROJECT_NAME} "-s SDL2_IMAGE_FORMATS='[\"png\"]'")
-    target_link_libraries(${PROJECT_NAME} "--preload-file assets")
+    set_target_properties(
+        jetpac
+        PROPERTIES
+        LINK_FLAGS
+        "-s USE_SDL=2 -s USE_SDL_IMAGE=2 -s SDL2_IMAGE_FORMATS='[\"png\"]' --preload-file ../../jetpac/assets@/assets"
+    )
+    #target_link_libraries(${PROJECT_NAME} "-s USE_SDL=2")
+    #target_link_libraries(${PROJECT_NAME} "-s USE_SDL_IMAGE=2")
+    #target_link_libraries(${PROJECT_NAME} "-s SDL2_IMAGE_FORMATS='[\"png\"]'")
+    #target_link_libraries(${PROJECT_NAME} "--preload-file assets")
 else(EMSCRIPTEN)
-    target_link_libraries(jetpac SDL2main)
+    target_link_libraries(jetpac SDL2 SDL2main SDL2_image)
     set(copy_source_dir "${CMAKE_SOURCE_DIR}/jetpac/assets")
     set(copy_dest_dir "${CMAKE_BINARY_DIR}/jetpac/assets")
     set(copy_file_name "*.png")
