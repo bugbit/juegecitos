@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Board : MonoBehaviour
+public class ZoneDeath : MonoBehaviour
 {
+    public int idxOpositePlayer;
     public Transform center;
 
     private void OnTriggerEnter2D(Collider2D collision)
