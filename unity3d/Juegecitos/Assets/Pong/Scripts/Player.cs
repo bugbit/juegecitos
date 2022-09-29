@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public TypePlayers TypePlayer = TypePlayers.Human;
     public float speed = 30;
     public string axis = "Vertical";
-    public int points = 0;
+    public int score = 0;
 
     private Rigidbody2D rigid;
     private float vertical;
