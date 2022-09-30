@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -10,6 +11,9 @@ public class Ball : MonoBehaviour
     public AudioClip wallHitSound;
     public AudioClip scoreSound;
 
+    //Singleton pattern
+    public static Ball instance;
+
     private Vector2 initialPosition;
     private Rigidbody2D rigid;
     //private Rigidbody rigid;
@@ -17,6 +21,19 @@ public class Ball : MonoBehaviour
     public void SetPositionInitial()
     {
         transform.position = initialPosition;
+    }
+
+    //Awake is called before Start
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -56,6 +73,15 @@ public class Ball : MonoBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             // Calculate hit Factor
+            CollisionPlayer(col);
+        }
+        else if (col.gameObject.CompareTag("Wall"))
+        {
+            CollisionWall(col);
+        }
+
+        void CollisionPlayer(Collision2D col)
+        {
             var y = hitFactor(transform.position, col.transform.position, col.collider.bounds.size.y);
             // Calculate direction, make length=1 via .normalized
             var dirX = (col.transform.position.x > 0) ? -1.0f : 1.0f;
@@ -65,8 +91,14 @@ public class Ball : MonoBehaviour
             rigid.velocity = direction * impulse;
             Camera.main.GetComponent<AudioSource>().PlayOneShot(hitSound);
         }
-        else if (col.gameObject.CompareTag("Wall"))
+
+        void CollisionWall(Collision2D col)
+        {
+            if (col.relativeVelocity.y == 0)
+                rigid.velocity = new Vector2(rigid.velocity.x, col.transform.position.y).normalized * impulse;
+
             Camera.main.GetComponent<AudioSource>().PlayOneShot(wallHitSound);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

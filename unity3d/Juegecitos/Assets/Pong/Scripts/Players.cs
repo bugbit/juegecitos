@@ -14,11 +14,13 @@ public class Players : MonoBehaviour
     public void UpdateScore(int player)
     {
         if (player < 0 || player > 2)
-            playersTexts[player].text = (++(players[player].score)).ToString();
+            return;
+
+        playersTexts[player].text = (++(players[player].score)).ToString();
     }
 
     //Awake is called before Start
-    private void Awake()
+    void Awake()
     {
         if (instance == null)
         {
@@ -28,17 +30,5 @@ public class Players : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
