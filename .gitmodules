@@ -1,0 +1,3 @@
+[submodule "BANA/juegecitos/BANA"]
+	path = BANA/juegecitos/BANA
+	url = https://github.com/bugbit/BANA.git
