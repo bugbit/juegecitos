@@ -1,0 +1,15 @@
+@page "/pong"
+
+<Viewer @ref="viewer" App=@app />
+
+@code
+{
+    Viewer? viewer;
+    Games.Pong.PongGame? app;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();        
+        app = new Games.Pong.PongGame(viewer);
+    }
+}
