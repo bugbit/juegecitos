@@ -27,7 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BANA\BANARCL\BANARCL.csproj" />
-    <ProjectReference Include="..\BANA\BANA.Core.csproj" />
+    <ProjectReference Include="..\BANA\BANA.Core\BANA.Core.csproj" />
   </ItemGroup>
 
 </Project>
