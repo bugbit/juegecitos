@@ -15,5 +15,4 @@ var host = await GRHost.Create();
 builder.Services.AddScoped(sp => host);
 
 //await JSHost.ImportAsync("BANARCL/Viewer", "../_content/BANARCL/Viewer.razor.js");
-
 await builder.Build().RunAsync();

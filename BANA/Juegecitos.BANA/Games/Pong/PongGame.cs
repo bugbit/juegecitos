@@ -36,6 +36,7 @@ public class PongGame : GRApp
     {
         await base.Load(progressSetPercentLoaded, cancel);
         progressSetPercentLoaded?.Report(50);
-        Host.Test1();
+        //Host.Test1();
+        await Host.LoadSound("hitSound", "assets2/pong/hitSound.wav");
     }
 }
