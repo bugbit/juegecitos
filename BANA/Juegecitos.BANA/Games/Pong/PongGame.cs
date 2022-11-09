@@ -35,13 +35,14 @@ public class PongGame : GRApp
     public async override Task Load(IProgress<int>? progressSetPercentLoaded, CancellationToken cancel)
     {
         await base.Load(progressSetPercentLoaded, cancel);
-        progressSetPercentLoaded?.Report(50);
-        //Host.Test1();
-        //await Host.LoadSound("hitSound", "assets2/pong/hitSound.wav");
-        // var x=await Host.LoadSound("assets/pong/hitSound.wav");
 
-        // x.Play();
-        var x = await Assets.LoadAsset<IAudio>("hitSound", "assets2/pong/hitSound.wav");
+        var assets = Assets;
+        var scene = new GRScene(this);
+
+        assets.RootDirectory = "/pong";
+        progressSetPercentLoaded?.Report(50);
+        
+        var x = await Assets.LoadAsset<IAudio>("hitSound", "hitSound.wav");
 
         x.Play();
     }
