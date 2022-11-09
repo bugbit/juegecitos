@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Using Include="BANA.Core" />
+    <Using Include="BANA.Core.Assets" />
     <Using Include="BANARCL" />
   </ItemGroup>
 
