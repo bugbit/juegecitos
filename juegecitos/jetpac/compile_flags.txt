@@ -1,3 +1,0 @@
--I/home/oscar/proyectos/oscar/juegecitos/juegecitos/jetpac
--I/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/include
--I/home/oscar/proyectos/oscar/juegecitos/juegecitos/core

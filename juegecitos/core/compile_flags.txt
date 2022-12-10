@@ -1,2 +1,0 @@
--I/home/oscar/proyectos/oscar/juegecitos/juegecitos/core
--I/home/oscar/proyectos/oscar/juegecitos/juegecitos/extern/box2d/include

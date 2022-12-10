@@ -1,2 +1,0 @@
-In File include/box2d/b2_math:
-	function b2IsValid
