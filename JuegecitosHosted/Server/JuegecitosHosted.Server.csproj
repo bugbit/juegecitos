@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Juegecitos.Shared\Juegecitos.Shared.csproj" />
+    <ProjectReference Include="..\Client\JuegecitosHosted.Client.csproj" />
+    <ProjectReference Include="..\Shared\JuegecitosHosted.Shared.csproj" />
+  </ItemGroup>
+
+
+</Project>

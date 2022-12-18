@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuegecitosStatic", "JuegecitosStatic\JuegecitosStatic.csproj", "{576ACDB1-C106-48B0-9852-847F5ACB48B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuegecitosHosted.Server", "JuegecitosHosted\Server\JuegecitosHosted.Server.csproj", "{F50E12C8-8BCF-466C-A8E8-8DBB50646718}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuegecitosHosted.Client", "JuegecitosHosted\Client\JuegecitosHosted.Client.csproj", "{34859A5F-125E-4270-B183-A94475249238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuegecitosHosted.Shared", "JuegecitosHosted\Shared\JuegecitosHosted.Shared.csproj", "{E58211B7-3104-49D4-A12D-BD4A339C2A31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Juegecitos.Shared", "Juegecitos.Shared\Juegecitos.Shared.csproj", "{05B786A9-6C97-437F-BA3B-FC956BA1A8F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{576ACDB1-C106-48B0-9852-847F5ACB48B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{576ACDB1-C106-48B0-9852-847F5ACB48B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{576ACDB1-C106-48B0-9852-847F5ACB48B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{576ACDB1-C106-48B0-9852-847F5ACB48B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F50E12C8-8BCF-466C-A8E8-8DBB50646718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F50E12C8-8BCF-466C-A8E8-8DBB50646718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F50E12C8-8BCF-466C-A8E8-8DBB50646718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F50E12C8-8BCF-466C-A8E8-8DBB50646718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34859A5F-125E-4270-B183-A94475249238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34859A5F-125E-4270-B183-A94475249238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34859A5F-125E-4270-B183-A94475249238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34859A5F-125E-4270-B183-A94475249238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E58211B7-3104-49D4-A12D-BD4A339C2A31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E58211B7-3104-49D4-A12D-BD4A339C2A31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E58211B7-3104-49D4-A12D-BD4A339C2A31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E58211B7-3104-49D4-A12D-BD4A339C2A31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B786A9-6C97-437F-BA3B-FC956BA1A8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B786A9-6C97-437F-BA3B-FC956BA1A8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B786A9-6C97-437F-BA3B-FC956BA1A8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B786A9-6C97-437F-BA3B-FC956BA1A8F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9ED8F9E-BBD9-438A-A422-155967FE3747}
+	EndGlobalSection
+EndGlobal
